@@ -402,6 +402,8 @@ function spanText(days){
 }
 const surahName=s=>NAMES[s-1];
 const juzTitle=j=>'الجزء '+(j+1)+(JUZ_NICK[j]?' ('+JUZ_NICK[j]+')':'');
+/* اللقب الشائع للجزء إن وُجد (مثل عمّ، تبارك)، وإلا اسم أول سورة فيه */
+const juzShortLabel=j=>JUZ_NICK[j]||NAMES[SURAH_OF[JS[j]]];
 const posLabel=i=>'سورة '+NAMES[SURAH_OF[i]]+'، الآية '+AYAH_OF[i];
 function rangeLabel(a,b){
   for(let j=0;j<30;j++){
@@ -722,7 +724,7 @@ function viewJuz(st,d){
       const p=d.jc[j]/JSIZE[j]*100,done=p>=100;
       h+=`<button class="tile${done?' done':''}${j===d.curJuz&&d.next>=0?' cur':''}" style="--p:${p.toFixed(2)}" data-act="open-juz" data-j="${j}" aria-label="${esc(juzTitle(j))}، ${done?'مكتمل':pInt(p)+' بالمئة'}">
         ${j===d.curJuz&&d.next>=0?'<span class="badge">الحالي</span>':''}
-        <span class="n">${j+1}</span><span class="s">${NAMES[SURAH_OF[JS[j]]]}</span><span class="pc">${done?'مكتمل':pInt(p)+'%'}</span></button>`;
+        <span class="n">${j+1}</span><span class="s">${juzShortLabel(j)}</span><span class="pc">${done?'مكتمل':pInt(p)+'%'}</span></button>`;
     }
     h+='</div></div>';
   });
@@ -825,7 +827,7 @@ function viewHist(st,d){
   const done=[];d.jdone.forEach((x,j)=>{if(x)done.push({j,date:x.date});});
   done.sort((a,b)=>a.j-b.j);
   h+=`<div class="hcard c-done"><div class="sec-h"><h2>الأجزاء المكتملة</h2></div>`;
-  h+=done.length?`<div class="donegrid">${done.map(x=>`<button type="button" class="dchip" data-act="open-juz" data-j="${x.j}" aria-label="${esc(juzTitle(x.j))}${x.date?'، أُتمّ في '+fmtDate(x.date):'، قبل استخدام التطبيق'}"><span class="n">${x.j+1}</span><span class="s">${NAMES[SURAH_OF[JS[x.j]]]}</span></button>`).join('')}</div>`:`<div class="empty">لم يكتمل أي جزء بعد.</div>`;
+  h+=done.length?`<div class="donegrid">${done.map(x=>`<button type="button" class="dchip" data-act="open-juz" data-j="${x.j}" aria-label="${esc(juzTitle(x.j))}${x.date?'، أُتمّ في '+fmtDate(x.date):'، قبل استخدام التطبيق'}"><span class="n">${x.j+1}</span><span class="s">${juzShortLabel(x.j)}</span></button>`).join('')}</div>`:`<div class="empty">لم يكتمل أي جزء بعد.</div>`;
   h+='</div>';
   return h;
 }
