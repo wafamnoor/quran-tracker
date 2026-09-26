@@ -371,6 +371,8 @@ h1,h2,p{margin:0}
 <nav id="nav" class="nav" hidden aria-label="التنقل الرئيسي"></nav>
 <div id="sheet-root"></div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
 <script>
 (function(){
@@ -563,8 +565,79 @@ applyTheme();
 function save(){
   try{localStorage.setItem(KEY,JSON.stringify(DATA));}
   catch(e){storageOK=false;toast('تعذّر الحفظ على هذا الجهاز. خذ نسخة احتياطية من تبويب «المزيد».');}
+  if(SYNC_CODE&&!syncApplyingRemote)syncPush();
 }
 const cur=()=>DATA.students.find(s=>s.id===DATA.selected)||DATA.students[0]||null;
+
+/* ═══════════════ المزامنة السحابية (Firebase) ═══════════════ */
+const FIREBASE_CONFIG={apiKey:"AIzaSyDFg2vF3t1fhZ1bD8m0bidXEFn4f8a1WQw",authDomain:"quran-tracker-172ec.firebaseapp.com",projectId:"quran-tracker-172ec",storageBucket:"quran-tracker-172ec.firebasestorage.app",messagingSenderId:"579864253306",appId:"1:579864253306:web:df979c6d04f027a1b6bcc3"};
+let fbDb=null,syncUnsub=null,syncApplyingRemote=false,syncStatus='off';
+function loadSyncCode(){try{return localStorage.getItem('quranTracker.sync')||'';}catch(e){return '';}}
+let SYNC_CODE=loadSyncCode();
+function fbInit(){
+  if(fbDb)return fbDb;
+  if(typeof firebase==='undefined')return null;
+  try{
+    if(!(firebase.apps&&firebase.apps.length))firebase.initializeApp(FIREBASE_CONFIG);
+    fbDb=firebase.firestore();
+  }catch(e){fbDb=null;}
+  return fbDb;
+}
+function syncDocRef(code){
+  const db=fbInit();if(!db)return null;
+  return db.collection('quranTrackerSync').doc(code.trim());
+}
+function syncPush(){
+  if(!SYNC_CODE)return;
+  const ref=syncDocRef(SYNC_CODE);if(!ref)return;
+  ref.set({data:DATA,updatedAt:Date.now()}).catch(()=>{});
+}
+function syncStart(code){
+  SYNC_CODE=code;
+  try{localStorage.setItem('quranTracker.sync',code);}catch(e){}
+  if(syncUnsub){syncUnsub();syncUnsub=null;}
+  const ref=syncDocRef(code);if(!ref){syncStatus='error';return;}
+  syncStatus='connecting';
+  syncUnsub=ref.onSnapshot(snap=>{
+    syncStatus='on';
+    if(!snap.exists)return;
+    const remote=snap.data();
+    if(!remote||!remote.data)return;
+    syncApplyingRemote=true;
+    DATA=cleanData(remote.data);
+    if(!DATA.students.some(s=>s.id===DATA.selected))DATA.selected=DATA.students[0]?DATA.students[0].id:null;
+    try{localStorage.setItem(KEY,JSON.stringify(DATA));}catch(e){}
+    syncApplyingRemote=false;
+    render();
+  },()=>{syncStatus='error';render();});
+}
+function syncStop(){
+  SYNC_CODE='';syncStatus='off';
+  try{localStorage.removeItem('quranTracker.sync');}catch(e){}
+  if(syncUnsub){syncUnsub();syncUnsub=null;}
+}
+function syncConnect(code){
+  code=(code||'').trim();
+  if(!code){toast('اكتب رمز مزامنة أولًا.');return;}
+  const ref=syncDocRef(code);
+  if(!ref){toast('تعذّر تحميل خدمة المزامنة. تحقّق من الإنترنت.');return;}
+  toast('جارٍ الاتصال...');
+  ref.get().then(snap=>{
+    if(snap.exists&&snap.data()&&snap.data().data){
+      openSheet({type:'sync-conflict',code});
+    }else{
+      ref.set({data:DATA,updatedAt:Date.now()}).then(()=>{
+        syncStart(code);toast('تم تفعيل المزامنة، ورُفعت بيانات هذا الجهاز.');render();
+      }).catch(()=>toast('تعذّر رفع البيانات. تحقّق من الإنترنت.'));
+    }
+  }).catch(()=>toast('تعذّر الاتصال. تحقّق من الإنترنت وإعدادات Firestore.'));
+}
+function syncConflictHTML(S){
+  return `<p class="muted">وجدنا بيانات محفوظة سابقًا بهذا الرمز على السحابة (ربما من جهاز آخر). ماذا تريد أن تفعل؟</p>
+    <button type="button" class="btn btn-primary btn-block" data-act="sync-use-cloud">استخدام بيانات السحابة <span class="muted" style="display:block;font-size:12px;margin-top:2px">تستبدل بيانات هذا الجهاز</span></button>
+    <button type="button" class="btn btn-ghost btn-block" style="margin-top:10px" data-act="sync-use-local">رفع بيانات هذا الجهاز بدلًا منها</button>
+    <button type="button" class="btn btn-ghost btn-block" style="margin-top:10px" data-act="close-sheet">إلغاء</button>`;
+}
 
 /* ═══════════════ الحسابات المشتقة ═══════════════ */
 function derive(st){
@@ -1208,6 +1281,17 @@ function viewMore(st){
   <section class="sec"><div class="sec-h"><h2>نسخة احتياطية</h2></div>
     <p class="muted" style="margin-top:6px">بياناتك محفوظة على هذا الجهاز فقط. خذ نسخة احتياطية قبل تغيير الهاتف أو مسح بيانات المتصفح.</p>
     <div class="stack"><button class="btn btn-ghost btn-block" data-act="open-backup">نسخ البيانات أو استعادتها</button></div></section>
+  <section class="sec"><div class="sec-h"><h2>المزامنة بين الأجهزة</h2></div>
+    ${SYNC_CODE?`
+      <p class="muted" style="margin-top:6px">مفعّلة برمز: <b style="color:var(--ink);font-family:var(--font-display)">${esc(SYNC_CODE)}</b> — ${syncStatus==='on'?'<span style="color:var(--ok)">متصل</span>':syncStatus==='error'?'<span style="color:var(--danger)">تعذّر الاتصال</span>':'جارٍ الاتصال...'}</p>
+      <p class="muted" style="font-size:13px">افتح الموقع من أي جهاز آخر وأدخل نفس الرمز لرؤية هذه البيانات نفسها وتحديثها تلقائيًا.</p>
+      <div class="stack"><button class="btn btn-danger btn-block" data-act="sync-disconnect">إيقاف المزامنة على هذا الجهاز</button></div>
+    `:`
+      <p class="muted" style="margin-top:6px">اختر رمزًا (اسمك مثلًا) وأدخل نفس الرمز من أي جهاز آخر لمزامنة بياناتك تلقائيًا بينهما.</p>
+      <div class="field"><label for="sync-code">رمز المزامنة</label><input id="sync-code" type="text" placeholder="مثلًا: عائلة أحمد" maxlength="60"></div>
+      <div class="stack"><button class="btn btn-primary btn-block" data-act="sync-connect">تفعيل المزامنة</button></div>
+    `}
+  </section>
   <section class="sec"><div class="sec-h"><h2>كتطبيق على هاتفك</h2></div>
     <p class="muted" style="margin-top:6px">من قائمة المتصفح اختر «إضافة إلى الشاشة الرئيسية» ليظهر أيقونةً بين تطبيقاتك.</p></section>`;
 }
@@ -1348,6 +1432,7 @@ function paintSheet(){
     case 'student':html=sheetWrap('تعديل الاسم',studentFormHTML(S));break;
     case 'confirm':html=sheetWrap(S.title,`<p class="confirm-p">${esc(S.msg)}</p><div class="stack"><button class="btn ${S.danger?'btn-danger-fill':'btn-primary'} btn-block" data-act="confirm-yes">${esc(S.yes)}</button><button class="btn btn-ghost btn-block" data-act="close-sheet">إلغاء</button></div>`);break;
     case 'backup':html=sheetWrap('نسخة احتياطية',backupHTML());break;
+    case 'sync-conflict':html=sheetWrap('يوجد بيانات سابقة بهذا الرمز',syncConflictHTML(S));break;
     case 'cele':html=sheetWrap('مبارك',celeHTML(S));break;
   }
   $('#sheet-root').innerHTML=html;
@@ -1873,6 +1958,14 @@ const ACT={
   'review-juz30-log':reviewJuz30Log,
   'open-edit':el=>openEdit(el.dataset.id),
   'open-backup':()=>openSheet({type:'backup'}),
+  'sync-connect':()=>syncConnect($('#sync-code').value),
+  'sync-disconnect':()=>{syncStop();render();toast('تم إيقاف المزامنة.');},
+  'sync-use-cloud':()=>{const code=UI.sheet.code;syncStart(code);closeSheet();toast('تم الاتصال، وتم استخدام بيانات السحابة.');},
+  'sync-use-local':()=>{
+    const code=UI.sheet.code,ref=syncDocRef(code);
+    ref.set({data:DATA,updatedAt:Date.now()}).then(()=>{syncStart(code);closeSheet();toast('تم رفع بيانات هذا الجهاز، والمزامنة مفعّلة.');})
+      .catch(()=>toast('تعذّر رفع البيانات.'));
+  },
   'close-sheet':closeSheet,
   'step':el=>{
     const inp=$('#'+el.dataset.t);let v=parseNum(inp.value);if(!(v>=1))v=1;
@@ -1980,6 +2073,7 @@ document.addEventListener('input',e=>{
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&UI.sheet)closeSheet();});
 
 render();
+if(SYNC_CODE)syncStart(SYNC_CODE);
 })();
 </script>
 </body>
