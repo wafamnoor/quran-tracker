@@ -50,8 +50,32 @@ h1,h2,p{margin:0}
 .app{max-width:560px;margin:0 auto;padding:0 20px 120px}
 .muted{color:var(--ink2)}
 
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0 0}
-.who{display:flex;flex-direction:column;align-items:flex-start;background:none;border:0;padding:4px 0;text-align:start;min-width:0}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;margin:0 -20px;padding-inline:20px;background:var(--bg);border-bottom:1px solid var(--line)}
+.who-dd{flex:1;min-width:0}
+.who-dd .lbl{font-size:11px;color:var(--ink2);display:block;margin-bottom:5px}
+.dd-row{display:flex;gap:8px}
+.dd-row select{flex:1;min-width:0;font:700 14.5px var(--font-display);color:var(--ink);background:var(--surface2);border:1px solid var(--line);border-radius:9px;padding:7px 8px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%238a8372'><path d='M5 7l5 5 5-5z'/></svg>");background-repeat:no-repeat;background-position:left 6px center;background-size:16px}
+.who .sep{font-style:normal;color:var(--ink2);margin:0 2px}
+.stu-group{margin-bottom:18px}
+.stu-group-h{font:700 15px var(--font-display);color:var(--ink2);margin-bottom:4px}
+.cmp-unit{margin-top:14px}
+.cmp-nav{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.cmp-period{font:700 15px var(--font-display);color:var(--ink)}
+.cmp-chart{width:100%;height:auto;display:block;margin-top:4px}
+.cmp-legend{display:flex;justify-content:center;gap:18px;font-size:12.5px;color:var(--ink2);margin-top:6px}
+.cmp-legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-inline-end:5px;vertical-align:-1px}
+.cmp-table{width:100%;border-collapse:collapse;margin-top:18px;font-size:13.5px}
+.cmp-table th{text-align:start;color:var(--ink2);font-weight:600;padding:6px 4px;border-bottom:1px solid var(--line);font-size:12.5px}
+.cmp-table td{padding:9px 4px;border-bottom:1px solid var(--line)}
+.cmp-table tr:last-child td{border-bottom:0}
+.cmp-table tr.cur td{background:var(--surface2)}
+.cmp-table td:first-child{font-weight:700;font-family:var(--font-display);font-size:1.05em}
+.cmp-custom{background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px}
+.cmp-metrics{display:flex;gap:18px;margin-top:6px}
+.cmp-metrics .pk-row{display:flex;align-items:center;gap:6px;padding:0}
+.cmp-toolbar{margin:12px 0 4px}
+.cmp-toolbar .btn{width:auto;display:inline-flex;padding:9px 16px}
+.cmp-chart-title{font:700 16px var(--font-display);margin:0 0 8px;text-align:center}
 .who .lbl{font-size:13px;color:var(--ink2)}
 .who .nm{font:700 30px/1.2 var(--font-display);display:flex;align-items:center;gap:8px;max-width:100%}
 .who .nm span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -322,7 +346,7 @@ h1,h2,p{margin:0}
 
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
 .nav[hidden]{display:none}
-.nav-in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.nav-in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr)}
 .nav button{background:none;border:0;padding:10px 2px 9px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--ink2);border-top:3px solid transparent}
 .nav button svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .nav button[aria-current="page"]{color:var(--primary);border-top-color:var(--gold);font-weight:600}
@@ -342,7 +366,9 @@ h1,h2,p{margin:0}
 .dateline{display:flex;gap:8px}
 .dateline input{flex:1;min-width:0}
 .dateline .btn{min-height:50px;padding:0 14px}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;min-width:0}
+.row2>.field{min-width:0}
+.row2>.field input,.row2>.field select{min-width:0}
 .stepper{display:flex;gap:6px}
 .stepper input{text-align:center;flex:1;min-width:0;padding:0 4px!important}
 .step{width:42px;height:50px;flex:none;border-radius:12px;border:1px solid var(--line);background:var(--surface2);font-size:22px;line-height:1}
@@ -417,6 +443,98 @@ h1,h2,p{margin:0}
 .toast{position:fixed;left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100% - 40px);bottom:calc(84px + env(safe-area-inset-bottom,0px));
   background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:15px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:60}
 .toast.on{opacity:1}
+
+/* ═══════════════ النجوم والمكافآت ═══════════════ */
+.st5{width:1em;height:1em;fill:var(--gold);flex:none}
+.stx-strip{display:flex;align-items:center;gap:10px;width:100%;margin-top:14px;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:var(--gold-soft);color:var(--gold-ink);text-align:start}
+.stx-strip-b{display:inline-flex;align-items:center;gap:5px;font:700 20px/1 var(--font-display)}
+.stx-strip-b .st5{width:22px;height:22px}
+.stx-strip-t{flex:1;min-width:0;font-size:14px;font-weight:500}
+.stx-strip-f{font-weight:600;font-size:14px}
+.stx-strip .chev{width:16px;height:16px;flex:none}
+.stx-hero{margin-top:16px;border-radius:22px;padding:20px 16px 18px;text-align:center;color:var(--gold-ink);
+  background:radial-gradient(120% 90% at 50% 0%,var(--gold-soft),var(--surface2))}
+.stx-name{font:700 18px/1.3 var(--font-display)}
+.stx-bal{display:flex;align-items:center;justify-content:center;gap:10px;font:700 60px/1.1 var(--font-display);margin-top:4px}
+.stx-bal .st5{width:46px;height:46px;filter:drop-shadow(0 2px 0 rgba(0,0,0,.08))}
+.stx-sub{font-size:13.5px;opacity:.85}
+.stx-card{margin-top:14px;border:1px solid var(--line);border-radius:18px;padding:14px 16px;background:var(--surface)}
+.stx-card h3{font:700 19px/1.3 var(--font-display);margin:0}
+.stx-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.stx-msg{margin-top:10px;font-size:14.5px;line-height:1.7}
+.lp{display:flex;gap:6px;margin-top:12px}
+.lp i{flex:1;height:14px;border-radius:7px;background:var(--track)}
+.lp i.on{background:var(--gold)}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.pill{font-size:13px;padding:4px 10px;border-radius:999px;background:var(--surface2);color:var(--ink)}
+.pill.fire{background:var(--danger-soft);color:var(--danger)}
+.pill.gold{background:var(--gold-soft);color:var(--gold-ink);font-weight:600}
+.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:12px}
+.wk-d{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11.5px;color:var(--ink2)}
+.wk-d.is-today{color:var(--ink);font-weight:600}
+.wk-c{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--track);color:var(--ink2);font-weight:700}
+.wk-c svg{width:18px;height:18px}
+.wk-c small{font-size:10px;font-weight:600}
+.wk-c.met{background:var(--ok);color:#fff}
+.wk-c.miss{background:var(--danger-soft);color:var(--danger)}
+.wk-c.ex{background:var(--surface2);border:1.5px dashed var(--ink2)}
+.wk-c.now{background:var(--surface);border:2px solid var(--gold)}
+.wk-c.fut{background:var(--surface2)}
+.wk-gift{display:flex;align-items:center;gap:10px;margin-top:12px;padding:8px;border-radius:12px;background:var(--surface2);font-weight:600}
+.wk-gift-pic{width:40px;height:40px;border-radius:9px;object-fit:cover;font-size:28px;display:grid;place-items:center}
+.stx-card.gift{background:var(--gold-soft);color:var(--gold-ink);border-color:transparent}
+.stx-card.gift .row{border-color:rgba(0,0,0,.08)}
+.btn.sm{min-height:38px;padding:0 14px;font-size:14.5px;border-radius:11px}
+.tgt-card{display:flex;align-items:center;gap:14px}
+.tgt-card.fam{margin-top:10px}
+.tgt-pic{width:72px;height:72px;border-radius:14px;overflow:hidden;background:var(--surface2);display:grid;place-items:center;flex:none}
+.tgt-pic img{width:100%;height:100%;object-fit:cover}
+.tgt-pic .rw-emo{font-size:44px}
+.bar{height:8px;border-radius:4px;background:var(--track);overflow:hidden;margin-top:8px}
+.bar.big{height:12px;border-radius:6px}
+.bar i{display:block;height:100%;background:var(--gold);border-radius:inherit}
+.rw-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.rw{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);display:flex;flex-direction:column}
+.rw.tgt{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.rw-img{position:relative;aspect-ratio:4/3;background:var(--surface2);display:grid;place-items:center}
+.rw-img img{width:100%;height:100%;object-fit:cover}
+.rw-img .rw-emo{font-size:54px;line-height:1}
+.rw-badge{position:absolute;top:8px;inset-inline-start:8px;background:var(--gold);color:#fff;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px}
+.rw-edit{position:absolute;top:6px;inset-inline-end:6px;width:32px;height:32px;border-radius:50%;border:0;background:rgba(255,255,255,.88);color:#333;font-size:15px}
+.rw-b{padding:10px 12px 12px;display:flex;flex-direction:column;flex:1}
+.rw-n{font:700 17px/1.35 var(--font-display)}
+.rw-c{display:flex;align-items:center;gap:4px;font-weight:700;color:var(--gold-ink);margin-top:2px}
+.rw-left{font-size:12.5px;color:var(--ink2);margin-top:4px}
+.rw-btn{min-height:40px;margin-top:auto;padding:0 10px;font-size:14.5px;border-radius:11px;width:100%}
+.rw-b .bar{margin-bottom:8px}
+.rw-b .rw-left{margin:-4px 0 8px}
+.stx-empty{margin-top:12px;padding:18px;border:1.5px dashed var(--line);border-radius:16px;text-align:center;color:var(--ink2)}
+.stx-empty .btn{margin-top:12px}
+.bdg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:10px;margin-top:12px}
+.bdg{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 6px;border-radius:14px;background:var(--surface2);text-align:center;opacity:.42;filter:grayscale(1)}
+.bdg.on{opacity:1;filter:none;background:var(--gold-soft);color:var(--gold-ink)}
+.bdg-i{font-size:28px;line-height:1}
+.bdg-l{font-size:12.5px;font-weight:600;line-height:1.35}
+.bdg-c{position:absolute;top:6px;inset-inline-end:8px;font-size:12px;font-weight:700}
+.stx-plus{color:var(--ok);font:700 18px var(--font-display)}
+.stx-minus{color:var(--danger);font:700 18px var(--font-display)}
+.icon-x{background:none;border:0;color:var(--ink2);padding:6px}
+.pin-in{width:100%;height:56px;border:1px solid var(--line);border-radius:12px;background:var(--surface2);font-size:26px;letter-spacing:10px;text-align:center;direction:ltr}
+.rw-prev{width:140px;height:140px;margin:0 auto 14px;border-radius:20px;overflow:hidden;background:var(--surface2);display:grid;place-items:center}
+.rw-prev img{width:100%;height:100%;object-fit:cover}
+.rw-prev .rw-emo{font-size:76px}
+.emo-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}
+.emo{aspect-ratio:1;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-size:22px;padding:0}
+.emo.on{border-color:var(--gold);background:var(--gold-soft);box-shadow:0 0 0 1px var(--gold)}
+.rules p{margin:0 0 12px;line-height:1.75;font-size:15px}
+.rules b{color:var(--ink)}
+@media (max-width:380px){.emo-grid{grid-template-columns:repeat(6,1fr)}.stx-bal{font-size:52px}}
+.stx-debt{display:inline-block;margin-top:8px;padding:3px 12px;border-radius:999px;background:var(--danger-soft);color:var(--danger);font-size:13.5px;font-weight:600}
+.rw-joint{margin-bottom:6px;border-color:var(--gold);color:var(--gold-ink)}
+.debt-box{margin-top:10px;padding:10px 14px;border-radius:12px;background:var(--danger-soft);color:var(--danger);font-size:14.5px;font-weight:500}
+.debt-box.out{background:var(--ok-bg);color:var(--ok)}
+.jt-head{display:flex;align-items:center;gap:14px}
+.jt-row .jt-in{width:96px;height:46px;border:1px solid var(--line);border-radius:12px;background:var(--surface2);font-size:18px;text-align:center}
 </style>
 </head>
 <body>
@@ -544,6 +662,250 @@ function pagesToWajhText(pages){
   if(rem===0)return wajhCountText(whole);
   return wajhCountText(whole)+' '+fracShort[rem];
 }
+
+/* ═══════════════ المقارنة بين جهات الحفظ ═══════════════ */
+/* عدد الصفحات (كسريًا) الذي يمثله نطاق آيات معيّن، بصرف النظر عن أي سجل آخر */
+function pagesOfRange(a,b){
+  let s=0;for(let i=a;i<=b;i++)s+=1/PLEN[PAGE_OF[i]];
+  return s;
+}
+/* إجمالي صفحات التسميع (سجلّات الحفظ فقط، لا الحفظ السابق) وصفحات المراجعة لجهة معيّنة خلال فترة */
+function placePeriodStats(place,from,to){
+  let hifz=0,review=0;
+  place.records.forEach(r=>{if(r.type==='session'&&r.date>=from&&r.date<=to)hifz+=pagesOfRange(r.start,r.end);});
+  place.reviews.forEach(r=>{if(r.date>=from&&r.date<=to)review+=pagesOfRange(r.start,r.end);});
+  return {hifz,review,total:hifz+review};
+}
+/* فترة الجدول العلوي: أسبوع/شهر/سنة/مخصص (منفصلة تمامًا عن إعدادات رسم "عبر الوقت" أسفله) */
+function tablePeriodRange(unit,offset){
+  const today=parseISO(todayISO());
+  if(unit==='week'){
+    const start=new Date(today);start.setDate(start.getDate()-today.getDay()+offset*7);
+    const end=new Date(start);end.setDate(end.getDate()+6);
+    return {from:toISO(start),to:toISO(end)};
+  }
+  if(unit==='year'){
+    const y=today.getFullYear()+offset;
+    return {from:y+'-01-01',to:y+'-12-31'};
+  }
+  if(unit==='custom'){
+    if(UI.tblCustomMode==='count'){
+      const n=Math.max(1,Math.min(52,UI.tblCount||4));
+      if(UI.tblCountUnit==='month'){
+        const start=new Date(today.getFullYear(),today.getMonth()-n+1,1);
+        return {from:toISO(start),to:todayISO()};
+      }
+      const start=new Date(today);start.setDate(start.getDate()-(n*7)+1);
+      return {from:toISO(start),to:todayISO()};
+    }
+    const from=UI.tblFrom||todayISO(),to=UI.tblTo||todayISO();
+    return from<=to?{from,to}:{from:to,to:from};
+  }
+  const start=new Date(today.getFullYear(),today.getMonth()+offset,1);
+  const end=new Date(start.getFullYear(),start.getMonth()+1,0);
+  return {from:toISO(start),to:toISO(end)};
+}
+function tablePeriodLabel(unit,offset,r){
+  if(unit==='week'){
+    if(offset===0)return 'هذا الأسبوع';
+    if(offset===-1)return 'الأسبوع الماضي';
+    if(offset===1)return 'الأسبوع القادم';
+    return fmtShort(r.from)+' – '+fmtShort(r.to);
+  }
+  if(unit==='year')return r.from.slice(0,4);
+  if(unit==='custom')return fmtShort(r.from)+' – '+fmtShort(r.to);
+  if(offset===0)return 'هذا الشهر';
+  if(offset===-1)return 'الشهر الماضي';
+  try{return parseISO(r.from+'').toLocaleDateString('ar-u-nu-latn-ca-gregory',{month:'long',year:'numeric'});}catch(e){return r.from.slice(0,7);}
+}
+function tableCustomPanelHTML(){
+  const mode=UI.tblCustomMode;
+  let h=`<div class="cmp-custom">
+    <div class="seg" role="group" aria-label="طريقة التخصيص">
+      <button type="button" data-act="tbl-custom-mode" data-m="dates" aria-pressed="${mode==='dates'}">من - إلى</button>
+      <button type="button" data-act="tbl-custom-mode" data-m="count" aria-pressed="${mode==='count'}">عدد الفترات</button>
+    </div>`;
+  if(mode==='count'){
+    h+=`<div class="row2"><div class="field"><label for="tbl-count">آخر</label><input id="tbl-count" type="number" min="1" max="52" value="${UI.tblCount||4}"></div>
+      <div class="field"><label for="tbl-count-unit">الوحدة</label><select id="tbl-count-unit"><option value="week"${UI.tblCountUnit!=='month'?' selected':''}>أسبوعًا</option><option value="month"${UI.tblCountUnit==='month'?' selected':''}>شهرًا</option></select></div></div>`;
+  }else{
+    h+=`<div class="row2"><div class="field"><label for="tbl-from">من تاريخ</label><input id="tbl-from" type="date" value="${esc(UI.tblFrom||addDays(todayISO(),-6))}"></div>
+      <div class="field"><label for="tbl-to">إلى تاريخ</label><input id="tbl-to" type="date" value="${esc(UI.tblTo||todayISO())}"></div></div>`;
+  }
+  h+=`<button type="button" class="btn btn-primary btn-block" data-act="tbl-custom-apply">تطبيق</button></div>`;
+  return h;
+}
+function compareTableHTML(stu,curPl){
+  const unit=UI.tblUnit,offset=UI.tblOffset,r=tablePeriodRange(unit,offset);
+  const rows=stu.places.map(p=>{const s=placePeriodStats(p,r.from,r.to);return {id:p.id,name:p.name,juz:p.goal.juz,cur:p.id===curPl.id,...s};});
+  const hasAny=rows.some(x=>x.total>0);
+  const winner=hasAny?rows.slice().sort((a,b)=>b.total-a.total)[0]:null;
+  let h=`<div class="seg cmp-unit" role="group" aria-label="وحدة فترة الجدول">
+    <button type="button" data-act="tbl-unit" data-u="week" aria-pressed="${unit==='week'}">أسبوع</button>
+    <button type="button" data-act="tbl-unit" data-u="month" aria-pressed="${unit==='month'}">شهر</button>
+    <button type="button" data-act="tbl-unit" data-u="year" aria-pressed="${unit==='year'}">سنة</button>
+    <button type="button" data-act="tbl-unit" data-u="custom" aria-pressed="${unit==='custom'}">مخصص</button>
+  </div>`;
+  if(unit==='custom')h+=tableCustomPanelHTML();
+  else h+=`<div class="cmp-nav">
+    <button type="button" class="mp-nav" data-act="tbl-nav" data-d="-1">‹ السابق</button>
+    <span class="cmp-period">${esc(tablePeriodLabel(unit,offset,r))}</span>
+    <button type="button" class="mp-nav" data-act="tbl-nav" data-d="1"${offset>=0?' disabled':''}>التالي ›</button>
+  </div>`;
+  if(unit==='custom')h+=`<p class="cmp-period" style="margin-top:10px;text-align:center">${esc(tablePeriodLabel(unit,offset,r))}</p>`;
+  h+=`<div class="hcard" style="margin-top:14px">
+    ${hasAny?'':'<p class="muted" style="text-align:center;padding:8px 0 16px">لا يوجد تسميع أو مراجعة مسجَّلة في هذه الفترة لأي جهة.</p>'}
+    <table class="cmp-table"><thead><tr><th>الجهة</th><th>الجزء الحالي</th><th>تسميع</th><th>مراجعة</th></tr></thead>
+    <tbody>${rows.map(x=>`<tr${x.cur?' class="cur"':''}>
+      <td>${esc(x.name)}${winner&&x.id===winner.id&&x.total>0?' 🏆':''}</td>
+      <td>جزء ${x.juz+1}</td>
+      <td>${pagesToWajhText(x.hifz)}</td>
+      <td>${pagesToWajhText(x.review)}</td>
+    </tr>`).join('')}</tbody></table>
+  </div>
+  ${winner&&winner.total>0?`<p class="tgt" style="margin-top:14px"><span class="tag ok">الأفضل هذه الفترة</span> جهة «${esc(winner.name)}» بمجموع ${pagesToWajhText(winner.total)}.</p>`:''}`;
+  return h;
+}
+/* أدوات تقسيم الوقت لوحدات (يوم/أسبوع/شهر/سنة) */
+function addUnit(date,unit,n){
+  const d=new Date(date);
+  if(unit==='day')d.setDate(d.getDate()+n);
+  else if(unit==='week')d.setDate(d.getDate()+n*7);
+  else if(unit==='month')d.setMonth(d.getMonth()+n);
+  else d.setFullYear(d.getFullYear()+n);
+  return d;
+}
+function bucketEnd(start,unit){
+  if(unit==='day')return new Date(start);
+  if(unit==='week'){const e=new Date(start);e.setDate(e.getDate()+6);return e;}
+  if(unit==='month')return new Date(start.getFullYear(),start.getMonth()+1,0);
+  return new Date(start.getFullYear(),11,31);
+}
+function bucketLabel(start,unit){
+  if(unit==='day'){try{return start.toLocaleDateString('ar-u-nu-latn-ca-gregory',{day:'numeric',month:'short'});}catch(e){return fmtShort(toISO(start));}}
+  if(unit==='week')return fmtShort(toISO(start));
+  if(unit==='month'){try{return start.toLocaleDateString('ar-u-nu-latn-ca-gregory',{month:'short',year:'2-digit'});}catch(e){return (start.getMonth()+1)+'';}}
+  return String(start.getFullYear());
+}
+const UNIT_SING={day:'يوم',week:'أسبوع',month:'شهر',year:'سنة'},UNIT_PLUR={day:'أيام',week:'أسابيع',month:'أشهر',year:'سنوات'};
+function trendBuckets(unit,mode,count,from,to){
+  const today=parseISO(todayISO());
+  const buckets=[];
+  if(mode==='dates'&&from&&to){
+    let cur=parseISO(from<=to?from:to);const end=parseISO(from<=to?to:from);
+    let guard=0;
+    while(cur<=end&&guard<80){
+      guard++;
+      let bEnd=bucketEnd(cur,unit);if(bEnd>end)bEnd=new Date(end);
+      buckets.push({from:toISO(cur),to:toISO(bEnd),label:bucketLabel(cur,unit)});
+      cur=addUnit(cur,unit,1);
+    }
+    return buckets.length?buckets:[{from:toISO(end),to:toISO(end),label:bucketLabel(end,unit)}];
+  }
+  const n=Math.max(1,Math.min(60,count||8));
+  let curStart;
+  if(unit==='day')curStart=new Date(today);
+  else if(unit==='week'){curStart=new Date(today);curStart.setDate(curStart.getDate()-today.getDay());}
+  else if(unit==='month')curStart=new Date(today.getFullYear(),today.getMonth(),1);
+  else curStart=new Date(today.getFullYear(),0,1);
+  for(let i=n-1;i>=0;i--){
+    const start=addUnit(curStart,unit,-i),end=bucketEnd(start,unit);
+    buckets.push({from:toISO(start),to:toISO(end),label:bucketLabel(start,unit)});
+  }
+  return buckets;
+}
+function trendDurationText(unit,mode,buckets){
+  if(mode==='dates')return 'من '+fmtShort(buckets[0].from)+' إلى '+fmtShort(buckets[buckets.length-1].to);
+  const n=buckets.length;
+  if(n===1)return 'آخر '+UNIT_SING[unit];
+  return 'آخر '+num(n)+' '+(n<=10?UNIT_PLUR[unit]:UNIT_SING[unit]);
+}
+/* عنوان قسم الرسم: "رسم بياني لكمية الحفظ في أسبوع/شهر/سنة" أو بتاريخ محدَّد عند اختيار مدى مخصص */
+function trendSectionTitle(unit,mode,buckets){
+  if(mode==='dates')return 'رسم بياني لكمية الحفظ من '+fmtShort(buckets[0].from)+' إلى '+fmtShort(buckets[buckets.length-1].to);
+  return 'رسم بياني لكمية الحفظ في '+UNIT_SING[unit];
+}
+function trendMetricValue(stats,metric){return metric==='hifz'?stats.hifz:metric==='review'?stats.review:stats.total;}
+/* رسم كمية الحفظ/المراجعة عبر الوقت لكل جهة، بمحاور واضحة العنوان وتسميات تاريخ مائلة */
+const PLACE_COLORS=['var(--primary)','var(--gold)','var(--ok)','#a855c9','#c2410c','#0891b2'];
+function trendChartSVG(stu,buckets,metric){
+  const n=stu.places.length,W=340,H=220,pl=30,pr=8,pt=14,pb=50;
+  const data=buckets.map(b=>({...b,values:stu.places.map(p=>trendMetricValue(placePeriodStats(p,b.from,b.to),metric))}));
+  const maxV=Math.max(...data.flatMap(b=>b.values),0.5)*1.15;
+  const gw=(W-pl-pr)/data.length,bw=Math.max(3,Math.min(11,(gw*0.72)/n));
+  const Y=v=>H-pb-(v/maxV)*(H-pt-pb);
+  let axis=`<line x1="${pl}" y1="${pt}" x2="${pl}" y2="${H-pb}" stroke="var(--line)" stroke-width="1"/><line x1="${pl}" y1="${H-pb}" x2="${W-pr}" y2="${H-pb}" stroke="var(--line)" stroke-width="1"/>`;
+  for(let t=0;t<=4;t++){
+    const v=maxV*t/4,y=Y(v);
+    axis+=`<text x="${pl-4}" y="${(y+3).toFixed(1)}" text-anchor="end" font-size="7.5" fill="var(--ink2)">${Math.round(v*4)/4}</text>`;
+  }
+  let bars='',labels='';
+  const everyK=Math.max(1,Math.ceil(data.length/9));
+  data.forEach((b,bi)=>{
+    const cx=pl+gw*bi+gw/2,totalW=bw*n+2*(n-1);
+    const x0=cx-totalW/2;
+    b.values.forEach((v,pi)=>{
+      const x=x0+pi*(bw+2),y=Y(v),ht=Math.max(v>0?2:0,(H-pb)-y);
+      bars+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${ht.toFixed(1)}" rx="2" fill="${PLACE_COLORS[pi%PLACE_COLORS.length]}"/>`;
+    });
+    if(bi%everyK===0||bi===data.length-1)labels+=`<text x="${cx.toFixed(1)}" y="${(H-pb+11).toFixed(1)}" text-anchor="end" font-size="8.5" transform="rotate(-45 ${cx.toFixed(1)} ${(H-pb+11).toFixed(1)})">${esc(b.label)}</text>`;
+  });
+  const yTitle=`<text x="9" y="${(H-pb+pt)/2+5}" text-anchor="middle" font-size="9" font-weight="700" fill="var(--ink2)" transform="rotate(-90 9 ${((H-pb+pt)/2+5).toFixed(1)})">عدد الأوجه</text>`;
+  const xTitle=`<text x="${(pl+(W-pr))/2}" y="${H-2}" text-anchor="middle" font-size="9" font-weight="700" fill="var(--ink2)">التاريخ</text>`;
+  const legend=stu.places.map((p,i)=>`<span><i style="background:${PLACE_COLORS[i%PLACE_COLORS.length]}"></i>${esc(p.name)}</span>`).join('');
+  return `<svg class="chart cmp-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="كمية الحفظ عبر الوقت لكل جهة">${axis}${bars}${labels}${yTitle}${xTitle}</svg>
+    <div class="cmp-legend">${legend}</div>`;
+}
+function trendSettingsHTML(){
+  const mode=UI.trendMode;
+  let h=`<div class="seg" role="group" aria-label="طريقة تحديد المدة">
+    <button type="button" data-act="trend-mode" data-m="count" aria-pressed="${mode!=='dates'}">عدد ووحدة</button>
+    <button type="button" data-act="trend-mode" data-m="dates" aria-pressed="${mode==='dates'}">من - إلى</button>
+  </div>`;
+  if(mode==='dates'){
+    h+=`<div class="row2" style="margin-top:12px"><div class="field"><label for="trend-from">من تاريخ</label><input id="trend-from" type="date" value="${esc(UI.trendFrom||addDays(todayISO(),-49))}"></div>
+    <div class="field"><label for="trend-to">إلى تاريخ</label><input id="trend-to" type="date" value="${esc(UI.trendTo||todayISO())}"></div></div>
+    <div class="field"><label for="trend-bucket">تقسيم كل عمود بوحدة</label><select id="trend-bucket">
+      <option value="day"${UI.trendUnit==='day'?' selected':''}>يوم</option>
+      <option value="week"${UI.trendUnit==='week'?' selected':''}>أسبوع</option>
+      <option value="month"${UI.trendUnit==='month'?' selected':''}>شهر</option>
+      <option value="year"${UI.trendUnit==='year'?' selected':''}>سنة</option>
+    </select></div>`;
+  }else{
+    h+=`<div class="row2" style="margin-top:12px"><div class="field"><label for="trend-count">العدد</label><input id="trend-count" type="number" min="1" max="60" value="${UI.trendCount||8}"></div>
+    <div class="field"><label for="trend-unit">الوحدة</label><select id="trend-unit">
+      <option value="day"${UI.trendUnit==='day'?' selected':''}>يوم</option>
+      <option value="week"${UI.trendUnit==='week'?' selected':''}>أسبوع</option>
+      <option value="month"${UI.trendUnit==='month'?' selected':''}>شهر</option>
+      <option value="year"${UI.trendUnit==='year'?' selected':''}>سنة</option>
+    </select></div></div>`;
+  }
+  h+=`<p class="muted" style="font-size:13px">الافتراضي أسبوعي: كل عمود في الرسم يمثل أسبوعًا.</p>
+  <button type="button" class="btn btn-primary btn-block" data-act="trend-apply">تطبيق</button>`;
+  return h;
+}
+function viewCompare(stu,curPl,d){
+  if(stu.places.length<2){
+    return `<h1 class="page-h">مقارنة جهات الحفظ</h1>
+    <p class="muted" style="margin-top:-8px">أضف جهة حفظ أخرى لـ${esc(stu.name)} من «المزيد» لتظهر هنا مقارنة بين جهاته.</p>`;
+  }
+  const buckets=trendBuckets(UI.trendUnit,UI.trendMode,UI.trendCount,UI.trendFrom,UI.trendTo);
+  const secTitle=trendSectionTitle(UI.trendUnit,UI.trendMode,buckets);
+  return `<h1 class="page-h">مقارنة جهات الحفظ</h1>
+  <p class="muted" style="margin-top:-8px">قارِن كمية تسميع ومراجعة ${esc(stu.name)} بين جهاته المختلفة.</p>
+  ${compareTableHTML(stu,curPl)}
+  <div class="sec-h" style="margin-top:26px"><h2 class="pace-title" style="margin-top:0">${esc(secTitle)}</h2></div>
+  <div class="cmp-toolbar"><button type="button" class="btn btn-ghost" data-act="trend-settings-open">⚙ تغيير المدة المعروضة</button></div>
+  <div class="field" style="margin-top:2px"><label>ماذا تريد أن يُظهر الرسم؟</label>
+    <div class="cmp-metrics">
+      <label class="pk-row"><input type="checkbox" data-act="trend-metric" data-k="hifz" ${UI.trendMetric!=='review'?'checked':''}><span>حفظ (تسميع)</span></label>
+      <label class="pk-row"><input type="checkbox" data-act="trend-metric" data-k="review" ${UI.trendMetric!=='hifz'?'checked':''}><span>مراجعة</span></label>
+    </div>
+  </div>
+  <div class="hcard" style="margin-top:14px">
+    ${trendChartSVG(stu,buckets,UI.trendMetric)}
+  </div>`;
+}
 function spanText(days){
   if(days<=0)return 'اليوم';
   if(days<=45)return daysText(days);
@@ -569,17 +931,65 @@ function rangeLabel(a,b){
   return 'من '+NAMES[s1]+' '+a1+' إلى '+NAMES[s2]+' '+a2;
 }
 
+/* ═══════════════ النجوم والمكافآت: تنظيف البيانات المحفوظة ═══════════════ */
+const cleanImg=s=>typeof s==='string'&&s.length<200000&&/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(s)?s:'';
+const cleanEmoji=s=>typeof s==='string'&&s.trim()&&s.length<=8?s.trim():'🎁';
+const cleanCost=v=>{const n=Math.round(+v);return n>0&&n<=100000?n:0;};
+function cleanStars(o){
+  o=o&&typeof o==='object'?o:{};
+  const excused=[...new Set((Array.isArray(o.excused)?o.excused:[]).filter(x=>validDate(x)))].sort();
+  const spent=[];
+  (Array.isArray(o.spent)?o.spent:[]).forEach(x=>{
+    if(!x||typeof x!=='object')return;
+    const cost=cleanCost(x.cost);if(!cost||!validDate(x.date))return;
+    const e={id:String(x.id||uid()),rewardId:x.rewardId?String(x.rewardId):null,name:String(x.name||'مكافأة').slice(0,40),cost,date:x.date,createdAt:Number.isFinite(x.createdAt)?x.createdAt:Date.now()};
+    if(x.joint){e.joint=String(x.joint);e.total=cleanCost(x.total)||cost;e.with=String(x.with||'').slice(0,120);}
+    spent.push(e);
+  });
+  const gifts={};
+  if(o.gifts&&typeof o.gifts==='object')Object.keys(o.gifts).forEach(k=>{if(validDate(k)&&validDate(o.gifts[k]))gifts[k]=o.gifts[k];});
+  return {excused,spent,gifts,target:o.target?String(o.target):null};
+}
+function cleanRewardItem(x,needCost){
+  if(!x||typeof x!=='object')return null;
+  const name=String(x.name||'').trim().slice(0,40);if(!name)return null;
+  const cost=cleanCost(x.cost);if(needCost&&!cost)return null;
+  return {id:String(x.id||uid()),name,img:cleanImg(x.img),emoji:cleanEmoji(x.emoji),cost,for:x.for?String(x.for):''};
+}
+function cleanRewards(o){
+  o=o&&typeof o==='object'?o:{};
+  const items=[];
+  (Array.isArray(o.items)?o.items:[]).forEach(x=>{const c=cleanRewardItem(x,true);if(c)items.push(c);});
+  const weekly=cleanRewardItem(o.weekly,false);
+  let family=null;
+  const f=cleanRewardItem(o.family,true);
+  if(f){
+    const done=[];
+    (Array.isArray(o.family.done)?o.family.done:[]).forEach(x=>{if(x&&validDate(x.date))done.push({date:x.date,name:String(x.name||'').slice(0,40)});});
+    family=Object.assign(f,{base:Math.max(0,Math.round(+o.family.base)||0),done});
+  }
+  const loans=[];
+  (Array.isArray(o.loans)?o.loans:[]).forEach(l=>{
+    if(!l||typeof l!=='object'||!l.from||!l.to||l.from===l.to)return;
+    const amount=cleanCost(l.amount);if(!amount||!validDate(l.date))return;
+    const repaid=[];let left=amount;
+    (Array.isArray(l.repaid)?l.repaid:[]).forEach(r=>{const a=Math.min(cleanCost(r&&r.amount),left);if(a>0&&validDate(r.date)){repaid.push({id:String(r.id||uid()),amount:a,date:r.date});left-=a;}});
+    loans.push({id:String(l.id||uid()),from:String(l.from),to:String(l.to),amount,date:l.date,createdAt:Number.isFinite(l.createdAt)?l.createdAt:Date.now(),repaid,forgiven:validDate(l.forgiven)?l.forgiven:null});
+  });
+  return {pin:typeof o.pin==='string'&&/^\d{4,6}$/.test(o.pin)?o.pin:'',items,weekly,family,loans};
+}
+
 /* ═══════════════ التخزين المحلي ═══════════════ */
-const KEY='quranTracker.v2';
+const KEY='quranTrackerMulti.v1';
 let storageOK=true;
 try{localStorage.setItem('__t','1');localStorage.removeItem('__t');}catch(e){storageOK=false;}
 const okDate=d=>(typeof d==='string'&&validDate(d))?d:null;
-function cleanStudent(s){
-  if(!s||typeof s!=='object')return null;
-  const name=String(s.name||'').trim().slice(0,40); if(!name)return null;
-  const g=s.goal&&Number.isInteger(s.goal.juz)&&s.goal.juz>=0&&s.goal.juz<30?s.goal.juz:29;
+function cleanPlace(p){
+  if(!p||typeof p!=='object')return null;
+  const name=String(p.name||'').trim().slice(0,40); if(!name)return null;
+  const g=p.goal&&Number.isInteger(p.goal.juz)&&p.goal.juz>=0&&p.goal.juz<30?p.goal.juz:29;
   const recs=[];
-  (Array.isArray(s.records)?s.records:[]).forEach(r=>{
+  (Array.isArray(p.records)?p.records:[]).forEach(r=>{
     if(!r||typeof r!=='object')return;
     const type=r.type==='prior'?'prior':'session';
     const a=r.start,b=r.end;
@@ -589,7 +999,7 @@ function cleanStudent(s){
     recs.push({id:String(r.id||uid()),type,start:a,end:b,date:type==='prior'?null:date,createdAt:Number.isFinite(r.createdAt)?r.createdAt:Date.now()});
   });
   const reviews=[];
-  (Array.isArray(s.reviews)?s.reviews:[]).forEach(r=>{
+  (Array.isArray(p.reviews)?p.reviews:[]).forEach(r=>{
     if(!r||typeof r!=='object')return;
     const a=r.start,b=r.end;
     if(!Number.isInteger(a)||!Number.isInteger(b)||a<0||b>=TOTAL||a>b)return;
@@ -597,19 +1007,29 @@ function cleanStudent(s){
     reviews.push({id:String(r.id||uid()),start:a,end:b,date,createdAt:Number.isFinite(r.createdAt)?r.createdAt:Date.now()});
   });
   const plan=[];
-  (Array.isArray(s.plan)?s.plan:[]).forEach(p=>{
-    if(!p||typeof p!=='object')return;
-    const date=okDate(p.date);if(!date)return;
-    const a=p.start,b=p.end;
+  (Array.isArray(p.plan)?p.plan:[]).forEach(pl=>{
+    if(!pl||typeof pl!=='object')return;
+    const date=okDate(pl.date);if(!date)return;
+    const a=pl.start,b=pl.end;
     if(!Number.isInteger(a)||!Number.isInteger(b)||a<0||b>=TOTAL||a>b)return;
-    const kind=p.kind==='review'?'review':'hifz';
-    plan.push({id:String(p.id||uid()),date,kind,start:a,end:b,done:!!p.done,createdAt:Number.isFinite(p.createdAt)?p.createdAt:Date.now()});
+    const kind=pl.kind==='review'?'review':'hifz';
+    plan.push({id:String(pl.id||uid()),date,kind,start:a,end:b,done:!!pl.done,createdAt:Number.isFinite(pl.createdAt)?pl.createdAt:Date.now()});
   });
-  return {id:String(s.id||uid()),name,goal:{juz:g,target:okDate(s.goal&&s.goal.target)},finalTarget:okDate(s.finalTarget),records:recs,reviews,plan};
+  return {id:String(p.id||uid()),name,goal:{juz:g,target:okDate(p.goal&&p.goal.target)},finalTarget:okDate(p.finalTarget),records:recs,reviews,plan};
+}
+function cleanStudent(s){
+  if(!s||typeof s!=='object')return null;
+  const name=String(s.name||'').trim().slice(0,40); if(!name)return null;
+  const places=[];
+  (Array.isArray(s.places)?s.places:[]).forEach(p=>{const c=cleanPlace(p);if(c)places.push(c);});
+  if(!places.length)return null;
+  const selectedPlace=places.some(p=>p.id===s.selectedPlace)?s.selectedPlace:places[0].id;
+  return {id:String(s.id||uid()),name,places,selectedPlace,stars:cleanStars(s.stars)};
 }
 function cleanData(o){
-  const out={app:'quran-tracker',v:2,selected:null,students:[]};
+  const out={app:'quran-tracker-multi',v:1,selected:null,students:[],rewards:cleanRewards(o&&o.rewards)};
   if(o&&Array.isArray(o.students))o.students.forEach(s=>{const c=cleanStudent(s);if(c)out.students.push(c);});
+  {const ids=new Set(out.students.map(s=>s.id));out.rewards.loans=out.rewards.loans.filter(l=>ids.has(l.from)&&ids.has(l.to));}
   out.selected=out.students.some(s=>s.id===(o&&o.selected))?o.selected:(out.students[0]?out.students[0].id:null);
   return out;
 }
@@ -617,8 +1037,6 @@ function load(){
   try{
     const raw=localStorage.getItem(KEY);
     if(raw)return cleanData(JSON.parse(raw));
-    const old=localStorage.getItem('quranTracker.v1');
-    if(old)return cleanData(JSON.parse(old));
   }catch(e){}
   return cleanData(null);
 }
@@ -638,7 +1056,8 @@ function save(){
   catch(e){storageOK=false;toast('تعذّر الحفظ على هذا الجهاز. خذ نسخة احتياطية من تبويب «المزيد».');}
   if(SYNC_CODE&&!syncApplyingRemote)syncPush();
 }
-const cur=()=>DATA.students.find(s=>s.id===DATA.selected)||DATA.students[0]||null;
+const curStudent=()=>DATA.students.find(s=>s.id===DATA.selected)||DATA.students[0]||null;
+const cur=()=>{const s=curStudent();if(!s)return null;return s.places.find(p=>p.id===s.selectedPlace)||s.places[0]||null;};
 
 /* ═══════════════ المزامنة السحابية (Firebase) ═══════════════ */
 const FIREBASE_CONFIG={apiKey:"AIzaSyDFg2vF3t1fhZ1bD8m0bidXEFn4f8a1WQw",authDomain:"quran-tracker-172ec.firebaseapp.com",projectId:"quran-tracker-172ec",storageBucket:"quran-tracker-172ec.firebasestorage.app",messagingSenderId:"579864253306",appId:"1:579864253306:web:df979c6d04f027a1b6bcc3"};
@@ -890,8 +1309,599 @@ function firstUnmem(s,d){
   return 1;
 }
 
+/* ═══════════════ النجوم: توزيع الآيات على أسطر مصحف المدينة ═══════════════ */
+/* لكل آية: عدد كلماتها في كل سطر تمتد عليه (مفصولة بنقطة)، و«+» في أولها = تبدأ في سطر جديد */
+const AYL_RAW='+4,+4,+2,3,+4,1.2,3.4.2,+1,6.1,5.3,4.8,+6.2,+9.2,7.5,2.9,+8.2,6.6,3.8,+7,2.10.7,2.10.4,4.3,4.7,+9.8,1.5,5.9.5,3.10.10.2,6.5,3.9.10.1,8.9.3,6.7,+8.9.10.7,+10.8.8.8.5,3.11.6,+6.7,1.10.8,+9.9.10,+8.7,1.11,+8.10.4,4.9,+9.9,+9.10,+11,+10.7,2.8,+9.4,3.11.4,4.4,3.4,3.7,+8,+8,+9.2,9.10,+8.7.3,5.5,3.9,+8,+7,+8.8.10,+10.4,3.4,2.9.7,+10.8.2,4.10.4,3.7.9.9,+11.9.7.9.7.8.8,+7.9.8,1.8.6,3.9.1,7.5,3.6,2.10.8,1.14.8,+11.7,+13.4,7.10.7,1.9,+8.3,6.10.10.11,+8.9.2,6.9.8,+9,+9.2,5.10.9,+8.10.5,4.7.2,4.6,1.9.6.7.6,+8.7,+7.7.7.5.9.9.5,3.9.1,6.8.9.5,1.9,+10.8.8,+8.12.7,+10.8.11.1,4.7,+7.7.6.7,+10.7,+9,+7.10.8,1.10.7,+7.5,2.8,+8.2,6.9.7,+9.6.8.11.8.10.8.10.4,3.9,+7.5,+9.9.7,+11.8,5.9.3,5.9.4,4.8.10.11,+7.10,+10.7.1,7.10,+8.9.10.4,5.11.9.5,3.9,+10.4,3.8,2.9.8.5,2.8,+11.10.10,2.10.3,5.6,2.12.4,5.11.3,5.9.7.1,9.12.9,+9.5,3.10.4,4.7.5,3.10.5,5.4,4.10.2,6.10.7.4,5.10,+10.5,4.9.8.10,+11.8,+9.1,7.7,1.6.10.10.3,7.8,+10.10.1,5.8.10.10.10.2,6.7.9.10.2,6.10.8.8,+8.6,2.5,4.9.6,4.9.4,5.8.9.8.1,5.6.6,1.5,2.8,+11.2,5.7,+10,+7.2,6.10.8,2.10.8,+7.4,5.8,+9,+9,+8.11.11.7.6,1.10.11.9,+9.3,5.10.8,+10.6,2.9,+13.8.1,6.12,+8.6,2.8.13.2,7.8.9.5,2.6.3,5.9,+9.8.8.7.7.8.4,4.9.10.9.5,4.4,2.9.5,2.12,+11.5,4.8.2,5.10.9.8,1.7.8.9.9.7.3,2.9.6,+9.9.7.10.10.8.9.3,4.8.5,1.9.9.7.1,6.7,+8.10.7,2.4,6.9,2.8.11.1,9.5,4.11.12.13.13.11.9,+9.10.8.2,4.7.6.7.2,5.7,+6.7.10.1,7.7,+8,+8.11.6,1.9.7,3.8.3,7.5,1.8.2,4.7.4,4.8,+10.7,+11.9,2.8.10,+8.8.11.9.11.2,6.9.10.5,4.8.10,+9.11.5,3.11.8.9.8.8.7.3,4.8.4,3.8.8.7,+9.8.9,+8.8.9.9.5,1.9.9.8,+9.7,+7.7,+10.4,5.8,2.5,2.12.10.10.6,2.9.10.12.11.2,9.12.9,+8.8.10.9.10,+9.10.10.4,3.11.9.10.11.10.10,+7.9.9,+9.8.9.8.9.4,6.10.9,+8.10.8.9,+7.1,7.8,+6.8.9.4,2.4,2.5,2.9.11.6,+9,+10.6,+12.10.8.10.8.6,1.9.9.10.7.7,+8.7.7.8,+8.10.10.8.8.8.8,+7.7.1,4.6.8.6.3,3.6,+10.8.9.9.11.5,4.13.4,5.12.12.10.8.3,7.8.9,+9.6.8.1,8.10.10.9.6,3.11.11.11.8.6.7.10,+10.10.10.9,+9.10.5,3.12.9,+7.4,5.8.9.8.8,+7.8.8.4,4.10.9.8.4,2.8.9.10,+5.8,+8.8,+10.5,2.7.7.4,3.9.7.9,+6.6.6.8.4,3.7.7,+9.9.10.11.6,1.10,+7.9.3,5.8,3.9.5,2.9.3,5.10,+9.7.8.10.11.8.8.8.10.9.10.7.8.8.7,+9.9.8.6,4.10.9.5,4.9.9.5,2.10.10.10.11.6,+1,7,3.8,1.11.6,5.6,3.10,1.10.10.10.12.3,8.7,3.10,+9.7,2.9.3,4.5,2.10.7.9.1,6.6.6.6,1.9.8.6,+9.2,3.3,1.11.6,3.9.9.5,4.9.8.5,3.7.6.2,4.7,+11.9,+10.5,3.10.2,6.10.9,2.10.9,+9.11.7,1.12.9,+11.10.5,5.9,+10.1,7.4,5.2,8.10,1.10.9.4,3.9.10.12,+11.4,4.10.6,2.10.5,5.10.5,2.7.3,4.3,5.9.6,2.9.9,+7,+11.12,+5,+10.9.7.9.10,+8.8.3,5.3,4.9.7,+8.1,5.1,7.8.9.6,2.8.3,4.7,+7,1.11.3,7,+12.6.7,+13.2,6,+9.11.10.1,5.9.1,6.11.2,8.6,3.9.1,7.6,1.7,+8.2,6.9.2,8.11.12.1,7.1,7.11.11.7,+9,1.9.10.7,+7.8.12.2,7.9.9.3,5.8,+9.8.8.8,+7,+9.5,+10.6.9.4,4.9,+8.9.1,6.3,4.5,4.7,2.9.3,5.9.10,+11.4,5.11.8,+9.2,7.4,6.4,4.10.11,+9.3,6.10.3,5.9,+8.9,+11.1,6.10.9.9,+8.6,1.9.4,4.8.5,3.7,2.9,+11,+7.7.7.2,4.7,1.12.8.8.6,2.10.2,4.6.5,2.7,+9.9,+10.8.5,2.9.10.9,+8.9.10,+8.8.5,4.7,+9.3,5.5,3.9.1,7.8,+10.7,2.7,2.10,+10.6,2.8.2,5,+5,+7.4,2.6.5,2.8.9.4,3.8.4,5.8,+6,+9,+8.8.8,+6,1.9.3,5.7,2.11.9.5,2.10.9.3,5.11.5,3.11.5,2.8,+7.5,+6,1.8.8.2,3.7.8.7.7.8,+6.5.7.7,+10.8.10.12.13.9.9.4,4.8.9,1.9.12.10.4,5.9,+7,3.11.9.7,3.10.5,4.11.6,3.10,+8,+11.6.8,+9.11,+9,+10.9.8.6,3.9.4,5.8,1.9.9,+10.1,7.8,+10.7,+9.6,3.8,+10.11.1,7.5,4.10.3,7.11.11.7,1.10.11.8,+11.8.3,4.5,3.9.9.7,+9.3,4.7.9.3,3.6.7.8,+9.8.4,4.10.6,2.7,2.7.2,5.7.9,+10.1,7.9.4,4.10,+10.9.8.7.9,+7,2.5,3.9.9,2.9.9.8.2,4.6,+11.10.7,3.10.3,7.12.9,1.11.2,8.8,1.10.10.8.8,+8.10.1,6.7,+8.7,+9.4,2.9.10.9.12.10.10.9,+8.9.8.9.8.9.10.8.9.10,+7.6.5,+7.6,+6.7.9,+6.8,+8.9.3,3.7.9.5,2.10.8.6.8,+7.7.3,4.6.1,6.9.2,3.5.6.5.6.8.6.6.9,+7.10.7.7.10.1,7.7.7.6.6.8.8.9,+7.7,+8.5,4.4,2.8.8.5,4.8.1,7.5,+10.7.9.1,6.5.8,+8.7.8.5.7.5,3.9.10,+7.6.6.10.3,3.6.6,+7.10.1,8.7,4.9.2,7.5,3.9.2,6.10.11.10.7.4,7.7,+9,+8.8.10.10.2,7.9.10.2,10.10,+11.3,6.4,6.6.8,+11,+10,1.10.7,+11,+9.8.3,4.9.7,1.10.13.1,8.12.8,+10.9.9.2,7.7.1,5.9.2,5.8.3,5.8.6.4,4.8.7,+10.11.6,3.3,3,+10.6.2,5.2,5.5,4.12.1,7.9.2,5.7.9,+10.9.11.1,8.9.3,8.10.11.11.8,1.10.10.13.2,9.9,+10.2,5.9.10,+10.3,5.10.8.7,+10.10.2,6.10.6,4.11,+12.5,4.9.9,2.9.9.8,+10.9.8.9,+8.11.6.7,+10.8.10.7.7.8.7.3,3.6.7,1.10.7.7.7.7,+9.9.10.5,3.5,4.10.10.3,4.8,+10,+11.11.9,2.11.10,+8.7.7.7.7.9.9.8,+8.7.5,2.9.10.1,7.8,+7,2.10.2,5.12.4,3.9.6,2.10.1,7.4,5.9,1.8.8.7.9,+10.9.7,1.10.8.1,10.10,+8.3,4.4,2.5.7.7,+7,+7,+5.9.7,2.9.9,1.9.6,1.9.7,2.9.1,6.9.9.6.10,+10.8.8.3,4.8.7.3,5.6,3.9.10.10,+10,+8.4,6.8,+8.9.11.9,1.8.9.8.2,7.12.1,6,1.7.6,4.11.10.8,+11.9.8.8,+9.9.1,9.7,3.8.6,2.9,+7.8.3,4.7,+11.3,8.6,3.8.6.5,3.5,2.9.6,1.10.9.9.8,+9.10,+8.10.4,4.2,7.11.13.3,8,+10.4,4.9.1,8.6,1.10.7.8,+10.6.6.3,4.9.1,5.10,+8.5,2.9,+10.2,6.5,4.9.10,+8.10.9.10.10.6,2.8.6.2,5.7.6.8,2.9,+7.8,+9.11.12.9.9,+8.12.3,7.10.9.8.9.9,+10.7.10.9.8.9.8,+10.10.11,+9.8.9.8.9,+8.6.7.12.9.7.7.5,+7.11.1,6.7.9.4,4.6,+6.1,5.9.8.1,5.8.7.6.5.8.6,1.6.7.11.7,+7.8.7.3,2.7.6.7.1,6.6.6,+8.10.8.6.10,+8.10.8.4,4.11.11.2,6.9.7,2.10.2,6.9.2,5.8.8,+10.6,2.10.1,6.8,+9.9.6,4.10.2,7.6,1.8,+9.9.7,+10.9.7.8.6,1.8.8.8.9,+9.4,3.8.2,5.10.9,+9.3,3.10,+9.5,6.8.5,2.8.8.5.8.9.10.10.7,+6.9.7.4,3.9.3,4.8.7.7.9.6,2.7.6.8.8,+11.9.6,1.11.4,3.8.9.9.10.7.5,4.9.13.7,1.9,+9.12.1,7.13.9,+9.6,1.12.9.12.3,7.6,3.8,2.11.10,+10.2,9.11,1.12.9.5,4.12,+8.5,3.9.1,8.10.11.10.8,+8.4,3.9.9.3,6.10.8,2.8.10.10,+7.9.4,4.8.7,+9.9.1,7.8.11.7,+10.10.5,2.6,+10.6.8.1,7.9,+9.9.5,2.8.7,+7.3,3.8.8,+8.7,+7.6.8.5,+10.10.1,9.7,1.10.3,3.4,3.11.3,6.6,3.8.8.10.8.8,+9.6,2.9.9,1.9.3,5.9.10,+9.10.4,6.12.11.11.10,+9.10.1,5.8.12.2,7.2,8.3,5.8.2,5.11.9,1.8,+12.9,+11.10.3,5.10.4,4.9.11.7.12.8,3.8.7.8,1.12.9,+10.5,6.8.8.6.9.7.8.10.1,7.6,2.8.10.1,7.8,+11.9.2,8.9,+10.11.13.10,1.12.10.6,4.7,4.9.11,+11,+8.6,2.11.1,8.4,5.6,3.9,1.12.8.9.1,8.8,3.10,+8.1,6.7,+9.1,8.8.9,+9,+10.11.3,5.4,5.4,4.12.1,7,+13.10.13.1,6.7,2.12,+9.3,8.4,6.4,6.11.12.3,6.5,6.10,+14.2,8.1,9.10,+10.10.6,4.9,+9.5,2.11.9,+9.11.8,+9.1,10.9,1.11.10,+10.7,1.10.4,5.7,2.9,+8.6,1.9.10,+9,+10.10.3,6.8,1.8.6,3.5,4.11.11.2,6.11,+8.10.7,+8.7,1.8.9.9,+6,+13.8,+11.10.1,8.6,+10.10.11,+9.8.5,4.9.4,6.6,4.10.3,7.3,8.11.8,+9,1.4,5.10.8,+9.3,3.8.11.10.9.4,5.12.8.10.4,3.5,2.7.9.6,+9.5,3.6,+12.3,6.11.1,8.9,+7.5,3.10.11.1,5.9.8,+9.2,5.9,+7.8.6,+7,+7.1,5.4,4.11.1,6.11,+8.8,+14.11.9.10,+9.9.4,5.13.11.6.10.4,3.9.9.8,+10.7,2.8.2,6.10,+8.5,3.10.9.8.11.3,5.9.1,7.11,+10.6,2.7,+10.5,2.6,+12.1,8.5,3.11.10.1,7.11.3,5.8,+8.12.2,5.8.10,+7.5,2.8.9.4,4.7,1.10.7,3.8,+10,+11.11.8,+8.4,5.9.6,+10.9.5,2.8.5,2.12.7.8,+10.8.8.2,6.3,5.5,3.8.9.12.3,5.3,5.7.9.6,1.9,+8.1,6.7.5,2.5,2.7.9,+7.7.7.7.3,2.5.5.8,+9.8.8.1,6.7.7.2,5.10.5,2.7.6.9.7,+7.9,+8.8.7,+8.8.8.9.7,3.11.10.12.3,4.8.9.7,+9.4,3.11.8.10.5,4.4,4.9.8.6,1.9.7.7.9.9,+11.8.9.7,+8.8.1,7.8.2,5.3,5.9,+10.8.9.8,+11.12.12.2,7.12,+9.7,4.11.1,7.2,8,+12.12.5,3.8.10,+1,9.4,4.10,+10,+11.1,5.1,6,+8.1,6.5,2.9,+8.8,+14.3,8.5,5,+4,5.2,7.8,1.10.1,8.8,1.10.12.2,5,+9.9.10,+11.1,7.5,4.3,6.9.4,4.9.10.7,2.11.9,1.8.7,1.8.7,+9.6,5.10.9.2,9.12.8,3.8,+10.8,1.8.2,9.9.10.9,+11.11.8.10,+9.5,3.10.9.1,7.3,3.8.4,6.10.12.8,+12.12.4,6.4,4.10.4,4.9,2.9.3,5.10,+8.11.1,5.7.7,+9.1,8.11.11.8,+9.10.8.5,3.5,3.8.4,3.9.11.6,+10.7,+11.9,+9,1.9,+8.3,7.6,1.8.5,3.12,+9.5,2.8,+7,1.9.9.8,+8.9,+8.6.10.1,5.8,+8.9.8.9,+8.7.9.1,5.7.10.1,5.3,4.10.1,5.1,6.8,+8.5,3.8,+9.4,2.5,2.6,+8.9.6.7.7,+6.8.6.4,3.8.8,+8.11.2,9.14.12.7,2.10,+6,+10.3,5.7.3,7.6,1.9.8,+9.8.1,7.2,6.3,5.5,3.9.7,+9.8.6,2.7,+9.7,+8,+11.7,3.8,1.5,5.1,8.1,7,+7,1.3,5.6,3.2,7.3,5.6,+10.1,6,1.3,3,+4,3,1.11.7,1.7,+5,6.10,+9.8.4,3.8.5,2.11.6.3,4.6,+9.10.3,6.6,2.7.4,3.10.8.1,6.5,3.8,+6.8.9.6,+9.10.4,7.3,5.4,2.7.7.2,4.8.9.2,5.11.9.9.7,+8.6,1.9.8.2,5.10.10.8.3,4.8.1,7.11.4,2.10.6,+10.9.10.9.1,7.4,3.9.3,4.10,+8.7,1.8.11.11.10,+9.9.7.5,2.7.6.7.7.7.7,1.8.10.8.4,+8,+8.7.9.7.7.5,1.8.7.4,+9.7.1,5.8.7.7,+11.8,+10.8,+11,+9.8.2,5.6.3,4.9.10.12.5,2.8,+10.9,+10.10.6,4.10.1,5,+8.5,2.9.8.8.3,4.5,3.7,+9.12.9,+9.5,3.4,3.5,3.2,7.4,5.12.5,4.6,3.13.10.11,+13.9.6,3.9.9.8,+9.3,7,+7,+9.3,6.6.2,7.10.9,+9,+8.2,6.6,3.4,3.7,1.8.3,5.2,7.12.4,3.5,2.9.5,4.7,+9.8.1,7.9.1,5.1,7.4,3.8,+10.2,6.8.9,+7,+8.3,5.11.2,6.9.7,+10.8.5,2.9.2,4.2,6.5,3.10.7,+9.8.4,5.1,5.11.8,1.9.1,6.2,7.3,6.5,2.8.9.1,6.7,+8.7.4,3.8,+7.3,5.8.5,4.8.4,4.11.2,6.9.4,4.8,+9.8.4,3.7.3,4.8.8.1,6.7.5,2.10.4,2.8.6,2.8,+9.7.9.8,1.7.7.8.10.2,6.7.7,1.7.9.2,6.6,+8.5,3.7.7,3.8.8.11.6,2.8.8,+8.5,1.8,+9.8,+12.6,2.8.7,+10,+9.3,6.4,3.11,+8,+9.8.10.6,2.10,+10.2,5.9.6,3.5,3.8.9.6,2.10.9.5,5.9.6,3.7,2.9,+11.10.3,5.8,2.7.9.11.9.7,1.9.3,3.9.6,3.8.11,+9,+9.5,4.10.9.9,+8.9.5,4.6.8.8,+8.10,+7.8.8,+8.7.1,6.7,2.8,+7.6,2.8.8,+6.6.8,+6.5,1.10,+9.10.5,3.8.7,+9.9.5,2.9.12.1,7.9,+8.2,7.1,6.7.6,2.6.6.7.10.2,5.7.6.5,4.8.6,+11.1,5.8.9.5,2.10.9.8,+7.6.7.3,2.7.7.7,+9.6,2.8.4,2.7.7.6.6,2.8.8.1,7.8.9.5.7,+9.9.9.4,2.11.7.8,+7.8.1,7.9.8.7.5.7,+6.9,+9.7.7,+10.3,3.7.4,3.8.3,3.8.4,3.7.7,+9.7,+10.5,+6.8.2,6.8,+8.8.6,1.9.2,6.8.8,+9.8,+8.2,5.6,3.11.2,6.8.5,2.6.8.6,1.9.7.9,+7.5,3.10.3,2.10.5,2.8.3,4.9.3,2.6.7.4,2.6.8,+8.6.7.7.4,2.9.5.7.3,3.7.6.8,+8.8.8,+7.4,2.9.11.10.10.4,5.7,+9,+9.6,2.8.1,4.7.9,+11.9.5,2.8.12.5,4.4,5.9.9.2,9.9,+9.7,1.9.8,+9.2,5.6.3,5.8,1.8.8,+9.9.8,+10.8.5,3.7.9,+9.8.8.5,1.8.8.1,5.9,+7.9,1.9.6,1.7.10.9,+6.8.8.3,4.9.8.1,6.11,+9.7,2.10.4,5.7.4,3.9,+7.8.9,+10.10.3,3.10.12.2,6.9,+7.8.7.7.8,+4.4.6.2,6.8.6,2.8.12,+9.9,2.9.6,4.6.9.8,+9.9.12.1,7.1,6.10.9.9.9.9,+8.9.1,5.10.7,+8.8,+10.8,+7.5,2.9.5,3.9.9,+6.6.2,7.8,+5,3.11.10.2,7.12.9.1,7.9.8.4,4.8.9.2,7.7,+9.6,2.4,3.7.5,3.9.2,5.7.6,2.10.11.4,3.9.5,2.8,+9.11.12.7,3.9.6,2.9.3,4.8.11.6,2.7.8,+9.7,+12.10,+11.9.10.10.1,8.9.8,+10.10.7.10.6,1.10,+8.8,1.10.10.6,2.9.7,2.8,+10.6,3.9.10.5,4.7,1.9,+12.5,6.12.11,+14.3,8.10.4,6.10,+11.8,+11.1,7.8,2.9,+9.2,7.3,6.11.3,7.8,1.9.2,7,+13.9,+11.1,10.1,7.6,1.10,+11.8.2,9.7,3.2,5.9,+9.1,8.11.1,7.10.2,9.10.12.11,+10,+4,2.9.4,4.6,3.9.8.5,4.8.3,4.10.9.2,7.2,7.6,+12.8.10.3,7.9,+8.9,+9.12.1,7.7,+10,+10.1,7.9,+6,3.7,3.12.2,6.1,8.9.5,5.7,3.7,1.4,4.8.4,2.9.9.9,+8.3,4.8.12.3,5.2,5.9,+9.11.4,7.8.7,2.8,+8,+8,+10.9.2,8.7,1.9.4,5.9,+9.6,2.8,+12.10.4,5.4,5.11,+10.11.3,5.9.8,1.10,+10,+9,2.11.11.1,8,2.8.9,+11.5,3.7.8.8.5,5.9.8,+9.2,5.8,+8.2,6.11.10,+9.9,+11.5,4.10,+9.7,2.10.9.11.7,1.8.8.6,2.9,+10.10.4,3.6,3.4,4.7.3,3.8,+9,+11,+10.9.10,+11.8,+11.9.2,7.2,7.10.12.2,5.8,1.9,2.12.4,3.9,+12.5,3.8,+9.10,+9.1,9.10.7,2.9,1.9.9,+10.11.2,5.9.3,6.9,+12.11,+13.6,2.9.7,1.11.7,2.10.5,4.9,+8.8.1,7.8,+11.5,3.4,7.11,+9.12,+9.5,4.8,1.12.4,5.12.10,+10.11,+10.10.2,6.9.2,5.6,2.8.8,1.7,+11.1,6.9,1.9.8,2.7,+10.2,7.7,2.9,+5,5.9,1.10.2,7.9.10,+13,+11,1.10.10.8,+8.4,3.5,3.10.7.6,1.6.7,+10.1,5.11.4,4.12.9.10,+9.12.1,7.2,7.9.2,6.8.1,6.8.5,2.9.7,+10,1.5,2.8,+8.1,7.2,6.3,4.9.11,+10.2,8.8,1.4,5.5,4.5,4.11,+9.9,+12.8,+8.10,+9.1,8.4,5.10.2,6.8,+7,1.10.9.6,2.6,+10,+9.6,2.11.4,4.5,3,+8.8,+5,4.2,5.9.2,7.8,+10.5,2.8.11.4,5.2,6.9,1.10.3,6.9.1,10.1,7.1,7.6,2.7,+10.7,1.3,5.8.5,3.10.5,3.9.4,3.6,1.8.9.8.6,2.7,+9.10.4,5.9.5,1.9.12.1,8.10.1,8.2,8.5,3.7,+8.10,+9.10.12.1,8.9.2,7.10,+9.1,9.2,6.10.10.1,7.10.9,+8.12.6,1.8,+8.11.10.3,4.8.7,2.8.8,+8.7.9,+8,+10.1,7.7.8,1.10.3,8.7,5.6,3.11.8,1.10.10.8,1.11,+10.5,5.9,1.7,1.9.7,1.6,2.7,1.10.6,5.5,4.2,6.8,+9.7,+10.7,2.7.9.7,2.10.12,+10.11.6,1.9.11.9,+8.8,+9.6,2.3,4.8,2.10,+6,2.9,+8.9.11.5,3.10.10.1,8.7,+11.2,5.9.11.12,+8.9,+9.2,6.10.2,5.7,+8.4,4.9,+8.12,+9.8.4,5.5,2.10.10.1,6.3,4.7,+9.3,2.9.1,6,+10.10,1.7,2.7,1.9.4,5.11.11.11.8,1.9.8.3,4.10,+6,+10,+8.3,5.2,7.7,2.10.5,4.10.8.7,1.8.10,+9.7.7,+10.5,5.10.9.2,7.10.7,2.8.9.8,+10.7.8,+7.9.4,4.11,+9.6,2.3,4.9.1,8.13.13.1,6.3,3.7.9,+12.12.3,7.4,4.11.11.10.9,2.9.12.10.9,+8.11.8,+13.2,7,+10.3,5.8.6,3.8.4,7,+9.11.3,7.9,1.12.6,3.8,+7.1,9.8.11,+12.10.11.11.7,3.9.1,9.12.10.8,4.10,+9.8.2,4.11.10,+9.11,1.10.10,+8,+10.3,6.9.1,8.10,+8.7,+8.8,+10.4,2.8.6,2.9.8,+6.7.8,+8.8.5.5,2.7.2,8.5,4.8.8.9.8,1.8.7.10.7,+10.11.8,+9.8,+6.9.1,4.6,1.4,4.3,4.9.3,4.10.8,+10.4,5,+7.11.9.7,2.9.10.8.7.8,+6.9.2,8.7,+9.3,3.10,+8.7.3,8.4,3.1,7.5,3.8.10,3.7.9.6,2.7,+9.6,1.9.3,6.9,+11.8.7,+13.5,5.8,+8.1,7.1,6.7,+8.1,7.9.8.2,5.7.2,5.7,+9.2,6.4,3.3,4.2,6.4,4.9,+6,2.5,2.5,2.6,4.3,5.3,6.2,7.2,7,+7,3.5,3.2,7,+9,+8,+7,+5,4.3,4.7,3.5,5.6,2.9.1,6,+7,+7,3.5,6.1,8.4,5.4,3.1,7,+8,3.8,1.4,5.1,6,2.2,4,3.7,+4,4.1,8.3,4,+8,1.4,3,+10,+8,+6,2.3,4,+9,1.6,4.4,3.4,5.3,5,+6,3.3,5.1,5,1.3,6.1,4,1.10.3,5.4,3.1,6,1.3,5,+6,4.1,3,2.6,3.2,3,3.2,5,+5,3.2,5,+6,1.2,6,+9.5,3.2,6.1,9.6,2.3,4,+4,2.1,3,4.2,3,1.7,2.5,4.2,5,+9,+10.8,2.5,1.7,1.7,+7,+9.5,2.7,+9.1,8.5,2.7.7,+7.8,+8.5,2.7.7.5,+9.2,4,+7,1.9,+6,2.8,2.5,3.8,+10.3,6.3,3.9.3,5.8.8,+8.9.4,3.10.6,3.5,1.10.9,+9.6,2.8.2,6.11.5,1.9,+11.11.10,+9.8.8.3,4.10,+10.8,+9.2,7.3,8.9.1,5,+10.5,4.8,+9.7,2.5,5.3,8.9,+10.4,4.3,5.7,4.7,3.9,1.9,+6,1.10.1,7,+9,+11.8,3.9,+11.9.3,4.9.4,6.9.2,7.7,+13.3,7.10,+8.7,4.9,2.10.11.1,9.11,1.10.9.2,6.8.7,+11.4,4.6,4.10.9.4,4.9.10.6,2.8.9,1.8.6,+8.10,+10.7.8,+8.7.7.3,4.2,5.2,5.9,+10.1,5.9.5,1.9,+9.4,4.9.8.3,4.7.5,+8.8.4,4.8.10.10,+9.8,+9.9.1,9.6,3.9.3,5.8.5,3.5,4.6,1.8,+7.10,+8.5,+8.7.1,8.4,4.7,+9.8.7,+7.6,1.7.3,4.3,3.8.7,+9.6,3.7.9.5,1.7.1,6.7,+8.11.3,5.9.8,2.3,7.8,+10.9,+11,+7,+9,+10.2,5.9.3,5.8.9,+9.3,5.9,+8,+8.10.3,4.8,+9,+9.4,5.9.3,5.6,+9.6.8,+10.1,8.8,+9,+8,+9.8.6,1.10.2,7,+9.11.1,9.5,3.10,+12.6,2.8.2,6.6,3.8,+9,+9.9.7,1.10.1,8.4,4.6,2.7,+11.1,8.5,4.8,2.9.2,7.1,9.9.4,6.10.1,7.4,7.9,+11.2,7,+12.6,2.9,+10,+13,+6,3.11.7,2.9.1,8.11,+11.8,1.8,+9,+5,5.9.9.2,4.5,5.9.2,9.5,2.10.3,7.6,2.8.8,+9.9,+10.9.2,8.9.8,+8.5,4.8.3,6.4,3.7.8.1,7.2,5.9,+12.6,3.11.1,8.10.4,5.8.4,4.7.4,4.7,2.8.3,5.4,3.9,+7.6,3.8,1.9.4,4.8,2.9.3,5.4,6.7,1.11,+10.1,8.6,3.10,+9,1.10.8,1.11.2,8.2,7.4,4.8,+12.10.4,7.8,3.7.4,3.8,+11.9.7,+9.5,4.9.10,+10.4,4.10.4,5.8.2,5.4,5.9,+9,+9,+14.4,5.3,4.1,10.9.3,9.12,+11,+9.6,1.2,6,+11.5,3.8,1.10,+6,2.8,+11.5,4.3,5.4,5.6,1.9.9,1.8.9,+9.10,+8.9.11.6,2.8.8.4,2.9.10.8.7.2,5.8,+9.9.10.4,2.7.8.11.5,3.4,6.11,+8,+9.11.3,6.9,+8.9.11.2,8.9.8.3,4.8,1.11.9.7,1.9.4,5.6,4.9,+11.1,8.4,5.11,+8,2.13.4,6.8.1,8,+11.8,3.8,2.7,4.9.10,+7.6,4.7,1.11.4,4.8.10.5,4.11.8.3,4.9,+7.6,2.8,+10.4,5.9.5,3.7.8,1.11.10.8,1.9.9,+7.1,7.6,2.9,+10.2,8.9.3,8.1,7.5,5.6,4.2,8,1.9,1.11,+9.6,4.4,6.4,6.10,+9,2.11,+9.9.6,4.8,1.9.7,2.8,+9,+8.10.8.9,1.8,+10,2,+10.12.2,10.3,7.6,3,1.12.2,6,2.1,9.4,6.12.1,10.2,8.11,+8,+14.1,9.2,5,+10.1,8.6,4.1,9.2,6.8,2.7,3.7,1.5,7.11,1.13.10,+1,5,+5,5.8.1,6.7,2.6,1.11,+8.6,2.11.1,8.5,3.8,+7,+6,3.3,6.3,6.4,4.7,2.6,4.5,4.7,2.9.4,2.3,5.8,+10,+8,+10.8,+9.1,9.2,8.2,7.1,7.4,4.2,6.3,6.3,8.8,4.4,3.8,2.9,+12,+8,1.7,4.11,1.11.1,8.1,8.3,5.7,1.9,+9.5,4.10,+9,+10,+7,3.4,6.5,4.5,4.4,3,2.12.10.5,3.8,+9.3,6.5,6.5,5.4,8.10,+8.4,6.2,7.3,4.4,4.6,4.4,7.2,6.2,8.8,1.8,2.12.9.2,5.8,+8,+7,1.8,1.4,5.3,4.2,7.2,7,+6,2.3,7.2,4,1.3,4.5,4,+6,4.6,2.2,5,+7.2,5.5,3.11,+1,5,2.2,6,+4,6.6,3.4,7.1,4,3.10.5,4,+9,+5,7.4,3.7,2.8,2.2,5.8,2.1,5,2.5,2.9,1.3,5,1.4,3,3.1,2,5,1.1,3,3,2.1,2,4,2.3,5,+6,5.11.6,3.11.10.10,+2,6.2,5,4.4,7.3,7,+9.11.1,9.1,4,4.5,5,+11,+10.9,1.8,1.7,1.5,3.4,3.10.1,8,+6,2.9.4,4.1,7.6,1.9,+11,1.11,+5,4.2,9.7,3.5,6.8.8.4,7.10.2,8.6,5.8,4.6,2.10,+10.8,2.6,3.2,7.7,1.10.6,4.5,3.2,7.2,8.1,7.8.10.1,7.8,+9.3,7.5,6.9.1,9,+7,2.2,7.10.1,4,2.9.5,1.11.9.7,1.11,+12.1,8,+7,2.6,1.5,6.6,3.4,3,+6,3.10,+11.1,9.1,7.2,7.4,4.10,+10.7,2.9,2.7,+9.3,7,+6,2.9.2,6.9,+6,3.8.7,3.8.1,8,+8,1.10.1,9.8,2.7,2.10.8,1.11.6,3.9,+11.2,6.9.4,4.7,+7,+10.1,6.8.1,7.3,5.9,+8,+9.5,3.6,2.6,+8,+9.1,7,+9.1,5,3.5,2.5,5.6,3.10,+9.4,3.2,7,+11.2,6,1.11.10,+12.3,5.3,4.2,6.9,+9.4,4.7.7,3.9.1,6.2,6.5,5.5,3.7,+8.7.2,5.3,4.3,5.9.2,5.5,2.10.1,6.7,1.8.5,3.9.6,+9.2,6.5,2.9.9,+7.1,6.2,6.1,7.2,8.3,5,+8,1.6,5.8,+7,+8,+8,+7,3.5,3.3,4.5,2.5,3.6,1.9.1,8.1,6.1,7,+5,1.7,1.7,+7.7.1,6.9.1,6,+8.4,3.8.1,7.7,+7.7,+7.3,5.9,+7.5,2.8,+9.7,+7,+6,+10.10.3,3.5,1.10,+6.7.6,+7.4,2.6,+6,+8.4,3.4,3.7,+8.10.1,5.6,2.7,+7,2.7,+8.1,5.6,+7.9,+9.3,4.2,5,+8.3,4.9,+8,+8,1.9,+8.1,6.8.8,+10.2,7.4,5.11.10.10.7.9.9.8,+13,+11.1,10.3,8.7,1.8,2.12.9.2,7.7,2.8,+8.9,2.11.9,+9,+7.7.8,4.10.7.11.5,3.10.4,5.1,4,2.10,+7.8.7,+9,+8.8.9,+9.6.1,7.7,1.8.9.2,4.4,2.9.7.6,+11.10,+9,+10.1,6.10.4,5.8.2,5.11.8.3,6.8.6,2.11,+9.1,8.10.8.8.1,7.7.3,4.5,4,+7.4,3.7.4,4.10.9,+8.6,2.9,+8,1.7,+8,+11.9.7,1.9.6,1.9.10.1,8.8,+7.5,2.6,+9.8.1,4.3,4.10.2,6.9,+9.8,+10.5,4.8,+13.10.4,3.7,+8.9,+7,2.7,+11.7,3.13.2,7.6.8.8,+8.10.8.2,6.3,4.7,1.9,+6.5,+9.10.9.8.8,+3,5,+5,3.1,4,2.8,+7,2.3,4.1,3,2.4,4.3,6,1.7.8.5,4.1,5,1.9,+11.2,7.6,3.6,3.10.2,4,1.12.3,8.11.7,3.7,3.2,6.9.9.8,+12.3,7.1,7,2.4,6.8,4.9.11.1,7,+9,+4,4.6,4.8,2.3,5,+7.1,6,+7,4.10.5,4.4,3.4,4.3,4,+6,1.10,+9.2,7.1,8.1,5,2.5,7,+7,2.3,5,+10,+7,2.10,+13.1,8,+7,3.6,1.3,8.2,7,+9.1,6.8.2,6.3,5,+8,+10.1,6.2,8.4,6.4,5.2,6.4,5.1,7.1,9.3,6.2,5,+8,+5,3.9.2,5,+5,5.12.7,1.5,2.4,5.1,7,+9,+7,2.3,7.1,8.8,2.8,+6,1.8.1,6,+8,1.7,1.6,3.2,7.7,1.7,+8,1.6,5.3,7.2,5.3,7.4,5.12.1,7,+9,+10.12.4,6.11.1,8.10.1,10.1,9.8,+9,1.10,+9,+9,+12.11.5,5.7,1.9.4,5.10,+10.6,3.11,+9,+7,2.10.8,1.8,+9.8.12.5,5.8.10.3,5.8,+9,+10.1,4.6.6,2.8.8,+11.10.1,8.9,+7.8,2.7.9.8.7.10.10.9.9.7,+8.9,+10.8.10.10.10,+9.4,3.9.9.11.11.5,6.8,+12.7,+10.4,4.10.8,+11.10.12,3.11.7,2.5,5.11.13.9,+10,+13.12.6,4.7,1.10.4,5.6,4.3,7.9,+11.7,1.9,+8.9,+11.9.3,6.6.9.9.8,+7.1,7.4,3.9.11.9.8.9,+8.9.2,6.7.8.2,7.10.8.8.7.7.7.9.7.6,+9.10.7.8.5,4.8.8.7,3.10.9,+9,+9.10,+9.9.4,7.9,+6.3,5.7,1.8.7,2.9.6,1.7.1,9.8,1.7,+9,1.8,+8,1.9.3,5.5,3.8.5,4.10.7,1.7.7,+8.6.6,+9.10,+8.2,7.2,5.2,6.1,7.2,6.5,4.2,7.4,2.7,1.9.1,8.7,+8,+8.3,4.5,3.6,1.7.5,2.6,2.5,4.8.4,4.7,2.8.7,1.8,+10.5,6.10,+5,3.8,+9.4,5.5,3.6,2.5,3.4,3.10.2,7.5,4.10,+5,4.10,1.10.2,6.10.1,8.5,3.8,1.11.1,6.6,1.4,2.9,+4,3.8,+10.11.1,7.1,7.8.1,8.1,7.2,5.5,3.8.2,4.5,1.4,5.7,+1,4,3.3,8.3,7.4,6.2,10.1,8,1.4,7.1,4,4.2,6.2,6,1.6,2.5,5,+10,+7,+6,4.7,3.5,5,+9,+5,4.1,7,+9,1.7,1.4,6.1,6,2.4,6.1,7.1,7,+4,2.3,5,+7,3.9,2.4,7,+8.1,8,+3,4,+3,8.8.5,4.3,9.2,7.1,5,2.2,3,3,+4,3,+4,2,+8,1.5,5.8,+3,5,+3,7.1,5,2.2,6,1.5,4.1,4,4.2,5,1.2,6,+4,4,+4,3.1,8,+6,+6,4.1,6,3.1,6,5.1,3,3,+6,5.2,4,2.1,4,4.2,4,2.2,4,3,+7,6.2,5,1.3,7,+4,3,2.9,2.1,5,+6,5.2,4,5,+8,1.4,6.3,6,+4,6.2,5,1.2,7,2.2,3,3.8,3.2,4,+4,3,+5,3,+2,6,+9,+5,3,1.9,1.4,3,2.5,4,+3,7.4,5,+3,4,+5,3,+4,4.2,5,2.9,1.8,2.5,2.1,8.2,5,+4,7,+4,3,1.10,+4,5.6,5.3,5,+5,3,+4,3,2.4,7.1,5,2.2,6,2.2,3,3.8,3.3,3,+9,+5,3.2,8.1,7.2,5,1.9,+8,3.2,4,3.1,5,2.1,4,6.3,5,+6,2.3,6.1,5,1.3,2,1.3,5,+6,5.2,4,3.1,5,1.3,7.2,3,1.5,4.3,4,1.3,3,3.1,6,2.3,4,+3,6.1,5,2.8.9,+6,2.1,6.3,7.3,5.5,4.3,8.8,1.12.1,6,2.12.5,7.4,6.13,+8,+8.3,5.10,+9.9,1.8,+11.8,+9.9.6,+11.1,5.4,4.10,+9.2,5.9.3,6.8,1.7,2.5,3.8,2.6,5.3,5,+11.1,9.3,6.7,+8,+11.5,3.10,1.9,+13.3,8.12.11.7,4.8,3.11,+12,+10.10.8,+10.3,4.7.1,7.6,4.6,1.9.4,2.5,2.7,+8.3,3.2,4.4,2.9,+9.6,1.6,1.5,4.8,+8.9.10,+9.9.3,5.6.5,3.9.8,+10.9,+12.2,7.7,3.6,2.10,+9,+9,+7,2.7,2.8,1.7,3.7,3.9,+4,4.4,5.2,8.3,7.7,1.10.5,5.6,3.10,+8,1.10.4,5.12.1,8.10,+11,+9.4,6.10.1,7.8,2.9,+1,4,2.7,1.8.8.2,6.6,+8.4,4.10.8,+8.5,+10.8,1.10.6,1.9,+8.8,+9.8,+9.1,7.10.10.11,+11.2,7.2,6.9.1,10.11.11,+10.8,+10,+10.1,8.7.10.2,7.8,2.8.10.6,2.8,+10.8.10.1,6.9,+9.10.8,+9.9.1,7.10.2,7.8.8.2,7.2,6.8,+8.7,+10.7,1.10.7,2.9.10.6,1.9.2,4.6,+7.2,5.5,2.8.6,+11.2,5.9.4,3.9.8,+8.8.2,6.10.10,+10.3,5.9.9,+6,1.7,3.12,+8.4,3.9.3,6.7,2.9.11.3,4.8.5,4.10.6,+10.5,4.11.2,6.2,7.10.1,6.7,2.4,3.4,5.6,1.9.4,4.3,7.8,+11.8,+9.9.3,5.8,+7.1,6.10.1,7.9.13,+8.8.10,+12.11.5,3.9.8,1.9.6,1.11.5,3.8.11.4,4.10,+10.8,+10.9,2.9.4,4.11.1,9.10,+1,9.1,8.3,4.6,3.9,1.9,+7.5,2.11.8,+7,+11.10.10,+6,+7.8.3,3.8,+9.7,+6,+8.5,3.9.10.5,2.10.1,7.6,4.9.6,4.4,4.11.2,5.8,+10.10,+9.8.6.4,4.8,1.8.9,+7.7,+6.8.9,+6,+8.7,+10.6,1.9.10.3,4.8,+7,+7.9,+5.2,4.6.6,+6.7,+8.8.8.4,2.7.7.3,6.6,1.7,+8.2,6.7.8,+9.9.7,+7.10.2,7.6,2.9.3,4.11.1,6.8.1,6.7.6,+7.5,2.4,3.10,+8,+7,1.8.8,1.4,5.7,1.8.4,6.8,2.11.9,+10.5,3.11.2,5.1,7.8,+10.7,1.8,+1,2,6.2,5.7,+8,+11,+10,+9.10.3,5.10.7.8.2,6.7,1.7,2.3,5.4,1.4,3.6,+8.3,4.2,5.3,5.9,+10.1,7.7.6,3.6.4,4.8.2,4.9.8,+10.6,4.4,4.10.4,4.10.7.6,+10.6,3.10.7.2,5.4,3.8,+11.7,2.4,3.7,2.10.3,8.7,3.8.5,4.12.6,2.9.9.2,7.8,+11.3,5.11,1.8,+10.1,7.9.1,8.9.1,7.10.11,+10,+9.10,+9,+10.1,9.5,3.12.9,+9.3,5.11.4,4.5,2.10.7,1.7,2.8,+1,4,2.1,6.3,6.2,6.10.2,6.10,+8,+8,1.10.12.4,5.9,+10.8,2.10.2,5.10.2,8.9.9.3,7.11.6,4.10.3,8.8,3.8,+13.10.7,4.12.5,2.9.4,5.10,+7,+9.6,4.6,4.9.8,2.9,+12.10.3,8.8,3.10.6,3.10.9,+9.12.8.1,7.10.10,+1,8,+10.8,1.9.13.1,8.9,1.5,2.8,2.6,4.8.2,7.7,2.9,+8.8,+9.7,+8.6,2.9.4,2.8.1,10.3,6.2,6.6,3.10.8,+7.2,7.6,2.9.3,4.6,2.9,+9.9,+9.8,+7,+11,+5,+10.3,5.7,3.3,7.8.8.5,2.9.8.9,+7.8.8.6,+9.8,+8,+9.9.3,6.7.3,4.2,6.7,3.9.12.1,8.6,3.10,+11.4,8.13.3,6.8,1.9.9.9.7,2.9.8.4,7.10,+10.8,+10.8,1.7.8,3.9.4,4.8.4,2.9.2,7.6.2,6.8,+8.8,+8.6,2.9.8,1.8.7.8.1,6.8,+5.5.4.4.5.7,+12.11.1,8.10.10.10.10,+13.9,1.10.2,8.9,+7,2.1,6.7,+8,1.6,1.5,4.4,4.8,+8.10.4,3.8.9.8.10.9.7.7,+10.10.8.7,3.11.11,+9.10.8.8.8.8.9.9,1.10,+11.9.10,+8.5,3.10.1,4.8,+8.10.3,5.7.7,1.5,3.9,+11.4,5.2,8,+9.2,6.2,5.3,6.10,+8,1.9.4,5.8.5,3.5.7,+12.5,5.11.2,6.10.10.6,2.7.1,6.5,4.10.2,7.9,+12.4,6.9.10.4,5.7,2.9.1,6.11.10,+9.9.1,8.9.10,+10.10,+7.9,+8,+9.8,+8.10.1,7.3,6.11.4,6.9.11,+12.10,+8.9,1.8,1.10,+10.2,5.7,+7,+10,+8.9.8.7,+7.8,2.8.9.9.6,4.10,+8,+11.2,7.10.6,3.6,1.11.8,+9.1,8.5,3.10.5,5.12.11.6,4.7,1.10.3,5.8.11,+14.3,7,+8,3.11.2,8.2,7.2,6.4,5.10,+9.13.2,9.10,1.11.9,+11,+10.4,5.8,1.9.3,7.11.7,3.11.3,7.8.9,+10.12.12,+9.8.9.2,5.8.8.7,1.9.8,+9.1,6,+5,6.12.8.8,+4,4,+4,5.11,1.3,7.5,5.7.1,7,+12.8.2,4.9.4,5.7.4,2.6,+10.6,3.8.8.2,4.9,+10.1,8.6,3.10.5,2.9.9.5,3.7,+11.10.3,6.12.11.4,4.11.4,5.10.4,5.10.11,+10.11.9,+9.8.8,+1,2,3,1.2,3,3.4,5.3,7.3,5.7,1.7,2.8.2,5.9,+8,+9.2,8.7,4.2,5,+9.3,5.4,5.5,2.5,5.3,5.9.1,5,2.2,6.1,7,+11.2,8,+10.1,7.4,6,+8.2,5.5,3.5,2.8.3,6.3,4.4,4.3,6.9,+8,1.5,6.3,6,1.10,+11,+10.12.2,7,+8,+7,+10,+10.2,4.6,3.8,+7,2.5,4.2,5,2.2,7.6,2.3,5.3,5,+5,2.8.1,6.3,3.7,+7,+12,+8,+11.1,6,+6,1.6,2.5,3.6,4.7,2.9,+10,+9.2,5.9,+10,+8,+2,2,2,+3,6.1,6,1.4,6.3,4,3.4,4.8,2.1,4,4,+6,5.2,2,4,+7,3.2,7,+7,2.5,3,+4,4,2.3,6,+5,6.4,6,+4,5,+4,5.5,4.2,5,1.3,6,+4,4,+3,3,3,+5,3,+7,2.2,3,3.2,7,+4,6.1,4,4.1,5,3.3,3,2.4,5,+4,5.1,4,2.4,4,+6,3.4,5,+4,4,+5,3.1,5,+4,4.1,5,+4,4,1.4,4,2.2,3,2.2,5,2.4,5,+4,4,+3,3,3.3,4,3.1,3,4,+4,5.2,5,+6,5,+3,5.11.10,+4,3,1.6,3.2,3,3.1,3,3,+4,4.1,6.4,4.1,5,+4,2.1,3,1.3,4,+4,2.2,4,+5,4.1,5,+3,4,+4,4,2.2,4,2.2,4,2.2,3,3.1,3,3.1,5,2.2,4,2.3,6,+4,3.2,6,+4,3.2,5.1,5,1.3,4,+4,2,4,+5,4.6,3.1,4,3,+4,5,3.3,3,3,+3,6,1.3,4,1.4,3,1.3,4,2.1,2,4.2,4,2.1,6,+3,4,+4,6,+10,1.9,+8,2.10,+10,1.14,+7,2.8,+6,3.5,4.3,5.2,8.2,8,+11,+7,1.4,4.2,6.1,9.10.4,7.8,1.11.9.11,+9,+9.11.10,+11.5,5.8,+8.1,7,+6,2.9,+6,2.7,3.12,+8,1.3,4,1.6,5.1,9.2,6,+10,+10.4,5.3,4.1,5,1.7,2.4,5,+7,+4,4.1,7,2.3,4,1.3,4,+10,+11,+11,+10,1.5,5.1,11,+7,3.1,3,7.2,8,3.6,4.5,3.1,6,1.11.2,10,+5,5.1,6,3.1,4,2.2,4,+4,5.2,10,+5,4,+6,3.7,1.8.11.12.1,8.8,+8.7.8,+10.8.11.7,3.10.10.8,+11.12.10.1,8.10.6,3.9.9,+9,3.2,9,+6,5.10.4,6.10,+10.2,5.8,+10,+11.9,2.11.10.8,+11.9,+9.8.11.6,4.9,+8.2,7.5,4.7,2.5,5.8.6,4,+7,+8.7,1.7,+8,+8.4,3.7.5,7.5,4.8.11.9.4,3.6,+8,+8.9.1,6.9.9.2,6.8,+9.2,5.9.4,4.8.5,4.11.10,+10.1,8.11.3,7.4,4.8.3,6.9,+9.11,+9.4,4.8.4,4.10,+9,+10.2,6.4,2.9.3,4.7,1.8,2.7.2,6.1,8.6,2.4,5.6.6,+10.12,+7.8,+9,+9.9.7.9,+8.1,5.9.6,+8.8,+8.9,+1,6,1.11.2,8.5,3.8.7.3,5.5,3.8.8.8,+8.7.1,5.7,1.8.6,+8.5,4.9.2,5.9,+8,+10.6,5.10,+10.3,5.9.1,6,+9.6,3.9.10.8,2.8.3,4.2,4.3,4.8.7,+9.9,+9.4,5.8.9.8.9,1.9.12.4,5.5,4.10,+6,3.13,+10.10.9.1,7.9.7,2.7,1.8.8.6,2.6,+9.2,7.9.7,+8.1,7.8,2.11.9,+7.5,3.7,1.8.4,3.7.9,+8.4,5.8,+7.9,+8.3,5.5,3.5,1.3,4.7.1,5.9.8.1,5.7,+7.6,+9.2,5.7.1,6.9.5,1.11,+7,+7.6.7.1,7.7,1.11.8,+12.7.9.2,5.7,4.6,2.7,+6,+6,4.3,8.9,+10.1,6.2,6.8,+9.10.11.2,5.4,2.8.2,4.2,6.9.10,+7.8,1.10.1,8.9,+1,4,2.5,3.4,4.10.3,7.8.1,6.2,6.3,5.9,+11.4,6.10,+10.8.1,7.2,7.11.5,4.12.9,+8.9.2,6.8,+5,2.6,5.7,+9.9,+9.11,+7.2,6.5,2.10.11.2,7.4,4.6,2.12,+9.7,+9.7.3,4.8.4,4,+10.3,5.10.2,7.4,5.6,2.7.8.2,4.8,+10.11.1,9.13.4,6.3,8.5,7.10,+9.8.9.4,4.8.6,3.8,+10.11.7,1.11,+10.1,8.10.10.4,4.9,+9.8,1.10.8,2.10,+1,1,7.3,8.2,5.7.7,2.10,+9.12.1,8.11,+12.4,6.9,+8.8.3,4.9,+10.10.10.8,1.11.10.8,+8.9.8.9,+10.8,+8.3,5.8.9,+9,+10.11.1,7.10.5,2.7.6.9,+11.11.7,5.12.5,4.8,+8.4,4.11.2,8.5,3.10.3,5.5,3.11,+6,4.11,+7,2.7,5.11.1,7.3,5.6,3.3,6.8,2.7,4.9.2,8,+11.9,+7.9.8.3,6.10,1.13.7,2.10.9.6,2.9.4,4.7,2.12.8,+11.11.5,4.11,+1,2,4.2,5.2,4.4,5.1,8,+7,+7.3,4.7,+10.2,5.6,3.9.8,3.1,7.2,6.1,7.5,3.6,2.8.2,6.9,2.6,2.9,+12.9,+9.5,4.3,5.4,5,+7,1.8,+9,1.9,1.9.8.7,1.9.7,+5,2.9.1,8.3,5.2,7.4,3.6,2.9,+6,3.4,3.5,4.2,7.6,2.8.2,7,+10.3,5.6,3.4,4.10.3,8.3,8.3,2.5,2.4,1.3,4.5,2.12,+10,+8,+9.1,7,+8.9,+9,+7.4,5.5,2.5,3.5,3.2,4.1,6.8.1,6.1,6,+6,4.2,6,+8,1.6,3.2,8.3,7.1,6.2,6.2,7.4,5.8,+9.4,4.4,5.2,6,+1,2,4.4,5,+6,5.2,5.3,7.3,5,+6,1.4,4.2,7,+6,4.2,6,+7.1,9,+9,2.4,5,1.5,4.1,6,1.4,3,1.3,4,+8,1.6,3.4,5.1,7,+3,6.2,5,1.11,+7,+8,+5,4.6,4.4,3,+2,4,1.1,5,1.6,2.3,6,+5,3,+5,+4,3.2,4.6,1.6,3.2,3,+1,6,3.3,7.2,8.11.1,9.3,4,2.12,+10.1,9.10,1.10,+11.3,7.9,+10.4,4.7,2.8.3,4.11.9,+9.4,6.9,+7,+8.7.2,5.8,+12.11.1,10.11,2.12.2,9.9,2.8,+13.1,8.3,5.8,1.10.1,11.11,+11,+11.3,7.9,+8,1.7,+1,6,2.9.4,5.12.11.1,8.10,+9,1.11.2,8.13.4,6.15.3,9.9.6,3.12.4,4.8.4,4.9,+9,+8.10.10.10.7,2.10.6,2.10.11.5,4.12.1,7.2,8.9.10,+10.12.3,6.6,5.8,+9.9,2.10.2,6.9.9.8,1.9,+9.8,+9.9,+9.10,+9.5,5.10.3,7.10.5,6.10.2,7.11.9,+8,1.11.6,4.11.3,7.12.10.9,1.2,4,2.7,2.4,6.2,6.10,+11,+10.9.3,8.6,4.9,2.13.11.13.5,4.12.8,1.5,3.11.1,8.6,+9.9.9,+9.3,6.4,4.3,3.4,5.10.1,7.8,+6.1,6.4,2.9,+7.5,3.5,2.11.8,+9.1,9.6,5.7,1.9.3,3.3,3.9.9.8,+5,7.8,+4,6.8.5,3.9.7,1.5.9.6,2.6,2.3,3.5,+10.11.4,3.8.11.14.1,8.9.3,6.3,4.9.1,5.7.10.9,+10.9.9,1.11.10.5,4.9.6,1.6,2.8.7.1,8.6,4.8,1.11,+10.9,1.7.9.9.10.4,4.8.7.9,+8.8.10.2,6.8,+10.9.10.8.10.7,+11.4,6.9.7,2.9.6,2.7,+11.1,8.9,+12.10.6,+7,2.8.12.8,+8.2,8.13.9.9,+11.9.10.1,8.10.2,7.10.10,+9.8.1,5.11,+11.8,2.8,+3,6.5,5.2,8.1,9,+8.4,5.6,4.1,8.2,5,+8,1.6,3.1,9,+10,+11.3,8,+8,2.7,4.2,6,1.11,+6,5.1,4,5.5,5.5,6.2,8,+9,1.4,6,+7,1.4,6,+11.4,6.7,2.9.2,7.5,3.2,7,+7,1.5,3.6,4.9,+2,2,2,+2,3,3,+3,4,3.1,2,5,+4,5,1.6,4.1,9,+6,3,+5,3.1,4,3.2,8.1,6,+9,2.4,5,+9,+9,+8,+5,5.1,5,3.1,6,2.5,5.2,7.1,6,2.5,6.1,9,+8,4.4,4.3,7.1,5,1.3,5.2,8,+11,+13,+6,4.1,5,1.5,5.4,7,+9,+7,+1,2,3,1.1,2,2,1.3,4,3.1,3,3,+5,4.2,6,+6,2.10,+5,4.4,4.2,5.2,6.12.1,5,1.7,3.4,5,+7,2.4,4.5,4.4,6.1,6,+8,3.3,6,+8,2.5,3.4,6.3,5,+7,4.1,7,+9,3.6,3.4,6.3,7.3,6.4,5,+3,5,2.2,5,3,+3,3,3,+5,5,+5,4,2.2,3,3,+5,5,2.4,3,1.2,4,3.1,9.11.5,4,1.2,7.11,+9,+14.2,10.1,11.5,5.10.1,7.11.11.2,3,3,+5,6.1,3,5,+6,3.1,4,4,+4,4,+5,4,1.3,4,3.1,4,3,+9,1.1,3,4,+5,2,3.3,4,1.2,2,3,+4,4.3,3.3,4.3,5,+8,+8,+8,1.8,1.4,5,+9,+5,5.1,6,2.2,7,+6,3.6,4.2,4,3.4,3,2.8,3.6,4.1,7,+8,2.2,4,3.5,3.4,4,2.7,3.4,4.1,7.2,5,+3,7,+5,4.3,7.2,5,2.2,6,+5,4.5,5,+6,2.4,3.2,4,2.3,6,+1,2,2,+2,3,1.2,4,+4,3.3,3,+5,3.1,4,1.4,2.4,4,+4,4,+3,4,2.2,4,1.3,6,+4,4,1.5,4,+10,1.3,4,1.3,5.9.2,4,2.6,3.1,6,+4,5.3,4,+6,1.3,6,+5,4,+5,4,+2,4,2.1,4,4.1,4,3.6,3.1,7.2,4,2.1,4,2.3,4,+3,4,+1,4,1.2,4,+4,4,+3,4,1.3,4,+6,4,+6,1.3,6,+3,3,2,+4,3,+3,3,1.4,4.1,2,2,+3,3,3,+3,3,+4,5,+5,3,+4,2,2.1,4,5.1,4,4.1,3,2,2,+2,2,3.1,2,3,1.1,2,2,2.1,3,4.1,3,3,2.2,5,2.3,6.3,2,2.2,5,+5,5,+3,4,1.2,4,3.1,3,4.1,7,+9,1.5,3,+5,3.3,2,3,+4,4.3,6,+4,4.2,5,+4,2.2,5,+3,3,3.1,4,2.2,4,1.3,3,2.5,5,+4,5,+4,5.1,5,4.2,3,2,+5,4,+9,2.9,+9,+10.13.12.1,8,+11.1,6.9,+10.5,5.10.2,9.10.10.8,2.10,+9.10.3,5.10.11.1,8.8.4,6.9,+9.11.8,+11.2,4.8,+8.8.4,3.9.9.9.9,+9.8.8,2.10.9,1.9.5,3.9,+7.7.9.5,4.7.3,4.7.8.9.8.3,5.8.8,2.10.10,+11.7,2.10.8.3,6.10.5,5.10.8.3,6.10.2,6.9,+13.11.14.9,4.10.9.11.4,4.8.7,2.8.7,2.9.10.9,+10.12,+10.9.5,6.11.2,9.1,8.2,8.7,2.12.3,5.10,+8,+9,+9.8.8.7.9.10,+11,+10.9.10.8.3,5.9,+11.1,7.6,3.10.11.1,10.9.9.9,+7.9.2,6.9.9.7,+8.8.7,3.8.8.9,+9.7,+10.2,6.9.8,+10.1,8.9,+9.1,6.11,+8.2,5.5,3.8.7,+10.3,7.6.6,+8.9,+9.10.11.9.9,1.8.4,5.8,1.11.12.9.12.7,3.10,+12.7,4.11,+11.10,+9.10.2,6.8.13.10.10.8,2.9.10,+10.11.7.10,+9.10,+11,+8,+9,1.8.2,6.8.9,+12.13.6,4.12,+10.1,8.6,5.6,4.11,+10.7,3.6,4.12.10.9,+11.1,8.8.5,5.3,7.3,6.8.9,+10.7,2.7,2.8.8,+9.11.1,6.9,+10.11,+10.7,+11.1,8.3,4.9.9,+10.4,2.11.5,3.10.7,+7.7.3,5.8.4,4.10.7,1.10,+12.5,5.6,2.7,+11.3,7.6,4.8.4,9.9,2.8,1.10.9.7,+6.5,3.11.2,5.6,3.6,1.7.6.4,3.5,4.6.6,2.9.1,5,+8.8.9.11.5,4.8.9.9,1.12.8,2.9.9.8,4.10,+9.10.9.4,5.12.8,3.9.2,7,+11.5,6.9.10.9,3.10.12,+12.2,8.3,7.11.11,+10.8.3,7.8.2,6.8.8,1.10,+10.7.10.8.10,+7.4,3.8.8.8,+8.11.5,2.8.7,+9,2.9,+11.7,4.6,3.8.1,7,+8,2.11,+14.4,10.1,5,+9,+9,1.6,4.10,+10.1,9.3,6.2,8.7,3.12,+11.1,9.3,7.5,4.4,6.1,9,+10.3,7.8,2.11,+10,+4,5,+5,4,+2,2,3.8,2.1,4,3.2,3,3.1,4,5,+7,+3,8.2,2,5.2,2,2,1.6,3,+6,4,1.4,3,4.3,6,1.4,5,1.9,3.5,6,+3,4,1.4,5,3.9,2.2,8,+9,+11,+8.2,5,4.3,5,1.10,1.9,2.3,6.6,5,+1,2,4,2.2,4,1.5,2.9.4,5,+6,2.4,7,+6,4.2,6,+3,5,+9,+6,3.6,4.1,4,3,+2,7.1,10,+4,3,2.2,3,2,2.1,7,1.5,5,+5,5,2.2,4,3,+4,7,+6,4,1.4,3,2.2,6,2.1,5,3.1,3,4,+4,4,1.3,5.6,3,+3,2,4,+3,4,+9,+2,3,3.3,3,2,1.3,2,4,+4,4,1.1,5,2.3,2,2.2,6,2.3,4,2.8,3.4,5,+4,5,+4,5,+5,4.4,5,+7,5.3,7.1,9,+9,+12.2,6,2.3,5.13,+7,4.1,7.7,+4,5.2,6,+4,4.5,6,+3,7.1,7,+5,4.1,5,2.2,9.4,3,1.11.1,8,+10.2,9.1,9.1,7.8,+12.1,9,+9,2.5,6.4,7.4,7.2,6.2,7.6,5.8,3.6,5.6,4.10,+8.2,5,+7,1.9,1.7,5.5,6.2,8,2.10,2.11.3,6.5,4.7,3.4,6.7,4.9,+2,4,5,+6,4.1,8,3.3,6,+9,1.6,2.4,4,+5,4.4,5.6,3.3,6.2,6,+9,+12.12.11.9.11.11.12,+2,2,2,2,+2,3,2,+4,4,2.2,4,3.1,2,3,2.2,5,2,+3,3,4,2,+3,3,5.1,5,2,2.2,4,2,3,+11.10.11.12.13,1.1,3,3,2.1,2,7,1.4,3,3,+2,4,4.1,4,3.1,4,3,+4,5,+3,3,2.7,4.1,3,3,+11,+4,4,1.4,6,1.4,4,3,+2,3,3.2,3,4,2.4,5,2.1,6,3.1,4,4,+4,2,3,+3,3,5,+4,3,3,1.2,4,4,+3,5,2.1,4,5,+6,5,2.3,7,+11,+9.1,7,+6,1.7,+7,3.4,5.2,10,+7,4.4,5,+10,+6,3.5,5,+6,4,+9,+7,3.9.1,8,1.5,5.4,5,+7,1.7,1.8,+9,+11,+10,+2,2,2,+2,2,3,1.2,3,3,+3,3,3,+2,5,2.1,3,3,+3,3,+5,4,2.1,3,3,+4,2,3.4,3,+6,5.1,6,3.1,3,3,+4,4,2.1,5,2.3,3,3.2,3,3.3,4,2.1,5,2.1,6,1.2,4,+2,3,4,+2,3,4,+2,2,3,+3,3,1.3,3,1.4,4,1.1,5,4.2,4,1.3,4,1.1,3,6,+3,2,2.3,3,2.2,5,+3,2,2,1.1,6,4.1,8.2,7.7,4.5,5.10,+2,2,2,+2,2,3,+2,3,1.1,5,2.2,5,3.1,3,4,+6,5,+6,4,1.2,2,3,1.1,4,5,+6,6,+3,4,+4,4,+2,3,3.1,5,2.2,3,3,2.2,9,+4,5,+4,3,3.2,9,+2,3,4,1.3,3,3,+4,4,2,1.2,3,3,3,+2,2,2,2.2,4,4,1.2,3,4,2.3,4,4,+4,3,2,+2,2,2,2.1,3,5,+2,2,5.1,3,2,1.3,2,4,+3,3,2.1,3,3,+3,3,1.2,3,3,+3,3,2.1,4,3,+2,3,3,+4,6,1.2,3,4,+5,5,+2,5,4.1,8,+3,3,2.1,3,4.1,6,1.3,6,+4,3,1.1,3,4,1.3,3,4,+5,6,+9,+2,6,+5,4.1,2,5,+6,4,1.1,3,4,+7,6.1,8,2.4,4,2.5,6,+4,2,2,+4,3,2.3,4,+6,1.2,4,2.6,3.1,6,+6,3.1,6,+3,6,+3,3,3,+4,3,1.7,3.2,4,1.3,6,1.2,2,5,+5,6,2.1,3,3,+4,4,2.4,4,+4,3,+9,+3,2,2,+3,3,3.1,6,2.7,3.7,2.10.2,6.8,2.2,4,3,+3,3,4,+2,5,2.2,4,3,+2,4,2,2.4,4,3.1,5,4,+3,6,3,+3,3,3,1.2,2,4,+4,3,3,+3,3,1.2,9,1.1,4,3,+2,4,3.3,4,4,+4,3,1.4,3,+4,3,+2,3,4,+6,6,+3,2,3,+4,3,3,+2,2,2,+6,3.1,4,3.1,4,2.1,4,3.1,3,4,+1,2,2,3,+6,6,+3,6,+5,3,+4,3,1.4,3,1.10,+10,+5,4.1,4,+4,5.1,5,2.7,+4,5,+4,3,1.4,3,2,+4,4,3,+5,5.1,4,5,+4,2,1.1,3,4,+2,6,3,+4,6.3,3,1.5,3,+2,3,3,+3,3,3,+3,3,1.3,4,2.1,3,4.3,3.4,3,+3,3,4,+3,4,2,+2,4,2,+2,6,2.1,4,3,+4,3,1.1,4,4.2,5,2,+1,3,5,+5,3.1,4,2.1,3,4,+4,4,+4,3,1.2,3,4,1.3,3,3,+2,2,3,+6,4,+9,+4,4,+5,4,2.1,3,5,2.2,3,4,1.2,3,5,2.1,4,5,2.4,3,2,+2,5,+5,5,+6,3.6,5,+9.3,6,+3,7.4,6.9.1,7.9,1.8,+10.11,+4,3,+4,3,+4,4.2,5.1,6,+2,2,2,+3,3,2.2,4,2.2,7,+4,5,+1,2,4,+5,+4,1.3,4,+4,2,+4,2,+2,3,2.1,4,3.2,2,2.2,5,+1,4,3.6,+4,4,+4,4,+4,3,2.2,3,3,+7,3.2,4,1.3,3,+2,4,+4,2.5,+4,2.2,5,+2,5,+3,2,+3,3,+4,+3,4,+5,5,+5,4,+5,2.5,3.4,+5,5.1,4,1.2,5,+4,2,2.2,5,+4,4,1.4,4.1,5,+4,2,1.1,4,1.4,+3';
+const AYL_L0=new Uint16Array(TOTAL),AYL_N=new Uint8Array(TOTAL),AYL_OFF=new Uint32Array(TOTAL+1);
+let AYL_W=null,LINE_W=null;
+(function(){
+  const toks=AYL_RAW.split(','),ws=[];let line=-1;
+  for(let i=0;i<TOTAL;i++){
+    let t=toks[i]||'+1';
+    if(t[0]==='+'){line++;t=t.slice(1);}
+    const parts=t.split('.').map(Number);
+    AYL_L0[i]=line;AYL_N[i]=parts.length;AYL_OFF[i]=ws.length;
+    for(const w of parts)ws.push(w);
+    line+=parts.length-1;
+  }
+  AYL_OFF[TOTAL]=ws.length;AYL_W=Uint8Array.from(ws);
+  LINE_W=new Uint16Array(line+1);
+  for(let i=0;i<TOTAL;i++)for(let k=0;k<AYL_N[i];k++)LINE_W[AYL_L0[i]+k]+=AYL_W[AYL_OFF[i]+k];
+})();
+/* عدد الأسطر (بالكسور) التي تغطيها مجموعة آيات: السطر الجزئي يُحسب بنسبة كلماته */
+function linesOf(ayahs){
+  const cov=new Map();
+  for(const i of ayahs)for(let k=0;k<AYL_N[i];k++){const l=AYL_L0[i]+k;cov.set(l,(cov.get(l)||0)+AYL_W[AYL_OFF[i]+k]);}
+  let s=0;cov.forEach((w,l)=>{s+=Math.min(1,w/LINE_W[l]);});
+  return s;
+}
+function rangeLines(a,b){const arr=[];for(let i=a;i<=b;i++)arr.push(i);return linesOf(arr);}
+const fullJuzIn=(a,b)=>{let n=0;for(let j=0;j<30;j++)if(a<=JS[j]&&b>=JE[j])n++;return n;};
+
+/* ═══════════════ النجوم: القواعد والحساب ═══════════════ */
+const SR={goalSmall:2,goalBig:4,mult:2,bonusFrom:3,bonusStep:10,bonusMax:70,revFull:2,revHalf:1.5,revHalfPages:10,quarterPages:151};
+const Q1_JUZ=[23,24,25,26,27,28,29]; /* الربع الأول بترتيب الحفظ: الأجزاء 24–30 */
+const WD=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+const WD_S=['أحد','اثنين','ثلاثاء','أربعاء','خميس','جمعة','سبت'];
+const weekStart=iso=>addDays(iso,-parseISO(iso).getDay());
+const starsTxt=n=>plural(n,'نجمة واحدة','نجمتان','نجوم','نجمة');
+const linesTxt=n=>n===0?'0 أسطر':plural(n,'سطر واحد','سطران','أسطر','سطرًا');
+function stuStars(stu){if(!stu.stars)stu.stars=cleanStars(null);return stu.stars;}
+function starsOf(stu){
+  const today=todayISO(),SS=stuStars(stu);
+  const recs=[],revs=[];
+  stu.places.forEach(p=>{p.records.forEach(r=>recs.push(r));p.reviews.forEach(r=>revs.push(r));});
+  recs.sort((a,b)=>{const ka=a.type==='prior'?'':a.date,kb=b.type==='prior'?'':b.date;return ka<kb?-1:ka>kb?1:a.createdAt-b.createdAt;});
+  /* الحفظ الجديد فقط: الآية تُحسب مرة واحدة أول ما تُحفظ (حتى لو سُجّلت في أكثر من جهة) */
+  const mem=new Uint8Array(TOTAL),jc=new Array(30).fill(0),newBy={};
+  let pages=0,quarter=false,quarterDate=null;
+  const qDone=()=>pages>=SR.quarterPages||Q1_JUZ.every(j=>jc[j]>=JSIZE[j]);
+  for(const r of recs){
+    for(let i=r.start;i<=r.end;i++){
+      if(mem[i])continue;
+      mem[i]=1;jc[JUZ_OF[i]]++;pages+=1/PLEN[PAGE_OF[i]];
+      if(r.type==='session')(newBy[r.date]=newBy[r.date]||[]).push(i);
+    }
+    if(!quarter&&qDone()){quarter=true;quarterDate=r.type==='prior'?null:r.date;}
+  }
+  /* هدف اليوم يُحدَّد بحال الطالب في بداية ذلك اليوم */
+  const bigGoal=d=>quarter&&(quarterDate===null||d>quarterDate);
+  const revBy={};
+  revs.forEach(r=>{
+    const pg=rangeLines(r.start,r.end)/LINES_PER_PAGE,fj=fullJuzIn(r.start,r.end);
+    const m=fj?SR.revFull:pg>=SR.revHalfPages?SR.revHalf:1;
+    const o=revBy[r.date]=revBy[r.date]||{pages:0,stars:0,juz:0};
+    o.pages+=pg;o.stars+=pg*m;o.juz+=fj;
+  });
+  const exc=new Set(SS.excused);
+  const starts=Object.keys(newBy).concat(Object.keys(revBy)).sort();
+  const days=[];let streak=0,best=0,earned=0,juzReviews=0;
+  if(starts.length){
+    for(let d=starts[0];d<=today;d=addDays(d,1)){
+      const goal=bigGoal(d)?SR.goalBig:SR.goalSmall;
+      const frac=newBy[d]?linesOf(newBy[d]):0,lines=Math.round(frac);
+      const met=lines>=goal,ex=!met&&exc.has(d),isToday=d===today;
+      let bonus=0,base=lines;
+      if(met){streak++;base=lines*SR.mult;if(streak>=SR.bonusFrom)bonus=Math.min(SR.bonusMax,streak*SR.bonusStep);}
+      else if(!ex&&!isToday)streak=0;
+      best=Math.max(best,streak);
+      const hifz=Math.round(base*(1+bonus/100));
+      const rv=revBy[d],review=rv?Math.round(rv.stars):0;
+      if(rv)juzReviews+=rv.juz;
+      const total=hifz+review;earned+=total;
+      days.push({date:d,goal,lines,frac,met,ex,streak,bonus,hifz,review,revPages:rv?rv.pages:0,revJuz:rv?rv.juz:0,total});
+    }
+  }
+  const byDate={};days.forEach(x=>byDate[x.date]=x);
+  const goalNow=bigGoal(addDays(today,1))?SR.goalBig:SR.goalSmall;
+  const todayRow=byDate[today]||{date:today,goal:quarter&&quarterDate!==today?SR.goalBig:SR.goalSmall,lines:0,frac:0,met:false,ex:exc.has(today),streak,bonus:0,hifz:0,review:0,revPages:0,revJuz:0,total:0};
+  /* الأسابيع (من الأحد إلى السبت): أسبوع كامل = تحقيق الهدف كل يوم، ويُقبل يوم عذر واحد */
+  const weeks=[];
+  if(days.length){
+    for(let w=weekStart(days[0].date);w<=today;w=addDays(w,7)){
+      let met=0,ex=0;
+      for(let k=0;k<7;k++){const x=byDate[addDays(w,k)];if(x){if(x.met)met++;else if(x.ex)ex++;}}
+      const end=addDays(w,6);
+      weeks.push({start:w,end,met,ex,ended:end<today||(end===today&&met+ex===7),earned:met+ex===7&&ex<=1});
+    }
+  }
+  const gifts=weeks.filter(w=>w.earned&&w.ended);
+  const thisWeek=weekStart(today);
+  const spent=SS.spent.reduce((s,x)=>s+x.cost,0);
+  /* إهداء النجوم بين الطلاب: تنتقل من رصيد المُعطي إلى رصيد الآخر، بلا سداد */
+  let gotIn=0,gaveOut=0;const giftsIn=[],giftsOut=[];
+  (DATA.rewards.loans||[]).forEach(l=>{
+    if(l.to===stu.id){gotIn+=l.amount;giftsIn.push(l);}
+    else if(l.from===stu.id){gaveOut+=l.amount;giftsOut.push(l);}
+  });
+  return {days,byDate,today:todayRow,goalNow,streak,best,earned,spent,balance:earned-spent+gotIn-gaveOut,gotIn,gaveOut,giftsIn,giftsOut,
+    quarter,quarterDate,juzDone:jc.filter((c,j)=>c>=JSIZE[j]).length,juzReviews,
+    weeks,gifts,giftsPending:gifts.filter(w=>!SS.gifts[w.start]),thisWeek,
+    weekDays:Array.from({length:7},(_,k)=>{const d=addDays(thisWeek,k);return {date:d,row:byDate[d]||null,ex:exc.has(d)};})};
+}
+const stuName=id=>{const s=DATA.students.find(x=>x.id===id);return s?s.name:'طالب محذوف';};
+const familyEarned=()=>DATA.students.reduce((s,x)=>s+starsOf(x).earned,0);
+/* الرمز السري لوليّ الأمر: يبقى مفتوحًا 10 دقائق بعد إدخاله */
+function pinGate(fn){
+  if(UI.pinUntil&&Date.now()<UI.pinUntil){fn();return;}
+  openSheet({type:'pin',mode:DATA.rewards.pin?'enter':'set',next:fn});
+}
+/* ═══════════════ النجوم: الواجهة ═══════════════ */
+const STAR5='<svg class="st5" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z"/></svg>';
+const rwPic=(x,cls)=>x.img?`<img class="${cls||''}" src="${x.img}" alt="">`:`<span class="rw-emo ${cls||''}" aria-hidden="true">${esc(x.emoji||'🎁')}</span>`;
+function starsStripHTML(stu){
+  const S=starsOf(stu),t=S.today;
+  const left=Math.max(0,t.goal-t.lines);
+  return `<button type="button" class="stx-strip" data-act="tab" data-tab="stars">
+    <span class="stx-strip-b">${STAR5}<b>${num(S.balance)}</b></span>
+    <span class="stx-strip-t">${t.met?'حققت هدف اليوم، أحسنت!':left===t.goal?'هدف اليوم: '+linesTxt(t.goal):'باقي '+linesTxt(left)+' على هدف اليوم'}</span>
+    ${S.streak>0?`<span class="stx-strip-f">🔥 ${S.streak}</span>`:''}${CHEVR}</button>`;
+}
+function weekStripHTML(S){
+  const today=todayISO();let missed=false,remain=0,met=0;
+  const cells=S.weekDays.map((w,k)=>{
+    const r=w.row,fut=w.date>today,isT=w.date===today;
+    let st='fut',ic='';
+    if(r&&r.met){st='met';ic=CHECK;met++;}
+    else if(w.ex){st='ex';ic='<small>عذر</small>';}
+    else if(fut){st='fut';remain++;}
+    else if(isT){st='now';remain++;}
+    else{st='miss';ic='×';missed=true;}
+    return `<div class="wk-d${isT?' is-today':''}"><span class="wk-c ${st}">${ic}</span><span>${WD_S[k]}</span></div>`;
+  }).join('');
+  const W=DATA.rewards.weekly;
+  let msg;
+  if(S.giftsPending.some(g=>g.start===S.thisWeek))msg='🎉 أكملت الأسبوع كاملًا! هديتك بانتظارك.';
+  else if(missed)msg='فات يوم من هذا الأسبوع، فالهدية تبدأ من جديد يوم الأحد. واصل الحفظ لتجمع النجوم والبونص.';
+  else msg=`حقق هدفك كل يوم حتى السبت وتحصل على ${W?'<b>'+esc(W.name)+'</b>':'هدية'} 🎁 (باقي ${daysText(remain)}).`;
+  return `<section class="stx-card"><div class="stx-row"><h3>أسبوع الهدية 🎁</h3><span class="muted">${met} من 7</span></div>
+    <div class="wk">${cells}</div>
+    ${W?`<div class="wk-gift">${rwPic(W,'wk-gift-pic')}<span>${esc(W.name)}</span></div>`:''}
+    <p class="stx-msg">${msg}</p></section>`;
+}
+function rewardCardHTML(x,S,SS){
+  const isT=SS.target===x.id,can=S.balance>=x.cost,pct=Math.min(100,Math.max(0,S.balance)/x.cost*100);
+  return `<div class="rw${isT?' tgt':''}">
+    <div class="rw-img">${rwPic(x)}${isT?'<span class="rw-badge">هدفي</span>':''}
+      <button type="button" class="rw-edit" data-act="rw-edit" data-id="${esc(x.id)}" aria-label="تعديل ${esc(x.name)}">✎</button></div>
+    <div class="rw-b"><div class="rw-n">${esc(x.name)}</div>
+      <div class="rw-c">${STAR5}${num(x.cost)}</div>
+      <div class="bar"><i style="width:${pct.toFixed(0)}%"></i></div>
+      ${can?`<button type="button" class="btn btn-primary rw-btn" data-act="rw-redeem" data-id="${esc(x.id)}">اصرفها</button>`
+        :`<p class="rw-left">باقي ${num(x.cost-S.balance)}</p>${jointPossible(x,curStudent())?`<button type="button" class="btn btn-ghost rw-btn rw-joint" data-act="rw-joint" data-id="${esc(x.id)}">🤝 اجمعوا لها معًا</button>`:''}<button type="button" class="btn btn-ghost rw-btn" data-act="rw-target" data-id="${esc(x.id)}">${isT?'إلغاء الهدف':'اجعلها هدفي'}</button>`}
+    </div></div>`;
+}
+function viewStars(stu){
+  const S=starsOf(stu),SS=stuStars(stu),t=S.today,R=DATA.rewards,today=todayISO();
+  let h=`<section class="stx-hero" aria-label="رصيد النجوم">
+    <div class="stx-name">نجوم ${esc(stu.name)}</div>
+    <div class="stx-bal">${STAR5}<span>${num(S.balance)}</span></div>
+    <div class="stx-sub">جمعت ${num(S.earned)} · صرفت ${num(S.spent)}</div>
+    ${S.gotIn||S.gaveOut?`<div class="stx-sub">${S.gotIn?'أُهدي إليك '+num(S.gotIn):''}${S.gotIn&&S.gaveOut?' · ':''}${S.gaveOut?'أهديت '+num(S.gaveOut):''}</div>`:''}</section>`;
+
+  /* هدف اليوم */
+  const boxes=Array.from({length:t.goal},(_,i)=>`<i class="${i<t.lines?'on':''}"></i>`).join('');
+  const left=Math.max(0,t.goal-t.lines);
+  let msg;
+  if(t.met){
+    const nb=Math.min(SR.bonusMax,(S.streak+1)*SR.bonusStep);
+    msg=`أحسنت! حققت هدف اليوم فتضاعفت نجومه ×2.`+(S.streak+1>=SR.bonusFrom?` احفظ غدًا ليصبح البونص ${nb}%.`:` بعد ${daysText(SR.bonusFrom-S.streak)} متتالية يبدأ البونص.`);
+  }else if(t.ex)msg='اليوم يوم عذر، فلن تنقطع سلسلتك.';
+  else if(t.lines>0)msg=`رائع، بدأت! باقي ${linesTxt(left)} وتتضاعف نجوم اليوم.`;
+  else msg=`احفظ اليوم ${linesTxt(t.goal)} لتتضاعف نجومك`+(S.streak>0?` وتصل سلسلتك إلى ${S.streak+1}.`:'.');
+  h+=`<section class="stx-card"><div class="stx-row"><h3>هدف اليوم</h3><span class="tag ${t.met?'ok':'mid'}">${t.lines} من ${t.goal}</span></div>
+    <div class="lp" aria-hidden="true">${boxes}</div>
+    ${t.lines>t.goal?`<p class="muted" style="font-size:13px;margin-top:6px">وزيادة ${linesTxt(t.lines-t.goal)}، كل سطر يُضاعف!</p>`:''}
+    <p class="stx-msg">${msg}</p>
+    <div class="pills"><span class="pill fire">🔥 ${S.streak?daysText(S.streak)+' متتالية':'لا سلسلة بعد'}</span>
+      <span class="pill">${t.bonus?'بونص اليوم '+t.bonus+'%':!t.met&&S.streak+1>=SR.bonusFrom?'احفظ هدفك: بونص '+Math.min(SR.bonusMax,(S.streak+1)*SR.bonusStep)+'%':'البونص من اليوم '+SR.bonusFrom}</span>
+      <span class="pill gold">نجوم اليوم: ${num(t.total)}</span></div></section>`;
+
+  h+=weekStripHTML(S);
+
+  /* هدايا أسبوعية مستحقة لم تُسلَّم */
+  if(S.giftsPending.length){
+    h+=`<section class="stx-card gift"><h3>🎁 ${S.giftsPending.length===1?'هدية بانتظار التسليم':S.giftsPending.length+' هدايا بانتظار التسليم'}</h3>
+      <ul class="rows">${S.giftsPending.map(g=>`<li class="row"><div style="flex:1">أسبوع ${fmtShort(g.start)} – ${fmtShort(g.end)}</div>
+      <button type="button" class="btn btn-ghost sm" data-act="gift-deliver" data-w="${g.start}">سلّمتها ✓</button></li>`).join('')}</ul></section>`;
+  }
+
+  /* هدفي */
+  const items=R.items.filter(x=>!x.for||x.for===stu.id);
+  const tg=items.find(x=>x.id===SS.target);
+  if(tg){
+    const pct=Math.min(100,Math.max(0,S.balance)/tg.cost*100);
+    h+=`<section class="stx-card tgt-card"><div class="tgt-pic">${rwPic(tg)}</div><div style="flex:1;min-width:0">
+      <div class="muted" style="font-size:13px">هدفي</div><div class="rw-n">${esc(tg.name)}</div>
+      <div class="bar big"><i style="width:${pct.toFixed(0)}%"></i></div>
+      <div class="muted" style="font-size:13.5px;margin-top:4px">${S.balance>=tg.cost?'تستطيع صرفها الآن! 🎉':num(Math.max(0,S.balance))+' من '+num(tg.cost)+' · باقي '+starsTxt(tg.cost-Math.max(0,S.balance))}</div></div></section>`;
+  }
+
+  /* المتجر */
+  h+=`<section class="sec"><div class="sec-h"><h2>متجر المكافآت</h2><button type="button" class="link" data-act="rw-add">+ إضافة مكافأة</button></div>`;
+  if(items.length){
+    h+=`<div class="rw-grid">${items.slice().sort((a,b)=>a.cost-b.cost).map(x=>rewardCardHTML(x,S,SS)).join('')}</div>`;
+  }else{
+    h+=`<div class="stx-empty"><p>لا توجد مكافآت بعد. يضيفها وليّ الأمر بصورتها وعدد نجومها، ثم يختار الطفل مكافأته ويجمع لها.</p>
+      <button type="button" class="btn btn-primary" data-act="rw-add">إضافة أول مكافأة</button></div>`;
+  }
+  h+='</section>';
+
+  /* الهدف العائلي */
+  const F=R.family;
+  if(F||DATA.students.length>1){
+    h+=`<section class="sec"><div class="sec-h"><h2>الهدف العائلي</h2>${F?'<button type="button" class="link" data-act="family-edit">تعديل</button>':''}</div>`;
+    if(F){
+      const got=Math.max(0,familyEarned()-F.base),pct=Math.min(100,got/F.cost*100),done=got>=F.cost;
+      h+=`<div class="stx-card tgt-card fam"><div class="tgt-pic">${rwPic(F)}</div><div style="flex:1;min-width:0">
+        <div class="rw-n">${esc(F.name)}</div>
+        <div class="bar big"><i style="width:${pct.toFixed(0)}%"></i></div>
+        <div class="muted" style="font-size:13.5px;margin-top:4px">${num(Math.min(got,F.cost))} من ${num(F.cost)} نجمة يجمعها ${DATA.students.map(s=>esc(s.name)).join(' و')} معًا</div>
+        ${done?'<button type="button" class="btn btn-primary btn-block" style="margin-top:10px" data-act="family-done">تحقق الهدف! 🎉 تم التسليم</button>':''}</div></div>
+        <p class="muted" style="font-size:13px;margin-top:8px">نجوم الهدف العائلي لا تُنقص من رصيد أحد، فهي تُحسب من كل ما يجمعه الإخوة معًا.</p>`;
+      if(F.done.length)h+=`<p class="muted" style="font-size:13px">تحقق ${plural(F.done.length,'مرة واحدة','مرتين','مرات','مرة')} من قبل، آخرها ${fmtDate(F.done[F.done.length-1].date)}.</p>`;
+    }else{
+      h+=`<p class="muted" style="margin-top:6px">مكافأة يجمع لها الإخوة معًا (مثل رحلة للعائلة)، فيشجّع كل واحد الآخر بدل المقارنة بينهم.</p>
+        <div class="stack"><button type="button" class="btn btn-ghost btn-block" data-act="family-edit">تحديد هدف عائلي</button></div>`;
+    }
+    h+='</section>';
+  }
+
+  /* الأوسمة */
+  const anyMet=S.days.some(x=>x.met);
+  const B=[
+    ['🌟','أول هدف يومي',anyMet,''],
+    ['🔥','سلسلة 7 أيام',S.best>=7,''],
+    ['💎','سلسلة 30 يومًا',S.best>=30,''],
+    ['🎁','أسبوع كامل',S.gifts.length>0,S.gifts.length>1?'×'+S.gifts.length:''],
+    ['📖','سمّع جزءًا كاملًا',S.juzReviews>0,S.juzReviews>1?'×'+S.juzReviews:''],
+    ['📗','أجزاء مكتملة',S.juzDone>0,S.juzDone?String(S.juzDone):''],
+    ['👑','أتم ربع القرآن',S.quarter,'']
+  ];
+  h+=`<section class="sec"><div class="sec-h"><h2>الأوسمة</h2></div><div class="bdg-grid">${B.map(([i,l,on,c])=>`<div class="bdg${on?' on':''}"><span class="bdg-i">${i}</span><span class="bdg-l">${l}</span>${c?`<span class="bdg-c">${c}</span>`:''}</div>`).join('')}</div></section>`;
+
+  /* سجل النجوم */
+  const rows=S.days.filter(x=>x.total>0||x.lines>0||x.ex).reverse();
+  const show=UI.starsHistAll?rows:rows.slice(0,10);
+  h+=`<section class="sec"><div class="sec-h"><h2>سجل النجوم</h2><button type="button" class="link" data-act="stars-rules">كيف تُحسب؟</button></div>`;
+  if(!rows.length)h+=`<p class="muted" style="margin-top:8px">ستظهر هنا نجوم كل يوم بعد أول تسجيل حفظ أو مراجعة.</p>`;
+  else{
+    h+=`<ul class="rows">${show.map(x=>{
+      const parts=[];
+      if(x.lines>0)parts.push(`حفظ ${linesTxt(x.lines)}${x.met?' ✓ ×2':''}${x.bonus?' + بونص '+x.bonus+'%':''}`);
+      if(x.ex)parts.push('يوم عذر');
+      if(x.revPages>0)parts.push(`مراجعة ${dec(x.revPages,1)} صفحة${x.revJuz?' (جزء كامل ×2)':x.revPages>=SR.revHalfPages?' (×1.5)':''}`);
+      return `<li class="row"><div style="flex:1;min-width:0"><div class="t">${WD[parseISO(x.date).getDay()]} ${fmtShort(x.date)}${x.date===today?' <span class="tag mid">اليوم</span>':''}</div><div class="s">${parts.join(' · ')}</div></div><b class="stx-plus">+${num(x.total)}</b></li>`;
+    }).join('')}</ul>`;
+    if(rows.length>10)h+=`<button type="button" class="link" data-act="stars-hist-more">${UI.starsHistAll?'عرض أقل':'عرض كل الأيام ('+rows.length+')'}</button>`;
+  }
+  h+='</section>';
+
+  h+=siblingsHTML(stu,S);
+
+  if(SS.spent.length){
+    h+=`<section class="sec"><div class="sec-h"><h2>ما صرفته</h2></div><ul class="rows">${SS.spent.slice().reverse().map(x=>`<li class="row"><div style="flex:1;min-width:0"><div class="t">${esc(x.name)}${x.joint?' 🤝':''}</div><div class="s">${fmtDate(x.date)}${x.joint?' · مع '+esc(x.with)+' (السعر '+num(x.total)+')':''}</div></div><b class="stx-minus">−${num(x.cost)}</b><button type="button" class="icon-x" data-act="spent-undo" data-id="${esc(x.id)}" aria-label="إلغاء هذا الصرف">${TRASH}</button></li>`).join('')}</ul></section>`;
+  }
+
+  /* وليّ الأمر */
+  h+=`<section class="sec"><div class="sec-h"><h2>لوليّ الأمر</h2></div>
+    <p class="muted" style="margin-top:6px;font-size:14px">هذه الأزرار تحتاج الرمز السري${R.pin?'':' (ستختاره أول مرة)'}.</p>
+    <div class="stack">
+      <button type="button" class="btn btn-ghost btn-block" data-act="excuse-open">تسجيل يوم عذر (مرض، سفر…)</button>
+      <button type="button" class="btn btn-ghost btn-block" data-act="weekly-edit">${R.weekly?'تعديل':'تحديد'} الهدية الأسبوعية</button>
+      ${R.pin?'<button type="button" class="btn btn-ghost btn-block" data-act="pin-change">تغيير الرمز السري</button>':''}
+    </div>`;
+  if(SS.excused.length){
+    h+=`<p class="muted" style="margin-top:14px;font-size:14px">أيام العذر المسجّلة:</p><ul class="rows">${SS.excused.slice().reverse().slice(0,8).map(d=>`<li class="row"><div style="flex:1">${WD[parseISO(d).getDay()]} ${fmtDate(d)}</div><button type="button" class="icon-x" data-act="excuse-del" data-d="${d}" aria-label="حذف يوم العذر">${TRASH}</button></li>`).join('')}</ul>`;
+  }
+  h+='</section>';
+  return h;
+}
+
+/* ═══════════════ النجوم: النوافذ ═══════════════ */
+function pinHTML(S){
+  const inp=(id,lbl)=>`<div class="field"><label for="${id}">${lbl}</label><input id="${id}" class="pin-in" type="password" inputmode="numeric" maxlength="6" autocomplete="off"></div>`;
+  if(S.mode==='set')return `<p class="muted">${S.change?'اختر رمزًا سريًا جديدًا.':'اختر رمزًا سريًا من 4 أرقام لوليّ الأمر. ستحتاجه لإضافة المكافآت وصرفها وتسليم الهدايا، حتى لا يفعلها الطفل بنفسه.'}</p>
+    ${inp('pin-a','الرمز (4 إلى 6 أرقام)')}${inp('pin-b','أعد كتابة الرمز')}
+    <p id="pin-msg" class="note" hidden></p>
+    <button type="button" class="btn btn-primary btn-block" data-act="pin-save">حفظ الرمز</button>`;
+  return `<p class="muted">هذه الخطوة لوليّ الأمر.</p>${inp('pin-a','الرمز السري')}
+    <p id="pin-msg" class="note" hidden></p>
+    <button type="button" class="btn btn-primary btn-block" data-act="pin-ok">متابعة</button>`;
+}
+const RW_EMOJIS=['🎁','🍦','🍫','🍕','🎮','🧸','📚','⚽','🚲','🎨','🏞️','🎡','🛝','🧁','🎟️','📱'];
+function rewardEditHTML(S){
+  const pic=S.img?`<img src="${S.img}" alt="">`:`<span class="rw-emo">${esc(S.emoji)}</span>`;
+  return `<div class="rw-prev">${pic}</div>
+    <label class="btn btn-ghost btn-block" style="cursor:pointer">📷 ${S.img?'تغيير الصورة':'اختر صورة من الهاتف'}<input id="rw-file" type="file" accept="image/*" style="display:none"></label>
+    ${S.img?'<button type="button" class="link" style="display:block;margin:6px auto 0" data-act="rw-img-clear">إزالة الصورة واستخدام رمز</button>':`
+    <div class="field"><label>أو اختر رمزًا</label><div class="emo-grid">${RW_EMOJIS.map(e=>`<button type="button" class="emo${e===S.emoji?' on':''}" data-act="rw-emoji" data-e="${e}">${e}</button>`).join('')}</div></div>`}
+    <div class="field"><label for="rw-name">${S.kind==='weekly'?'اسم الهدية الأسبوعية':S.kind==='family'?'اسم الهدف العائلي':'اسم المكافأة'}</label><input id="rw-name" type="text" maxlength="40" autocomplete="off" value="${esc(S.name)}" placeholder="${S.kind==='family'?'مثال: رحلة للحديقة المائية':S.kind==='weekly'?'مثال: آيس كريم':'مثال: لعبة جديدة'}"></div>
+    ${S.kind==='weekly'?'':`<div class="field"><label for="rw-cost">عدد النجوم المطلوب</label><input id="rw-cost" type="text" inputmode="numeric" autocomplete="off" value="${S.cost||''}">
+      <div class="chips" style="margin-top:8px">${(S.kind==='family'?[300,500,1000,2000]:[30,80,200,500]).map(n=>`<button type="button" class="chip" data-act="rw-cost" data-n="${n}">${n}</button>`).join('')}</div></div>`}
+    ${S.kind==='item'&&DATA.students.length>1?`<div class="field"><label for="rw-for">لمن هذه المكافأة؟</label><select id="rw-for"><option value="">للجميع</option>${DATA.students.map(s=>`<option value="${esc(s.id)}"${S.for===s.id?' selected':''}>${esc(s.name)} فقط</option>`).join('')}</select></div>`:''}
+    <p id="rw-msg" class="note" hidden></p>
+    <button type="button" class="btn btn-primary btn-block" data-act="rw-save">حفظ</button>
+    ${S.id||(S.kind!=='item'&&S.exists)?'<button type="button" class="btn btn-danger btn-block" style="margin-top:10px" data-act="rw-delete">حذف</button>':''}`;
+}
+function excuseHTML(S){
+  return `<p class="muted">يوم العذر (مرض، سفر، ظرف طارئ) لا يقطع سلسلة الأيام ولا يُفقد هدية الأسبوع. المسموح يوم واحد في كل أسبوع (من الأحد إلى السبت).</p>
+    <div class="field"><label for="ex-date">التاريخ</label><input id="ex-date" type="date" max="${todayISO()}" value="${esc(S.date)}"></div>
+    <p id="ex-msg" class="note" hidden></p>
+    <button type="button" class="btn btn-primary btn-block" data-act="excuse-save">تسجيل يوم العذر</button>`;
+}
+function starsRulesHTML(){
+  return `<div class="rules">
+    <p><b>⭐ كل سطر تحفظه = نجمة.</b> تُحسب الأسطر تلقائيًا من الآيات المسجّلة في مصحف المدينة، ويُقرَّب لأقرب سطر (إن نقصت كلمة أو كلمتان يُحسب السطر).</p>
+    <p><b>🎯 هدف اليوم:</b> سطران يوميًا لمن لم يُتم ربع القرآن، و4 أسطر لمن أتمّه (الأجزاء 24–30). يتغيّر الهدف تلقائيًا عند إتمام الربع.</p>
+    <p><b>×2</b> إذا حققت هدف اليوم تتضاعف كل نجوم حفظ ذلك اليوم.</p>
+    <p><b>🔥 البونص:</b> إذا حققت الهدف 3 أيام متتالية تحصل على +30% في اليوم الثالث، ثم +40% في الرابع، و+50% في الخامس… حتى 70%، ويبقى 70% ما دمت مستمرًا.</p>
+    <p><b>🎁 الهدية الأسبوعية:</b> حقق الهدف كل يوم من الأحد إلى السبت.</p>
+    <p><b>📖 المراجعة:</b> كل صفحة = نجمة. نصف جزء (10 صفحات) في جلسة واحدة ×1.5، وجزء كامل في جلسة واحدة ×2.</p>
+    <p><b>🤝 مع الإخوة:</b> تستطيعون جمع نجومكم لشراء مكافأة واحدة معًا، أو يُهدي أحدكم نجومًا من رصيده لأخيه (هدية لا تُردّ). يحتاج ذلك رمز وليّ الأمر.</p>
+    <p><b>⏸ يوم العذر:</b> يسجّله وليّ الأمر للمرض أو السفر، فلا تنقطع السلسلة. يوم واحد في الأسبوع.</p>
+    <p class="muted">النجوم للحفظ الجديد فقط: الآية المحفوظة من قبل لا تُحسب مرة ثانية. وإذا عُدّل سجل أو حُذف تتصحح النجوم تلقائيًا.</p></div>
+    <button type="button" class="btn btn-primary btn-block" data-act="close-sheet">فهمت</button>`;
+}
+
+/* ═══════════════ النجوم: الأفعال ═══════════════ */
+function rwRead(){
+  const S=UI.sheet;if(!S)return;
+  const n=$('#rw-name');if(n)S.name=n.value;
+  const c=$('#rw-cost');if(c)S.cost=parseNum(c.value)||0;
+  const f=$('#rw-for');if(f)S.for=f.value;
+}
+function rwImageChosen(input){
+  const f=input.files&&input.files[0];input.value='';if(!f)return;
+  const url=URL.createObjectURL(f),img=new Image();
+  img.onload=()=>{
+    const sc=Math.min(1,320/Math.max(img.width,img.height)),c=document.createElement('canvas');
+    c.width=Math.max(1,Math.round(img.width*sc));c.height=Math.max(1,Math.round(img.height*sc));
+    const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(img,0,0,c.width,c.height);
+    let q=0.8,out=c.toDataURL('image/jpeg',q);
+    while(out.length>90000&&q>0.35){q-=0.1;out=c.toDataURL('image/jpeg',q);}
+    URL.revokeObjectURL(url);
+    if(!UI.sheet||UI.sheet.type!=='reward-edit')return;
+    rwRead();UI.sheet.img=cleanImg(out);paintSheet();
+  };
+  img.onerror=()=>{URL.revokeObjectURL(url);toast('تعذّر فتح هذه الصورة، جرّب صورة أخرى.');};
+  img.src=url;
+}
+function openRewardEdit(kind,id){
+  const R=DATA.rewards;let x=null;
+  if(kind==='item')x=id?R.items.find(i=>i.id===id):null;
+  else x=kind==='weekly'?R.weekly:R.family;
+  openSheet({type:'reward-edit',kind,id:kind==='item'&&x?x.id:null,exists:!!x,name:x?x.name:'',img:x?x.img:'',emoji:x?x.emoji:'🎁',cost:x?x.cost:(kind==='family'?500:kind==='item'?30:0),for:x?x.for:''});
+}
+function rwSave(){
+  rwRead();const S=UI.sheet,R=DATA.rewards,msg=$('#rw-msg');
+  const err=t=>{msg.textContent=t;msg.hidden=false;};
+  const name=S.name.trim().slice(0,40);
+  if(!name)return err('اكتب اسمًا.');
+  if(S.kind!=='weekly'&&!cleanCost(S.cost))return err('اكتب عدد النجوم المطلوب (رقم أكبر من صفر).');
+  const o={name,img:S.img||'',emoji:S.emoji||'🎁',cost:S.kind==='weekly'?0:cleanCost(S.cost)};
+  if(S.kind==='item'){
+    o.for=S.for||'';
+    if(S.id){const x=R.items.find(i=>i.id===S.id);if(x)Object.assign(x,o);}
+    else R.items.push(Object.assign({id:uid()},o));
+  }else if(S.kind==='weekly')R.weekly=Object.assign({id:'weekly',for:''},o);
+  else R.family=R.family?Object.assign(R.family,o):Object.assign({id:'family',for:'',base:familyEarned(),done:[]},o);
+  save();closeSheet();render();toast('تم الحفظ');
+}
+function rwDelete(){
+  const S=UI.sheet,R=DATA.rewards;
+  const label=S.kind==='weekly'?'الهدية الأسبوعية':S.kind==='family'?'الهدف العائلي':'«'+S.name+'»';
+  confirmSheet({title:'حذف '+label+'؟',msg:'لن يتأثر رصيد النجوم ولا ما صُرف من قبل.',yes:'حذف',onYes:()=>{
+    if(S.kind==='item'){R.items=R.items.filter(i=>i.id!==S.id);DATA.students.forEach(s=>{if(s.stars&&s.stars.target===S.id)s.stars.target=null;});}
+    else if(S.kind==='weekly')R.weekly=null;else R.family=null;
+    save();closeSheet();render();toast('تم الحذف');}});
+}
+function rwRedeem(id){
+  const stu=curStudent(),x=DATA.rewards.items.find(i=>i.id===id);if(!stu||!x)return;
+  pinGate(()=>{
+    const S=starsOf(stu);
+    if(S.balance<x.cost){closeSheet();toast('الرصيد لا يكفي لهذه المكافأة.');return;}
+    confirmSheet({title:'صرف «'+x.name+'»؟',msg:'سيُخصم '+starsTxt(x.cost)+' من رصيد '+stu.name+' ('+num(S.balance)+' ← '+num(S.balance-x.cost)+').',yes:'اصرفها',danger:false,onYes:()=>{
+      const SS=stuStars(stu);
+      SS.spent.push({id:uid(),rewardId:x.id,name:x.name,cost:x.cost,date:todayISO(),createdAt:Date.now()});
+      if(SS.target===x.id)SS.target=null;
+      save();closeSheet();render();toast('🎉 مبروك! استمتع بـ'+x.name);}});
+  });
+}
+function pinSubmit(){
+  const S=UI.sheet,a=($('#pin-a')||{}).value||'',msg=$('#pin-msg');
+  const err=t=>{msg.textContent=t;msg.hidden=false;};
+  if(S.mode==='set'){
+    const b=($('#pin-b')||{}).value||'';
+    if(!/^\d{4,6}$/.test(a))return err('الرمز يجب أن يكون من 4 إلى 6 أرقام.');
+    if(a!==b)return err('الرمزان غير متطابقين.');
+    DATA.rewards.pin=a;save();
+  }else if(a!==DATA.rewards.pin){$('#pin-a').value='';return err('الرمز غير صحيح.');}
+  UI.pinUntil=Date.now()+10*60*1000;
+  const next=S.next;closeSheet();
+  if(next)next();else{render();toast('تم حفظ الرمز');}
+}
+function excuseSave(){
+  const stu=curStudent(),SS=stuStars(stu),d=($('#ex-date')||{}).value,msg=$('#ex-msg');
+  const err=t=>{msg.textContent=t;msg.hidden=false;};
+  if(!validDate(d)||d>todayISO())return err('اختر تاريخًا صحيحًا لا يتجاوز اليوم.');
+  if(SS.excused.includes(d))return err('هذا اليوم مسجّل كيوم عذر بالفعل.');
+  const w=weekStart(d);
+  if(SS.excused.some(x=>weekStart(x)===w))return err('يوجد يوم عذر آخر في نفس الأسبوع. المسموح يوم واحد في الأسبوع.');
+  SS.excused.push(d);SS.excused.sort();save();closeSheet();render();toast('تم تسجيل يوم العذر');
+}
+const STARS_ACT={
+  'rw-add':()=>pinGate(()=>openRewardEdit('item',null)),
+  'rw-edit':el=>{const id=el.dataset.id;pinGate(()=>openRewardEdit('item',id));},
+  'weekly-edit':()=>pinGate(()=>openRewardEdit('weekly')),
+  'family-edit':()=>pinGate(()=>openRewardEdit('family')),
+  'rw-emoji':el=>{rwRead();UI.sheet.emoji=el.dataset.e;paintSheet();},
+  'rw-img-clear':()=>{rwRead();UI.sheet.img='';paintSheet();},
+  'rw-cost':el=>{const c=$('#rw-cost');if(c)c.value=el.dataset.n;},
+  'rw-save':rwSave,
+  'rw-delete':rwDelete,
+  'rw-target':el=>{const SS=stuStars(curStudent());SS.target=SS.target===el.dataset.id?null:el.dataset.id;save();render();},
+  'rw-redeem':el=>rwRedeem(el.dataset.id),
+  'gift-deliver':el=>{const w=el.dataset.w;pinGate(()=>{const SS=stuStars(curStudent());SS.gifts[w]=todayISO();save();if(UI.sheet)closeSheet();render();toast('تم تسليم الهدية 🎁');});},
+  'family-done':()=>pinGate(()=>{
+    const F=DATA.rewards.family;if(!F)return;
+    F.done.push({date:todayISO(),name:F.name});F.base+=F.cost;save();if(UI.sheet)closeSheet();render();toast('🎉 مبارك للعائلة! بدأ العدّ للهدف القادم.');}),
+  'excuse-open':()=>pinGate(()=>openSheet({type:'excuse',date:todayISO()})),
+  'excuse-save':excuseSave,
+  'excuse-del':el=>{const d=el.dataset.d;pinGate(()=>{const SS=stuStars(curStudent());SS.excused=SS.excused.filter(x=>x!==d);save();if(UI.sheet)closeSheet();render();toast('تم حذف يوم العذر');});},
+  'spent-undo':el=>{const id=el.dataset.id;pinGate(()=>{
+    const SS=stuStars(curStudent()),x=SS.spent.find(s=>s.id===id);if(!x)return;
+    if(x.joint){
+      confirmSheet({title:'إلغاء الشراء المشترك «'+x.name+'»؟',msg:'ترجع النجوم إلى كل من اشترك فيه ('+x.with+' أيضًا).',yes:'إلغاء الشراء',onYes:()=>{DATA.students.forEach(s=>{if(s.stars)s.stars.spent=s.stars.spent.filter(e=>e.joint!==x.joint);});save();closeSheet();render();toast('رجعت النجوم إلى أصحابها');}});
+      return;
+    }
+    confirmSheet({title:'إلغاء صرف «'+x.name+'»؟',msg:'سيرجع '+starsTxt(x.cost)+' إلى الرصيد.',yes:'إلغاء الصرف',onYes:()=>{SS.spent=SS.spent.filter(s=>s.id!==id);save();closeSheet();render();toast('رجعت النجوم إلى الرصيد');}});});},
+  'pin-save':pinSubmit,
+  'pin-ok':pinSubmit,
+  'pin-change':()=>pinGate(()=>openSheet({type:'pin',mode:'set',change:true,next:null})),
+  'stars-hist-more':()=>{UI.starsHistAll=!UI.starsHistAll;render();},
+  'stars-rules':()=>openSheet({type:'stars-rules'})
+};
+/* ═══════════════ النجوم: الشراء المشترك والاستلاف بين الطلاب ═══════════════ */
+const otherStudents=stu=>DATA.students.filter(s=>s.id!==stu.id);
+const balOf=s=>starsOf(s).balance;
+/* هل يكفي مجموع أرصدة الطلاب لهذه المكافأة؟ */
+const jointPossible=(x,stu)=>DATA.students.length>1&&DATA.students.reduce((t,s)=>t+Math.max(0,balOf(s)),0)>=x.cost;
+function siblingsHTML(stu,S){
+  if(DATA.students.length<2)return '';
+  const rows=S.giftsIn.map(l=>[l,true]).concat(S.giftsOut.map(l=>[l,false])).sort((x,y)=>y[0].createdAt-x[0].createdAt);
+  const shown=UI.loansAll?rows:rows.slice(0,5);
+  let h=`<section class="sec"><div class="sec-h"><h2>النجوم مع الإخوة</h2></div>
+    <p class="muted" style="margin-top:6px;font-size:14px">يستطيع الطالب أن يُهدي من نجومه لأخيه (هدية لا تُردّ)، أو تجمعوا نجومكم معًا لشراء مكافأة واحدة من المتجر (زر «🤝 اجمعوا لها معًا» على المكافأة).</p>`;
+  if(shown.length)h+=`<ul class="rows">${shown.map(([l,inc])=>`<li class="row"><div style="flex:1;min-width:0">
+      <div class="t">${inc?'🎁 أهداك '+esc(stuName(l.from)):'💛 أهديت '+esc(stuName(l.to))} <b>${num(l.amount)}</b> ${STAR5}</div>
+      <div class="s">${fmtDate(l.date)}</div></div>
+      <b class="${inc?'stx-plus':'stx-minus'}">${inc?'+':'−'}${num(l.amount)}</b>
+      <button type="button" class="icon-x" data-act="loan-del" data-id="${esc(l.id)}" aria-label="إلغاء هذا الإهداء">${TRASH}</button></li>`).join('')}</ul>`;
+  if(rows.length>5)h+=`<button type="button" class="link" data-act="loans-all">${UI.loansAll?'عرض أقل':'عرض الكل ('+rows.length+')'}</button>`;
+  h+=`<div class="stack"><button type="button" class="btn btn-ghost btn-block" data-act="loan-open">إهداء نجوم لطالب آخر</button></div></section>`;
+  return h;
+}
+
+/* ── الشراء المشترك ── */
+function openJoint(id){
+  const stu=curStudent(),x=DATA.rewards.items.find(i=>i.id===id);if(!stu||!x)return;
+  /* التقسيم المقترح: الطالب الحالي يدفع ما يستطيع، والباقي على الآخرين بدءًا بالأعلى رصيدًا */
+  const order=[stu].concat(otherStudents(stu).sort((a,b)=>balOf(b)-balOf(a)));
+  let left=x.cost;const parts={};
+  order.forEach(s=>{const v=Math.max(0,Math.min(balOf(s),left));parts[s.id]=v;left-=v;});
+  openSheet({type:'joint',id,parts});
+}
+function jointRead(){const S=UI.sheet;document.querySelectorAll('.jt-in').forEach(el=>{S.parts[el.dataset.id]=parseNum(el.value)||0;});}
+function jointCheck(){
+  const S=UI.sheet,x=DATA.rewards.items.find(i=>i.id===S.id);if(!x)return {err:'المكافأة غير موجودة.'};
+  let sum=0,who=0;
+  for(const s of DATA.students){
+    const v=S.parts[s.id]||0,b=Math.max(0,balOf(s));
+    if(v<0)return {err:'لا يمكن إدخال رقم سالب.'};
+    if(v>b)return {err:s.name+' رصيده '+num(b)+' فقط.'};
+    sum+=v;if(v>0)who++;
+  }
+  if(sum<x.cost)return {err:'المجموع '+num(sum)+' من '+num(x.cost)+'. باقي '+starsTxt(x.cost-sum)+'.',sum};
+  if(sum>x.cost)return {err:'المجموع '+num(sum)+'، أكثر من سعر المكافأة بـ '+num(sum-x.cost)+'.',sum};
+  if(who<2)return {err:'هذا الشراء من طالب واحد فقط. استخدم زر «اصرفها» العادي.',sum};
+  return {ok:true,sum,x};
+}
+function jointHTML(S){
+  const x=DATA.rewards.items.find(i=>i.id===S.id);if(!x)return '';
+  const stu=curStudent();
+  return `<div class="jt-head"><div class="tgt-pic">${rwPic(x)}</div><div><div class="rw-n">${esc(x.name)}</div><div class="rw-c">${STAR5}${num(x.cost)}</div></div></div>
+    <p class="muted" style="margin-top:12px">كم يدفع كل واحد؟ يمكنك تعديل الأرقام.</p>
+    <ul class="rows">${[stu].concat(otherStudents(stu)).map(s=>{const b=Math.max(0,balOf(s));return `<li class="row jt-row">
+      <div style="flex:1;min-width:0"><div class="t">${esc(s.name)}</div><div class="s">رصيده ${num(b)}</div></div>
+      <input class="jt-in" data-id="${esc(s.id)}" type="text" inputmode="numeric" autocomplete="off" value="${S.parts[s.id]||0}" aria-label="نصيب ${esc(s.name)}"></li>`;}).join('')}</ul>
+    <div id="jt-preview" class="preview" aria-live="polite"></div>
+    <button type="button" class="btn btn-primary btn-block" id="jt-save" data-act="joint-save">اشتروها معًا 🤝</button>
+    <button type="button" class="link" style="display:block;margin:10px auto 0" data-act="joint-to-loan">أو يُهديك أخوك الباقي وتشتريها وحدك</button>`;
+}
+function updateJoint(){
+  jointRead();const c=jointCheck(),box=$('#jt-preview'),btn=$('#jt-save');if(!box)return;
+  if(!c.ok){box.textContent=c.err;box.classList.add('err');btn.disabled=true;return;}
+  box.classList.remove('err');btn.disabled=false;
+  box.innerHTML='المجموع '+num(c.sum)+' ✓ '+DATA.students.filter(s=>UI.sheet.parts[s.id]>0).map(s=>esc(s.name)+' يدفع '+num(UI.sheet.parts[s.id])).join('، ');
+}
+function jointSave(){
+  updateJoint();if($('#jt-save').disabled)return;
+  const S=UI.sheet,c=jointCheck(),x=c.x,g=uid(),date=todayISO();
+  const payers=DATA.students.filter(s=>S.parts[s.id]>0);
+  payers.forEach((s,k)=>{
+    const SS=stuStars(s);
+    SS.spent.push({id:uid(),rewardId:x.id,name:x.name,cost:S.parts[s.id],date,createdAt:Date.now()+k,joint:g,total:x.cost,with:payers.filter(o=>o!==s).map(o=>o.name).join('، ')});
+    if(SS.target===x.id)SS.target=null;
+  });
+  save();closeSheet();render();toast('🎉 مبروك! اشتريتم '+x.name+' معًا');
+}
+
+/* ── إهداء النجوم ── */
+function openLoan(amount,fromId,toId){
+  const stu=curStudent(),givers=DATA.students.filter(s=>balOf(s)>0);
+  if(!givers.length){toast('لا يوجد طالب لديه نجوم يُهديها الآن.');return;}
+  let from=givers.some(s=>s.id===fromId)?fromId:(balOf(stu)>0?stu.id:givers[0].id);
+  let to=toId&&toId!==from?toId:(DATA.students.find(s=>s.id!==from)||{}).id;
+  openSheet({type:'loan',from,to,amount:amount||Math.min(10,balOf(DATA.students.find(s=>s.id===from)))});
+}
+function loanHTML(S){
+  const givers=DATA.students.filter(s=>balOf(s)>0);
+  return `<p class="muted">ينتقل عدد من النجوم من رصيد طالب إلى رصيد طالب آخر كهدية، ولا تُردّ.</p>
+    <div class="field"><label for="ln-from">من</label><select id="ln-from">${givers.map(s=>`<option value="${esc(s.id)}"${s.id===S.from?' selected':''}>${esc(s.name)} (رصيده ${num(balOf(s))})</option>`).join('')}</select></div>
+    <div class="field"><label for="ln-to">إلى</label><select id="ln-to">${DATA.students.filter(s=>s.id!==S.from).map(s=>`<option value="${esc(s.id)}"${s.id===S.to?' selected':''}>${esc(s.name)}</option>`).join('')}</select></div>
+    <div class="field"><label for="ln-amt">كم نجمة؟</label><input id="ln-amt" type="text" inputmode="numeric" autocomplete="off" value="${S.amount||''}"></div>
+    <div id="ln-preview" class="preview" aria-live="polite"></div>
+    <button type="button" class="btn btn-primary btn-block" id="ln-save" data-act="loan-save">أهدِ النجوم 🎁</button>`;
+}
+function loanCheck(){
+  const S=UI.sheet,from=DATA.students.find(s=>s.id===S.from),to=DATA.students.find(s=>s.id===S.to);
+  if(!from||!to||from===to)return {err:'اختر من يُهدي ومن يستلم.'};
+  if(!(S.amount>0))return {err:'اكتب عدد النجوم.'};
+  const b=balOf(from);
+  if(S.amount>b)return {err:from.name+' رصيده '+num(b)+' فقط.'};
+  return {ok:true,from,to,b,tb:balOf(to)};
+}
+function updateLoan(){
+  const S=UI.sheet,f=$('#ln-from'),t=$('#ln-to'),a=$('#ln-amt');
+  if(a)S.amount=parseNum(a.value)||0;
+  if(f&&f.value!==S.from){S.from=f.value;if(S.to===S.from)S.to=(DATA.students.find(s=>s.id!==S.from)||{}).id;paintSheet();return;}
+  if(t)S.to=t.value;
+  const c=loanCheck(),box=$('#ln-preview'),btn=$('#ln-save');if(!box)return;
+  if(!c.ok){box.textContent=c.err;box.classList.add('err');btn.disabled=true;return;}
+  box.classList.remove('err');btn.disabled=false;
+  box.innerHTML=`${esc(c.from.name)}: ${num(c.b)} ← <b>${num(c.b-S.amount)}</b><br>${esc(c.to.name)}: ${num(c.tb)} ← <b>${num(c.tb+S.amount)}</b>`;
+}
+function loanSave(){
+  updateLoan();if($('#ln-save').disabled)return;
+  const S=UI.sheet,c=loanCheck();
+  DATA.rewards.loans.push({id:uid(),from:c.from.id,to:c.to.id,amount:S.amount,date:todayISO(),createdAt:Date.now(),repaid:[],forgiven:null});
+  save();closeSheet();render();toast('🎁 أهدى '+c.from.name+' '+starsTxt(S.amount)+' إلى '+c.to.name+'، ما أجمل الكرم!');
+}
+
+const SHARE_ACT={
+  'rw-joint':el=>{const id=el.dataset.id;pinGate(()=>openJoint(id));},
+  'joint-save':jointSave,
+  'joint-to-loan':()=>{
+    const S=UI.sheet,stu=curStudent(),x=DATA.rewards.items.find(i=>i.id===S.id);if(!x)return;
+    const need=x.cost-Math.max(0,balOf(stu));
+    const rich=otherStudents(stu).filter(s=>balOf(s)>=need).sort((a,b)=>balOf(b)-balOf(a))[0];
+    if(!rich){toast('لا يوجد طالب واحد رصيده يكفي لإهداء الباقي ('+num(need)+'). جرّبوا الشراء المشترك.');return;}
+    closeSheet();openLoan(need,rich.id,stu.id);
+  },
+  'loan-open':()=>pinGate(()=>openLoan()),
+  'loan-save':loanSave,
+  'loan-del':el=>{const id=el.dataset.id;pinGate(()=>{
+    const l=DATA.rewards.loans.find(x=>x.id===id);if(!l)return;
+    const to=DATA.students.find(s=>s.id===l.to);
+    if(to&&balOf(to)-l.amount<0){if(UI.sheet)closeSheet();toast('لا يمكن إلغاؤه: '+stuName(l.to)+' صرف هذه النجوم.');return;}
+    confirmSheet({title:'إلغاء هذا الإهداء؟',msg:'ترجع '+starsTxt(l.amount)+' إلى '+stuName(l.from)+' وتُخصم من '+stuName(l.to)+'. استخدمه لتصحيح خطأ فقط.',yes:'إلغاء الإهداء',onYes:()=>{DATA.rewards.loans=DATA.rewards.loans.filter(x=>x.id!==id);save();closeSheet();render();toast('تم إلغاء الإهداء');}});});},
+  'loans-all':()=>{UI.loansAll=!UI.loansAll;render();}
+};
 /* ═══════════════ الحالة العامة ═══════════════ */
-const UI={tab:'home',sheet:null,d:null,opener:null,welcome:'choice'};
+const UI={tab:'home',sheet:null,d:null,opener:null,welcome:'choice',
+  trendUnit:'week',trendMode:'count',trendCount:8,trendFrom:null,trendTo:null,trendMetric:'both',
+  tblUnit:'week',tblOffset:0,tblCustomMode:'dates',tblFrom:null,tblTo:null,tblCount:4,tblCountUnit:'week'};
 let toastT=null;
 function toast(msg){
   const t=$('#toast');t.textContent=msg;t.classList.add('on');
@@ -930,9 +1940,10 @@ function goalPagesHTML(d,gj){
 }
 const ICONS={
   home:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>',
-  juz:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>',
+  compare:'<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>',
   review:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 1 2.6 6.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M3 21v-5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   hist:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  stars:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.7 5.5 6 .9-4.35 4.25 1 6L12 17l-5.35 2.85 1-6L3.3 9.6l6-.9z"/></svg>',
   more:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/></svg>'
 };
 
@@ -953,16 +1964,19 @@ function ringSVG(d){
   return `<svg viewBox="0 0 300 300" role="img" aria-label="حلقة من 30 قطعة، لكل جزء قطعة">${out}</svg>`;
 }
 
-function headerHTML(st){
+function headerHTML(stu,pl){
   return `<header class="top">
-    <button class="who" data-act="open-students" aria-label="تبديل الطالب">
-      <span class="lbl">الطالب</span>
-      <span class="nm"><span>${esc(st.name)}</span>${CHEV}</span>
-    </button>${STAR('star')}
+    <div class="who-dd">
+      <span class="lbl">الطالب والجهة</span>
+      <div class="dd-row">
+        <select id="hdr-student" aria-label="اختيار الطالب">${DATA.students.map(s=>`<option value="${esc(s.id)}"${s.id===stu.id?' selected':''}>${esc(s.name)}</option>`).join('')}<option value="__new__">+ طالب جديد</option></select>
+        <select id="hdr-place" aria-label="اختيار جهة الحفظ">${stu.places.map(p=>`<option value="${esc(p.id)}"${p.id===pl.id?' selected':''}>${esc(p.name)}</option>`).join('')}<option value="__newplace__">+ جهة جديدة</option></select>
+      </div>
+    </div>${STAR('star')}
   </header>${storageOK?'':'<p class="warn">الحفظ التلقائي غير متاح في هذا المتصفح، وستضيع البيانات عند إغلاق الصفحة. خذ نسخة احتياطية من تبويب «المزيد».</p>'}`;
 }
 function navHTML(){
-  const t=[['home','الرئيسية'],['juz','الأجزاء'],['review','المراجعة'],['hist','السجل'],['more','المزيد']];
+  const t=[['home','الرئيسية'],['stars','النجوم'],['compare','المقارنة'],['review','المراجعة'],['hist','السجل'],['more','المزيد']];
   return `<div class="nav-in">${t.map(([k,l])=>`<button data-act="tab" data-tab="${k}"${UI.tab===k?' aria-current="page"':''}>${ICONS[k]}<span>${l}</span></button>`).join('')}</div>`;
 }
 
@@ -1307,7 +2321,7 @@ function viewHome(st,d){
   const empty=!st.records.length;
   const gj=st.goal.juz,gPages=JUZ_PAGES[gj],gHave=Math.min(gPages,d.juzPages(gj)),gLeft=Math.max(0,gPages-gHave),gp=gHave/gPages*100;
   const gAyat=Math.min(d.jc[gj],JSIZE[gj]),gAyatTotal=JSIZE[gj],goalComplete=gLeft<=0;
-  let h='';
+  let h=starsStripHTML(curStudent());
 
   h+=planSectionHTML(st,d);
 
@@ -1544,12 +2558,19 @@ function viewHist(st,d){
 }
 
 /* ═══════════════ المزيد ═══════════════ */
-function viewMore(st){
+function viewMore(stu,st){
   return `<h1 class="page-h">المزيد</h1>
-  <section class="sec first"><div class="sec-h"><h2>${esc(st.name)}</h2></div>
+  <section class="sec first"><div class="sec-h"><h2>${esc(stu.name)}</h2></div>
     <div class="stack">
-      <button class="btn btn-ghost btn-block" data-act="student-rename">تعديل الاسم</button>
-      <button class="btn btn-danger btn-block" data-act="student-delete">حذف هذا الطالب</button>
+      <button class="btn btn-ghost btn-block" data-act="student-rename">تعديل اسم الطالب</button>
+      <button class="btn btn-danger btn-block" data-act="student-delete">حذف هذا الطالب (بكل جهاته)</button>
+    </div></section>
+  <section class="sec"><div class="sec-h"><h2>جهة الحفظ الحالية: ${esc(st.name)}</h2></div>
+    <p class="muted" style="margin-top:6px">${stu.places.length} ${stu.places.length===1?'جهة حفظ مسجَّلة':'جهات حفظ مسجَّلة'} لهذا الطالب.</p>
+    <div class="stack">
+      <button class="btn btn-ghost btn-block" data-act="place-rename">تعديل اسم هذه الجهة</button>
+      <button class="btn btn-ghost btn-block" data-act="place-new">+ إضافة جهة حفظ جديدة لهذا الطالب</button>
+      ${stu.places.length>1?'<button class="btn btn-danger btn-block" data-act="place-delete">حذف هذه الجهة فقط</button>':''}
     </div></section>
   <section class="sec"><div class="sec-h"><h2>المظهر</h2></div>
     <div class="seg" role="group" aria-label="مظهر التطبيق" style="margin-top:10px">
@@ -1603,11 +2624,11 @@ function welcomeHTML(){
 }
 
 function render(){
-  const app=$('#app'),nav=$('#nav'),st=cur();
+  const app=$('#app'),nav=$('#nav'),stu=curStudent(),st=cur();
   if(!st){app.innerHTML=welcomeHTML();nav.hidden=true;pkSyncAll();updateOb();return;}
   const d=derive(st);UI.d=d;
-  const body=UI.tab==='home'?viewHome(st,d):UI.tab==='juz'?viewJuz(st,d):UI.tab==='review'?viewReview(st,d):UI.tab==='hist'?viewHist(st,d):viewMore(st);
-  app.innerHTML=(UI.tab==='home'?headerHTML(st):'')+body;
+  const body=UI.tab==='home'?viewHome(st,d):UI.tab==='stars'?viewStars(stu):UI.tab==='compare'?viewCompare(stu,st,d):UI.tab==='review'?viewReview(st,d):UI.tab==='hist'?viewHist(st,d):viewMore(stu,st);
+  app.innerHTML=((UI.tab==='home'||UI.tab==='hist'||UI.tab==='review'||UI.tab==='stars')?headerHTML(stu,st):'')+body;
   nav.innerHTML=navHTML();nav.hidden=false;
 }
 
@@ -1662,9 +2683,10 @@ function calcNewRanges(ranges,mem){
 /* ═══════════════ الترحيب / إضافة طالب ═══════════════ */
 function onboardHTML(name){
   return `<div class="field"><label for="ob-name">اسم الطالب</label><input id="ob-name" type="text" maxlength="40" autocomplete="off" value="${esc(name||'')}"></div>
-  <div class="field"><label for="ob-goal">الجزء الذي تريد حفظه الآن</label><select id="ob-goal">${Array.from({length:30},(_,j)=>`<option value="${j}"${j===29?' selected':''}>${esc(juzTitle(j))}</option>`).join('')}</select><p id="ob-note" class="note" hidden></p></div>
+  <div class="field"><label for="ob-place">اسم جهة الحفظ <span class="muted" style="font:400 13px var(--font-ui)">(مثل: مدرسة، مركز تحفيظ، اسم الشيخ)</span></label><input id="ob-place" type="text" maxlength="40" autocomplete="off" placeholder="مثال: مركز العصر"></div>
+  <div class="field"><label for="ob-goal">الجزء الذي تريد حفظه الآن في هذه الجهة</label><select id="ob-goal">${Array.from({length:30},(_,j)=>`<option value="${j}"${j===29?' selected':''}>${esc(juzTitle(j))}</option>`).join('')}</select><p id="ob-note" class="note" hidden></p></div>
   <p class="muted" style="font-size:13px;margin-top:-8px">الترتيب المعتاد للحفظ يبدأ من الجزء 30 (عمّ) ثم 29 وهكذا نزولًا. يمكنك اختيار أي جزء تريده.</p>
-  <h2 class="ob-h">ما حفظه من قبل <span class="muted" style="font:400 15px var(--font-ui)">(اختياري)</span></h2>
+  <h2 class="ob-h">ما حفظه من قبل في هذه الجهة <span class="muted" style="font:400 15px var(--font-ui)">(اختياري)</span></h2>
   <p class="muted">ضع علامة صح على الجزء ليُحسب كاملًا، أو افتحه واختر سوره.</p>
   ${pickerHTML(null)}
   <div class="ob-bar"><div id="ob-sum" class="preview tight"></div><button class="btn btn-primary btn-block" id="ob-go" data-act="ob-go">ابدأ</button></div>`;
@@ -1678,9 +2700,7 @@ function updateOb(){
   note.hidden=!conflict;note.textContent=conflict?juzTitle(g)+' محدد كمحفوظ بالكامل، سيُختار تلقائيًا أول جزء غير مكتمل بعده كهدف.':'';
   $('#ob-sum').textContent=tot?'المحدد كحفظ سابق: '+num(tot)+' آية ('+pctText(tot/TOTAL*100)+'%)':'لم تحدد حفظًا سابقًا بعد.';
 }
-function obGo(){
-  const name=$('#ob-name').value.trim();
-  if(!name){toast('اكتب اسم الطالب');$('#ob-name').focus();return;}
+function buildPlaceFromPicker(placeName){
   const ranges=pkRanges(),now=Date.now();
   const memMock=new Uint8Array(TOTAL);
   ranges.forEach(([a,b])=>{for(let i=a;i<=b;i++)memMock[i]=1;});
@@ -1688,11 +2708,36 @@ function obGo(){
   const jcMock=new Array(30).fill(0);
   for(let i=0;i<TOTAL;i++)if(memMock[i])jcMock[JUZ_OF[i]]++;
   if(jcMock[goalJ]>=JSIZE[goalJ]) goalJ=nextGoalAfter(jcMock,goalJ);
-  const s={id:uid(),name:name.slice(0,40),goal:{juz:goalJ,target:null},finalTarget:null,
+  return {id:uid(),name:placeName.slice(0,40),goal:{juz:goalJ,target:null},finalTarget:null,
     records:ranges.map(([a,b],i)=>({id:uid(),type:'prior',start:a,end:b,date:null,createdAt:now+i})),reviews:[],plan:[]};
+}
+function obGo(){
+  const name=$('#ob-name').value.trim();
+  if(!name){toast('اكتب اسم الطالب');$('#ob-name').focus();return;}
+  const placeName=$('#ob-place').value.trim();
+  if(!placeName){toast('اكتب اسم جهة الحفظ');$('#ob-place').focus();return;}
+  const place=buildPlaceFromPicker(placeName);
+  const s={id:uid(),name:name.slice(0,40),places:[place],selectedPlace:place.id};
   DATA.students.push(s);DATA.selected=s.id;UI.tab='home';save();
   if(UI.sheet)closeSheet();
   render();window.scrollTo(0,0);
+}
+function placeAddHTML(){
+  return `<p class="muted">إضافة جهة حفظ جديدة لـ<b style="color:var(--ink)">${esc(curStudent().name)}</b>. لكل جهة هدفها وسجلّها الخاص، منفصل تمامًا عن باقي الجهات.</p>
+  <div class="field"><label for="ob-place">اسم جهة الحفظ</label><input id="ob-place" type="text" maxlength="40" autocomplete="off" placeholder="مثال: مركز العصر"></div>
+  <div class="field"><label for="ob-goal">الجزء الذي تريد حفظه الآن في هذه الجهة</label><select id="ob-goal">${Array.from({length:30},(_,j)=>`<option value="${j}"${j===29?' selected':''}>${esc(juzTitle(j))}</option>`).join('')}</select><p id="ob-note" class="note" hidden></p></div>
+  <h2 class="ob-h">ما حفظه في هذه الجهة من قبل <span class="muted" style="font:400 15px var(--font-ui)">(اختياري)</span></h2>
+  <p class="muted">ضع علامة صح على الجزء ليُحسب كاملًا، أو افتحه واختر سوره.</p>
+  ${pickerHTML(null)}
+  <div class="ob-bar"><div id="ob-sum" class="preview tight"></div><button class="btn btn-primary btn-block" id="place-go" data-act="place-go">إضافة الجهة</button></div>`;
+}
+function placeGo(){
+  const placeName=$('#ob-place').value.trim();
+  if(!placeName){toast('اكتب اسم جهة الحفظ');$('#ob-place').focus();return;}
+  const stu=curStudent();if(!stu)return;
+  const place=buildPlaceFromPicker(placeName);
+  stu.places.push(place);stu.selectedPlace=place.id;
+  save();UI.tab='home';closeSheet();render();window.scrollTo(0,0);toast('أُضيفت الجهة');
 }
 
 /* ═══════════════ تسجيل حفظ جديد ═══════════════ */
@@ -1731,12 +2776,20 @@ function paintSheet(){
     case 'page-view':html=sheetWrap('صفحة من المصحف',mushafPickerHTML(S));break;
     case 'students':html=sheetWrap('الطلاب',studentsHTML());break;
     case 'newstudent':html=sheetWrap('طالب جديد',onboardHTML(''));break;
-    case 'student':html=sheetWrap('تعديل الاسم',studentFormHTML(S));break;
+    case 'newplace':html=sheetWrap('جهة حفظ جديدة',placeAddHTML());break;
+    case 'trend-settings':html=sheetWrap('تغيير المدة المعروضة',trendSettingsHTML());break;
+    case 'student':html=sheetWrap(S.kind==='place'?'تعديل اسم الجهة':'تعديل اسم الطالب',studentFormHTML(S));break;
     case 'confirm':html=sheetWrap(S.title,`<p class="confirm-p">${esc(S.msg)}</p><div class="stack"><button class="btn ${S.danger?'btn-danger-fill':'btn-primary'} btn-block" data-act="confirm-yes">${esc(S.yes)}</button><button class="btn btn-ghost btn-block" data-act="confirm-no">إلغاء</button></div>`);break;
     case 'backup':html=sheetWrap('نسخة احتياطية',backupHTML());break;
     case 'sync-conflict':html=sheetWrap('الاتصال برمز موجود',syncConflictHTML(S));break;
     case 'sync-change':html=sheetWrap('تغيير رمز المزامنة',syncChangeHTML());break;
     case 'cele':html=sheetWrap('مبارك',celeHTML(S));break;
+    case 'pin':html=sheetWrap(S.mode==='set'?'الرمز السري لوليّ الأمر':'أدخل الرمز السري',pinHTML(S));break;
+    case 'reward-edit':html=sheetWrap(S.kind==='weekly'?'الهدية الأسبوعية':S.kind==='family'?'الهدف العائلي':S.id?'تعديل المكافأة':'مكافأة جديدة',rewardEditHTML(S));break;
+    case 'excuse':html=sheetWrap('يوم عذر',excuseHTML(S));break;
+    case 'stars-rules':html=sheetWrap('كيف تُحسب النجوم؟',starsRulesHTML());break;
+    case 'joint':html=sheetWrap('شراء مشترك 🤝',jointHTML(S));break;
+    case 'loan':html=sheetWrap('إهداء نجوم 🎁',loanHTML(S));break;
   }
   $('#sheet-root').innerHTML=html;
   if(S.type==='log')updateLog();
@@ -1744,10 +2797,14 @@ function paintSheet(){
   if(S.type==='prior'){if(S.mode==='pick')pkSyncAll();updatePrior();}
   if(S.type==='target')updateTarget();
   if(S.type==='newstudent'){pkSyncAll();updateOb();}
+  if(S.type==='newplace'){pkSyncAll();updateOb();}
   if(S.type==='review-log')updateReviewLog();
   if(S.type==='plan-add-hifz')updatePlanHifz();
   if(S.type==='plan-add-review')updatePlanReview();
   if(S.type==='mushaf-picker'||S.type==='page-view')mpFitLines();
+  if(S.type==='pin'){const p=$('#pin-a');if(p)setTimeout(()=>p.focus(),60);}
+  if(S.type==='joint')updateJoint();
+  if(S.type==='loan')updateLoan();
 }
 function mpFitLines(){
   const lines=[...document.querySelectorAll('.mp-line')];
@@ -1822,7 +2879,7 @@ function updateLog(){
 function setLog(from,to){$('#f-from').value=from;$('#f-to').value=to;updateLog();}
 function logSave(){
   updateLog();if($('#log-save').disabled)return;
-  const S=UI.sheet,st=cur(),before=UI.d.jdone.map(Boolean);
+  const S=UI.sheet,st=cur(),before=UI.d.jdone.map(Boolean),s0=starsOf(curStudent());
   st.records.push({id:uid(),type:'session',start:gi(S.s,S.from),end:gi(S.s,S.to),date:S.date,createdAt:Date.now()});
   if(S.planRef)markPlanDone(S.planRef.itemId);
   save();
@@ -1831,7 +2888,8 @@ function logSave(){
   const n=S.to-S.from+1;
   closeSheet();render();
   if(newly.length||d2.total===TOTAL) openSheet({type:'cele',newly,goalDone:newly.includes(st.goal.juz),quran:d2.total===TOTAL,date:S.date});
-  else toast('تم تسجيل '+ayahsTxt(n,true));
+  else{const s1=starsOf(curStudent()),gain=s1.earned-s0.earned;
+    toast('تم تسجيل '+ayahsTxt(n,true)+(gain>0?' · +'+starsTxt(gain)+' ⭐':'')+(s1.today.met&&!s0.today.met?' · حققت هدف اليوم 🎉':''));}
 }
 
 /* تعديل سجل موجود (حفظ جديد أو سابق) */
@@ -2128,14 +3186,15 @@ function updateReviewLog(){
 }
 function reviewLogSave(){
   updateReviewLog();if($('#rl-save').disabled)return;
-  const S=UI.sheet,r=reviewLogRange(),st=cur();
+  const S=UI.sheet,r=reviewLogRange(),st=cur(),e0=starsOf(curStudent()).earned;
   st.reviews.push({id:uid(),start:r.a,end:r.b,date:S.date,createdAt:Date.now()});
   if(S.planRef)markPlanDone(S.planRef.itemId);
   save();closeSheet();render();
   if(S.planRef){/* رجوع للصفحة فقط، بلا إعادة فتح تفاصيل الجزء */}
   else if(S.near)openSheet({type:'review-log',j:S.j,near:true,s:S.s,from:S.from,to:S.to,date:S.date});
   else openSheet({type:'review-juz',j:S.j});
-  toast('تم تسجيل المراجعة');
+  const gain=starsOf(curStudent()).earned-e0;
+  toast('تم تسجيل المراجعة'+(gain>0?' · +'+starsTxt(gain)+' ⭐':''));
 }
 function openConfirmDeleteReview(id,back){
   const st=cur(),r=st.reviews.find(x=>x.id===id);if(!r)return;
@@ -2158,13 +3217,21 @@ function reviewJuz30Log(){
 
 /* ═══════════════ الطلاب ═══════════════ */
 function studentsHTML(){
-  return `<ul class="rows">${DATA.students.map(s=>{
-    const d=derive(s);
-    return `<li class="row"><button class="go" data-act="student-select" data-id="${esc(s.id)}"><div class="t"><span class="f" style="font-family:var(--font-display);font-size:1.25em;font-weight:700">${esc(s.name)}</span>${s.id===DATA.selected?' <span class="tag mid">الحالي</span>':''}</div><div class="s">${pctText(d.pct)}% من القرآن، ${d.juzDone} أجزاء مكتملة</div></button></li>`;}).join('')}</ul>
-    <div class="stack"><button class="btn btn-primary btn-block" data-act="student-new">إضافة طالب</button></div>`;
+  return `<div class="stu-groups">${DATA.students.map(s=>{
+    return `<div class="stu-group">
+      <div class="stu-group-h">${esc(s.name)}</div>
+      <ul class="rows">${s.places.map(p=>{
+        const d=derive(p);
+        const isCur=s.id===DATA.selected&&p.id===s.selectedPlace;
+        return `<li class="row"><button class="go" data-act="student-select" data-id="${esc(s.id)}" data-place="${esc(p.id)}"><div class="t"><span class="f" style="font-family:var(--font-display);font-size:1.15em;font-weight:700">${esc(p.name)}</span>${isCur?' <span class="tag mid">الحالي</span>':''}</div><div class="s">${pctText(d.pct)}% من القرآن، ${d.juzDone} أجزاء مكتملة</div></button></li>`;
+      }).join('')}
+      <li class="row"><button type="button" class="link" style="padding:10px 4px" data-act="place-new-for" data-id="${esc(s.id)}">+ جهة حفظ جديدة لـ${esc(s.name)}</button></li></ul>
+    </div>`;
+  }).join('')}</div>
+    <div class="stack"><button class="btn btn-primary btn-block" data-act="student-new">إضافة طالب جديد</button></div>`;
 }
 function studentFormHTML(S){
-  return `<div class="field"><label for="s-name">اسم الطالب</label><input id="s-name" type="text" maxlength="40" autocomplete="off" value="${esc(S.name||'')}"></div>
+  return `<div class="field"><label for="s-name">${S.kind==='place'?'اسم الجهة':'اسم الطالب'}</label><input id="s-name" type="text" maxlength="40" autocomplete="off" value="${esc(S.name||'')}"></div>
   <button class="btn btn-primary btn-block" data-act="student-save">حفظ الاسم</button>`;
 }
 
@@ -2356,38 +3423,98 @@ const ACT={
   'target-save':targetSave,
   'target-clear':targetClear,
   'set-goal':el=>{const st=cur();st.goal={juz:+el.dataset.j,target:null};save();closeSheet();render();toast('تم تعيين الهدف القصير');},
-  'student-select':el=>{DATA.selected=el.dataset.id;save();UI.tab='home';closeSheet();render();window.scrollTo(0,0);},
+  'student-select':el=>{DATA.selected=el.dataset.id;const s=DATA.students.find(x=>x.id===el.dataset.id);if(s&&el.dataset.place&&s.places.some(p=>p.id===el.dataset.place))s.selectedPlace=el.dataset.place;save();UI.tab='home';closeSheet();render();window.scrollTo(0,0);},
+  'place-select':el=>{const s=curStudent();if(s){s.selectedPlace=el.dataset.place;save();}UI.tab='home';closeSheet();render();window.scrollTo(0,0);},
   'student-new':()=>{closeSheet();openSheet({type:'newstudent'});},
-  'student-rename':()=>openSheet({type:'student',name:cur().name}),
+  'student-rename':()=>openSheet({type:'student',kind:'student',name:curStudent().name}),
+  'place-rename':()=>openSheet({type:'student',kind:'place',name:cur().name}),
   'student-save':()=>{
     const name=$('#s-name').value.trim();
-    if(!name){toast('اكتب اسم الطالب');return;}
-    cur().name=name.slice(0,40);save();closeSheet();render();
+    if(!name){toast(UI.sheet.kind==='place'?'اكتب اسم الجهة':'اكتب اسم الطالب');return;}
+    if(UI.sheet.kind==='place')cur().name=name.slice(0,40);else curStudent().name=name.slice(0,40);
+    save();closeSheet();render();
   },
+  'place-new':()=>{closeSheet();openSheet({type:'newplace'});},
+  'place-new-for':el=>{DATA.selected=el.dataset.id;save();closeSheet();openSheet({type:'newplace'});},
   'student-delete':()=>{
-    const st=cur();
-    confirmSheet({title:'حذف الطالب؟',msg:'سيُحذف «'+st.name+'» مع كل سجلات حفظه نهائيًا.',yes:'حذف الطالب',onYes:()=>{
-      DATA.students=DATA.students.filter(s=>s.id!==st.id);DATA.selected=DATA.students[0]?DATA.students[0].id:null;
+    const stu=curStudent();
+    confirmSheet({title:'حذف الطالب؟',msg:'سيُحذف «'+stu.name+'» مع كل جهاته وسجلات حفظه نهائيًا.',yes:'حذف الطالب',onYes:()=>{
+      DATA.students=DATA.students.filter(s=>s.id!==stu.id);DATA.selected=DATA.students[0]?DATA.students[0].id:null;
       save();UI.tab='home';closeSheet();render();toast('تم حذف الطالب');}});
+  },
+  'place-delete':()=>{
+    const stu=curStudent(),pl=cur();
+    if(stu.places.length<=1){toast('لا يمكن حذف آخر جهة لهذا الطالب.');return;}
+    confirmSheet({title:'حذف هذه الجهة؟',msg:'سيُحذف «'+pl.name+'» مع كل سجلاته نهائيًا (باقي جهات '+stu.name+' لن تتأثر).',yes:'حذف الجهة',onYes:()=>{
+      stu.places=stu.places.filter(p=>p.id!==pl.id);stu.selectedPlace=stu.places[0].id;
+      save();UI.tab='home';closeSheet();render();toast('تم حذف الجهة');}});
   },
   'confirm-yes':()=>{const f=UI.sheet.onYes;if(f)f();},
   'backup-export':backupExport,
   'backup-copy':backupCopy,
   'cele-goal':()=>{closeSheet();openSheet({type:'goal-juz',juz:cur().goal.juz});},
   'ob-go':obGo,
+  'place-go':placeGo,
+  'tbl-unit':el=>{UI.tblUnit=el.dataset.u;UI.tblOffset=0;render();},
+  'tbl-nav':el=>{UI.tblOffset+=(+el.dataset.d);if(UI.tblOffset>0)UI.tblOffset=0;render();},
+  'tbl-custom-mode':el=>{UI.tblCustomMode=el.dataset.m;render();},
+  'tbl-custom-apply':()=>{
+    if(UI.tblCustomMode==='count'){
+      UI.tblCount=Math.max(1,Math.min(52,parseInt($('#tbl-count').value,10)||4));
+      UI.tblCountUnit=$('#tbl-count-unit').value;
+    }else{
+      UI.tblFrom=$('#tbl-from').value||todayISO();UI.tblTo=$('#tbl-to').value||todayISO();
+    }
+    render();
+  },
+  'trend-settings-open':()=>openSheet({type:'trend-settings'}),
+  'trend-mode':el=>{UI.trendMode=el.dataset.m;paintSheet();},
+  'trend-apply':()=>{
+    if(UI.trendMode==='dates'){
+      UI.trendFrom=$('#trend-from').value||addDays(todayISO(),-49);UI.trendTo=$('#trend-to').value||todayISO();
+      UI.trendUnit=$('#trend-bucket').value;
+    }else{
+      UI.trendCount=Math.max(1,Math.min(60,parseInt($('#trend-count').value,10)||8));
+      UI.trendUnit=$('#trend-unit').value;
+    }
+    closeSheet();render();
+  },
+  'trend-metric':el=>{
+    const k=el.dataset.k,cur=UI.trendMetric;
+    let hasHifz=cur!=='review',hasReview=cur!=='hifz';
+    if(k==='hifz')hasHifz=el.checked;else hasReview=el.checked;
+    if(!hasHifz&&!hasReview){if(k==='hifz')hasReview=true;else hasHifz=true;}
+    UI.trendMetric=hasHifz&&hasReview?'both':hasHifz?'hifz':'review';
+    render();
+  },
   'pk-toggle':el=>{
     const j=el.closest('.pk-j'),open=!j.classList.contains('open');
     j.classList.toggle('open',open);j.querySelector('.pk-b').hidden=!open;el.setAttribute('aria-expanded',String(open));
   },
   'theme-set':el=>setTheme(el.dataset.t)
 };
+Object.assign(ACT,STARS_ACT,SHARE_ACT);
 document.addEventListener('click',e=>{
   const el=e.target.closest('[data-act]');if(!el)return;
   const f=ACT[el.dataset.act];if(f){e.preventDefault();f(el,e);}
 });
 document.addEventListener('change',e=>{
   const t=e.target;
+  if(t.id==='hdr-student'){
+    if(t.value==='__new__'){openSheet({type:'newstudent'});render();return;}
+    const s=DATA.students.find(x=>x.id===t.value);
+    if(s){DATA.selected=s.id;save();render();window.scrollTo(0,0);}
+    return;
+  }
+  if(t.id==='hdr-place'){
+    if(t.value==='__newplace__'){openSheet({type:'newplace'});render();return;}
+    const s=curStudent();
+    if(s&&s.places.some(p=>p.id===t.value)){s.selectedPlace=t.value;save();render();window.scrollTo(0,0);}
+    return;
+  }
   if(t.id==='backup-file')return backupFileChosen(t);
+  if(t.id==='rw-file')return rwImageChosen(t);
+  if(t.id==='ln-from'||t.id==='ln-to')return updateLoan();
   if(t.matches&&t.matches('.pk input[type=checkbox]')){
     const j=t.closest('.pk-j');
     if(t.hasAttribute('data-all'))j.querySelectorAll('.pk-row input:not(:disabled)').forEach(b=>{b.checked=t.checked;});
@@ -2431,6 +3558,8 @@ document.addEventListener('input',e=>{
   const S=UI.sheet;if(!S)return;const t=e.target;
   if(t.type==='checkbox'||t.tagName==='SELECT')return;
   if(S.type==='log')updateLog();
+  else if(S.type==='joint')updateJoint();
+  else if(S.type==='loan')updateLoan();
   else if(S.type==='edit')updateEdit();
   else if(S.type==='plan-add-hifz')updatePlanHifz();
   else if(S.type==='plan-add-review')updatePlanReview();
@@ -2438,7 +3567,10 @@ document.addEventListener('input',e=>{
   else if(S.type==='target'&&S.mode==='date')updateTarget();
   else if(S.type==='review-log')updateReviewLog();
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&UI.sheet)closeSheet();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&UI.sheet)closeSheet();
+  else if(e.key==='Enter'&&UI.sheet&&UI.sheet.type==='pin'&&e.target.classList&&e.target.classList.contains('pin-in')){e.preventDefault();if(UI.sheet.mode==='set'&&e.target.id==='pin-a'){const b=$('#pin-b');if(b)b.focus();}else pinSubmit();}
+});
 (function(){
   let sx=0,sy=0,active=false;
   document.addEventListener('touchstart',e=>{
